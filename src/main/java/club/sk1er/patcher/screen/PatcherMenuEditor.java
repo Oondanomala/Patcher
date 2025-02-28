@@ -19,6 +19,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiIngameMenu;
 import net.minecraft.client.gui.GuiMainMenu;
+import net.minecraft.client.gui.GuiOptions;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiScreenOptionsSounds;
 import net.minecraft.client.gui.GuiScreenResourcePacks;
@@ -95,7 +96,22 @@ public class PatcherMenuEditor {
                     }
                 }
             }
-        } else if (gui instanceof GuiScreenResourcePacks) {
+        }
+        //#if MC==10809
+        else if (gui instanceof GuiOptions && PatcherConfig.cleanOptionsMenu) {
+            for (GuiButton button : mcButtonList) {
+                if (button.displayString.equals(I18n.format("options.stream"))) {
+                    button.visible = false;
+                    button.enabled = false;
+                } else if (button.displayString.equals(I18n.format("options.sounds"))) {
+                    button.xPosition = width / 2 + 5;
+                } else if (button.displayString.equals(I18n.format("options.skinCustomisation"))) {
+                    button.yPosition = height / 6 + 72 - 6;
+                }
+            }
+        }
+        //#endif
+        else if (gui instanceof GuiScreenResourcePacks) {
             if (!Loader.isModLoaded("ResourcePackOrganizer")) {
                 for (GuiButton button : mcButtonList) {
                     button.width = 200;
