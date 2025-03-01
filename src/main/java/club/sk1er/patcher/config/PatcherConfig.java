@@ -1359,8 +1359,8 @@ public class PatcherConfig extends Vigilant {
             Function0<Boolean> minecraft112 = () -> ForgeVersion.mcVersion.equals("1.12.2");
             Arrays.asList(
                 "resourceExploitFix", "newKeybindHandling", "separateResourceLoading", "futureHitBoxes",
-                "leftHandInFirstPerson", "extendedChatLength", "chatPosition",
-                "parallaxFix", "crosshairPerspective", "extendChatBackground", "vanillaGlassPanes"
+                "leftHandInFirstPerson", "extendedChatLength", "chatPosition", "parallaxFix",
+                "crosshairPerspective", "extendChatBackground", "cleanOptionsMenu", "vanillaGlassPanes"
             ).forEach(property -> hidePropertyIf(property, minecraft112));
 
             hidePropertyIf("keyboardLayout", () -> !SystemUtils.IS_OS_LINUX);

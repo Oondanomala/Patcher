@@ -94,9 +94,9 @@ public class PatcherMenuEditor {
                     button.visible = false;
                     button.enabled = false;
                 } else if (button.displayString.equals(I18n.format("options.sounds"))) {
-                    button.xPosition = gui.width / 2 + 5;
+                    button.xPosition = width / 2 + 5;
                 } else if (button.displayString.equals(I18n.format("options.skinCustomisation"))) {
-                    button.yPosition = gui.height / 6 + 72 - 6;
+                    button.yPosition = height / 6 + 72 - 6;
                 }
             }
         }
