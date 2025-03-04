@@ -1,7 +1,9 @@
 package club.sk1er.patcher;
 
 import club.sk1er.patcher.asm.render.screen.GuiChatTransformer;
-import club.sk1er.patcher.commands.*;
+import club.sk1er.patcher.commands.InventoryScaleCommand;
+import club.sk1er.patcher.commands.PatcherCommand;
+import club.sk1er.patcher.commands.PatcherSoundsCommand;
 import club.sk1er.patcher.config.PatcherConfig;
 import club.sk1er.patcher.config.PatcherSoundConfig;
 import club.sk1er.patcher.ducks.FontRendererExt;
@@ -404,7 +406,7 @@ public class Patcher {
 
         if (!replacements.isEmpty()) {
             for (String replacement : replacements) {
-                notifications.push("Patcher", replacement + " can be removed as it is replaced by Patcher.", 6f);
+                notifications.push("Patcher", replacement + " can be removed as it is replaced by Patcher.", 6);
             }
         }
     }

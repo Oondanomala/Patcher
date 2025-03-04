@@ -20,8 +20,6 @@ import java.util.Optional;
 public class PatcherCommand extends Command {
 
     private final Minecraft mc = Minecraft.getMinecraft();
-    private final int randomBound = 85673;
-    public static int randomChatMessageId;
 
     public PatcherCommand() {
         super("patcher");
@@ -106,7 +104,7 @@ public class PatcherCommand extends Command {
             return;
         }
 
-        ChatUtilities.sendNotification("Inventory Scale", "Set inventory scaling to " + scaling);
+        ChatUtilities.sendNotification("Inventory Scale", "Set inventory scaling to " + scaling + ".");
         PatcherConfig.inventoryScale = scaling;
         Patcher.instance.forceSaveConfig();
     }
