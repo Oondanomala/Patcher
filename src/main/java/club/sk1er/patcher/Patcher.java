@@ -135,7 +135,6 @@ public class Patcher {
             new AsyncScreenshots.UploadScreenshot(), new AsyncScreenshots.CopyScreenshot(),
             new AsyncScreenshots.ScreenshotsFolder()
         );
-        EssentialAPI.getCommandRegistry().registerParser(PatcherPlayer.class, new PatcherPlayerArgumentParser());
 
         registerEvents(
             this, soundHandler, dropModifier, audioSwitcher,
