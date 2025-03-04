@@ -3,9 +3,6 @@ package club.sk1er.patcher.asm.render.screen;
 import club.sk1er.patcher.tweaker.transform.CommonTransformer;
 import org.objectweb.asm.tree.*;
 
-import java.util.Iterator;
-import java.util.ListIterator;
-
 public class GuiNewChatTransformer implements CommonTransformer {
     /**
      * The class name that's being transformed
