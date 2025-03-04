@@ -64,8 +64,6 @@ import net.minecraftforge.fml.common.network.FMLNetworkEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -192,7 +190,7 @@ public class Patcher {
                 this.logger.error("Failed to open Forge website.", openException);
                 notifications.push("Patcher", "Failed to open Forge website. Link is now copied to your clipboard.");
                 try {
-                    Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(updateLink), null);
+                    UDesktop.setClipboardString(updateLink);
                 } catch (Exception clipboardException) {
                     // there is no hope
                     this.logger.error("Failed to copy Forge website to clipboard.", clipboardException);
