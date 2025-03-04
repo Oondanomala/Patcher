@@ -2,7 +2,6 @@ package club.sk1er.patcher.mixins.performance;
 
 import club.sk1er.patcher.util.world.render.culling.EntityCulling;
 import net.minecraft.client.renderer.tileentity.TileEntityMobSpawnerRenderer;
-import net.minecraft.tileentity.MobSpawnerBaseLogic;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
