@@ -9,7 +9,7 @@ import java.io.File
 import java.net.HttpURLConnection
 import java.net.URL
 import java.net.URLEncoder
-import java.util.*
+import java.util.Base64
 
 class Imgur(private val clientId: String) {
     @Suppress("BlockingMethodInNonBlockingContext")
