@@ -124,6 +124,13 @@ public class PatcherConfig extends Vigilant {
     public static boolean smartFullbright = true;
 
     @Property(
+        type = PropertyType.SWITCH, name = "Disable Night Vision",
+        description = "Remove the effects of night vision.",
+        category = "Miscellaneous", subcategory = "Rendering"
+    )
+    public static boolean disableNightVision = false;
+
+    @Property(
         type = PropertyType.SWITCH, name = "Nausea Effect",
         description = "Remove the nether portal effect appearing when clearing nausea.",
         category = "Miscellaneous", subcategory = "Overlays"

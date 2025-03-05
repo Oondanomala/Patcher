@@ -123,6 +123,7 @@
     "features.EntityPlayerSPMixin_NauseaEffect",
     "features.EntityRendererMixin_CameraPerspective",
     "features.EntityRendererMixin_NametagBackground",
+    "features.EntityRendererMixin_NightVision",
     "features.EntityRendererMixin_ParallaxFix",
     "features.EntityRendererMixin_ShadowedNametags",
     "features.EntityRendererMixin_ViewBobbing",
