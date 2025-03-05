@@ -70,6 +70,7 @@
     "bugfixes.MinecraftMixin_ForeignKeyboards",
     "bugfixes.MinecraftMixin_PersistentShaders",
     "bugfixes.NetHandlerPlayClientMixin_FixHandleSpawnPlayerNPE",
+    "bugfixes.RenderGlobalMixin_RenderOOBEntities",
     "bugfixes.RenderPlayerMixin_ArmPosition",
     "bugfixes.ScoreboardMixin_FixLogSpam",
     "bugfixes.SoundManagerMixin_DuplicatedSounds",
