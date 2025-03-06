@@ -1,9 +1,7 @@
 package club.sk1er.patcher;
 
 import club.sk1er.patcher.asm.render.screen.GuiChatTransformer;
-import club.sk1er.patcher.commands.InventoryScaleCommand;
 import club.sk1er.patcher.commands.PatcherCommand;
-import club.sk1er.patcher.commands.PatcherSoundsCommand;
 import club.sk1er.patcher.config.PatcherConfig;
 import club.sk1er.patcher.config.PatcherSoundConfig;
 import club.sk1er.patcher.ducks.FontRendererExt;
@@ -27,7 +25,6 @@ import club.sk1er.patcher.util.keybind.FunctionKeyChanger;
 import club.sk1er.patcher.util.keybind.KeybindDropModifier;
 import club.sk1er.patcher.util.keybind.MousePerspectiveKeybindHandler;
 import club.sk1er.patcher.util.keybind.linux.LinuxKeybindFix;
-import club.sk1er.patcher.util.screenshot.AsyncScreenshots;
 import club.sk1er.patcher.util.status.ProtocolVersionDetector;
 import club.sk1er.patcher.util.world.SavesWatcher;
 import club.sk1er.patcher.util.world.render.culling.EntityCulling;
@@ -37,7 +34,6 @@ import club.sk1er.patcher.util.world.sound.audioswitcher.AudioSwitcher;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import gg.essential.api.EssentialAPI;
-import gg.essential.api.commands.Command;
 import gg.essential.api.gui.Notifications;
 import me.oondanomala.essential.Multithreading;
 import me.oondanomala.essential.WebUtil;
@@ -48,6 +44,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.command.ICommand;
+import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.ForgeVersion;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -129,12 +127,7 @@ public class Patcher {
         resourceManager.registerReloadListener(soundHandler);
         resourceManager.registerReloadListener(new ReloadListener());
 
-        registerCommands(
-            new PatcherCommand(), new PatcherSoundsCommand(), new InventoryScaleCommand(),
-            new AsyncScreenshots.FavoriteScreenshot(), new AsyncScreenshots.DeleteScreenshot(),
-            new AsyncScreenshots.UploadScreenshot(), new AsyncScreenshots.CopyScreenshot(),
-            new AsyncScreenshots.ScreenshotsFolder()
-        );
+        registerCommands(new PatcherCommand());
 
         registerEvents(
             this, soundHandler, dropModifier, audioSwitcher,
@@ -265,9 +258,9 @@ public class Patcher {
         }
     }
 
-    private void registerCommands(Command... commands) {
-        for (Command command : commands) {
-            EssentialAPI.getCommandRegistry().registerCommand(command);
+    private void registerCommands(ICommand... commands) {
+        for (ICommand command : commands) {
+            ClientCommandHandler.instance.registerCommand(command);
         }
     }
 

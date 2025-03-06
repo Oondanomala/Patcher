@@ -5,11 +5,8 @@ import club.sk1er.patcher.config.PatcherConfig;
 import club.sk1er.patcher.render.ScreenshotPreview;
 import club.sk1er.patcher.tasks.UploadScreenshotTask;
 import club.sk1er.patcher.util.chat.ChatUtilities;
-import gg.essential.api.commands.Command;
-import gg.essential.api.commands.DefaultHandler;
 import me.oondanomala.essential.Multithreading;
 import gg.essential.universal.ChatColor;
-import gg.essential.universal.UDesktop;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiNewChat;
 import net.minecraft.event.ClickEvent;
@@ -87,7 +84,7 @@ public class AsyncScreenshots implements Runnable {
             }
 
             if (PatcherConfig.autoCopyScreenshot) {
-                CopyScreenshot.copyScreenshot(mc.thePlayer != null);
+                copyScreenshot(mc.thePlayer != null);
             }
         } catch (Exception e) {
             ChatUtilities.sendNotification("Screenshot Manager", "Failed to capture screenshot. " + e.getMessage());
@@ -107,7 +104,7 @@ public class AsyncScreenshots implements Runnable {
 
         final IChatComponent favoriteComponent = new ChatComponentText(ChatColor.YELLOW.toString() + ChatColor.BOLD +
             (compact ? "FAV" : "FAVORITE"));
-        favoriteComponent.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/$favorite"));
+        favoriteComponent.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/patcher $favorite"));
         favoriteComponent.getChatStyle()
             .setChatHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ChatComponentText(
                 ChatUtilities.translate("&7This will save the screenshot to a new folder called\n" +
@@ -116,7 +113,7 @@ public class AsyncScreenshots implements Runnable {
 
         final IChatComponent deleteComponent = new ChatComponentText(ChatColor.RED.toString() + ChatColor.BOLD +
             (compact ? "DEL" : "DELETE"));
-        deleteComponent.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/$delete"));
+        deleteComponent.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/patcher $delete"));
         deleteComponent.getChatStyle()
             .setChatHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ChatComponentText(
                 ChatUtilities.translate("&7This will delete the screenshot from your screenshots folder.\n" +
@@ -125,7 +122,7 @@ public class AsyncScreenshots implements Runnable {
 
         final IChatComponent imgurComponent = new ChatComponentText(ChatColor.GREEN.toString() + ChatColor.BOLD +
             (compact ? "UPL" : "UPLOAD"));
-        imgurComponent.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/$upload"));
+        imgurComponent.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/patcher $upload"));
         imgurComponent.getChatStyle()
             .setChatHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ChatComponentText(
                 ChatUtilities.translate("&7Upload the screenshot to Imgur, an image hosting website.\n" +
@@ -134,7 +131,7 @@ public class AsyncScreenshots implements Runnable {
 
         final IChatComponent copyComponent = new ChatComponentText(ChatColor.AQUA.toString() + ChatColor.BOLD +
             (compact ? "CPY" : "COPY"));
-        copyComponent.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/$copyss"));
+        copyComponent.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/patcher $copyss"));
         copyComponent.getChatStyle()
             .setChatHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ChatComponentText(
                 ChatUtilities.translate("&7Copy this image to your system clipboard.\n" +
@@ -176,103 +173,55 @@ public class AsyncScreenshots implements Runnable {
         }
     }
 
-    public static class ScreenshotsFolder extends Command {
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    public static void favoriteScreenshot() {
+        try {
+            final File favoritedScreenshots = getTimestampedPNGFileForDirectory(new File("./favorite_screenshots"));
+            screenshot.delete();
 
-        public ScreenshotsFolder() {
-            super("$openfolder", true, true);
-        }
-
-        @DefaultHandler
-        public void handle() {
-            try {
-                UDesktop.open(new File("./screenshots"));
-            } catch (Exception e) {
-                ChatUtilities.sendMessage("Unfortunately, we were unable to open the screenshots folder. " +
-                    "Contact the support Discord at https://sk1er.club/support if this issue persists.");
+            if (!favoritedScreenshots.exists()) {
+                favoritedScreenshots.mkdirs();
             }
+
+            ImageIO.write(image, "png", favoritedScreenshots);
+            ChatUtilities.sendMessage("&e" + screenshot.getName() + " has been favorited.");
+        } catch (Throwable e) {
+            ChatUtilities.sendMessage("&cFailed to favorite screenshot, maybe the file was moved/deleted?");
         }
     }
 
-    public static class FavoriteScreenshot extends Command {
-
-        public FavoriteScreenshot() {
-            super("$favorite", true, true);
-        }
-
-        @SuppressWarnings("ResultOfMethodCallIgnored")
-        @DefaultHandler
-        public void handle() {
-            try {
-                final File favoritedScreenshots = getTimestampedPNGFileForDirectory(new File("./favorite_screenshots"));
-                screenshot.delete();
-
-                if (!favoritedScreenshots.exists()) {
-                    favoritedScreenshots.mkdirs();
-                }
-
-                ImageIO.write(image, "png", favoritedScreenshots);
-                ChatUtilities.sendNotification("Screenshot Manager", "&e" + screenshot.getName() + " has been favorited.");
-            } catch (Throwable e) {
-                ChatUtilities.sendNotification("Screenshot Manager", "&cFailed to favorite screenshot, maybe the file was moved/deleted?");
+    public static void deleteScreenshot() {
+        try {
+            if (screenshot.exists() && screenshot.delete()) {
+                ChatUtilities.sendMessage("&c" + screenshot.getName() + " has been deleted.");
+                screenshot = null;
+            } else {
+                ChatUtilities.sendMessage("&cCouldn't find " + screenshot.getName());
             }
+        } catch (NullPointerException e) {
+            ChatUtilities.sendMessage("&cFailed to delete screenshot, maybe the file was moved/deleted?");
         }
     }
 
-    public static class DeleteScreenshot extends Command {
-        public DeleteScreenshot() {
-            super("$delete", true, true);
-        }
+    public static void uploadScreenshot() {
+        UploadScreenshotTask.INSTANCE.execute(screenshot);
+    }
 
-        @DefaultHandler
-        public void handle() {
-            try {
-                if (screenshot.exists() && screenshot.delete()) {
-                    ChatUtilities.sendNotification("Screenshot Manager", "&c" + screenshot.getName() + " has been deleted.");
-                    screenshot = null;
-                } else {
-                    ChatUtilities.sendNotification("Screenshot Manager", "&cCouldn't find " + screenshot.getName());
-                }
-            } catch (NullPointerException e) {
-                ChatUtilities.sendNotification("Screenshot Manager", "&cFailed to delete screenshot, maybe the file was moved/deleted?");
-            }
+    public static void copyScreenshot() {
+        try {
+            copyScreenshot(true);
+        } catch (HeadlessException e) {
+            ChatUtilities.sendMessage("&cFailed to copy screenshot to clipboard.");
+            Patcher.instance.getLogger().error("Failed to copy screenshot to clipboard.", e);
         }
     }
 
-    public static class UploadScreenshot extends Command {
+    private static void copyScreenshot(boolean message) throws HeadlessException {
+        final ImageSelection sel = new ImageSelection(image);
+        Multithreading.runAsync(() -> Toolkit.getDefaultToolkit().getSystemClipboard().setContents(sel, null));
 
-        public UploadScreenshot() {
-            super("$upload", true, true);
-        }
-
-        @DefaultHandler
-        public void handle() {
-            UploadScreenshotTask.INSTANCE.execute(screenshot);
-        }
-    }
-
-    public static class CopyScreenshot extends Command {
-
-        public CopyScreenshot() {
-            super("$copyss", true, true);
-        }
-
-        @DefaultHandler
-        public void handle() {
-            try {
-                copyScreenshot(true);
-            } catch (HeadlessException e) {
-                ChatUtilities.sendNotification("Screenshot Manager", "&cFailed to copy screenshot to clipboard.");
-                Patcher.instance.getLogger().error("Failed to copy screenshot to clipboard.", e);
-            }
-        }
-
-        public static void copyScreenshot(boolean message) throws HeadlessException {
-            final ImageSelection sel = new ImageSelection(image);
-            Multithreading.runAsync(() -> Toolkit.getDefaultToolkit().getSystemClipboard().setContents(sel, null));
-
-            if (message) {
-                ChatUtilities.sendMessage("&aScreenshot has been copied to your clipboard.");
-            }
+        if (message) {
+            ChatUtilities.sendMessage("&aScreenshot has been copied to your clipboard.");
         }
     }
 
