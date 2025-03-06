@@ -2,9 +2,8 @@ package club.sk1er.patcher.screen.render.overlay;
 
 import club.sk1er.patcher.Patcher;
 import club.sk1er.patcher.config.PatcherConfig;
-import gg.essential.api.EssentialAPI;
 import gg.essential.api.utils.Multithreading;
-import gg.essential.api.utils.TrustedHostsUtil;
+import me.oondanomala.essential.TrustedHostsUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
@@ -62,12 +61,10 @@ public class ImagePreview {
             final String host = url.getHost();
             boolean found = false;
 
-            for (TrustedHostsUtil.TrustedHost trustedHost : EssentialAPI.getTrustedHostsUtil().getTrustedHosts()) {
-                for (String domain : trustedHost.getDomains()) {
-                    if (host.equalsIgnoreCase(domain)) {
-                        found = true;
-                        break;
-                    }
+            for (String trustedHost : TrustedHostsUtil.getTrustedHosts()) {
+                if (host.equalsIgnoreCase(trustedHost)) {
+                    found = true;
+                    break;
                 }
             }
 
