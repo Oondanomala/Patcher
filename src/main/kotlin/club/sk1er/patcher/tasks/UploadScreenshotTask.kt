@@ -1,14 +1,12 @@
 package club.sk1er.patcher.tasks
 
 import club.sk1er.patcher.Patcher
-import club.sk1er.patcher.coroutines.MCDispatchers
 import club.sk1er.patcher.imgur.Imgur
 import club.sk1er.patcher.util.chat.ChatUtilities
 import club.sk1er.patcher.util.screenshot.AsyncScreenshots
 import gg.essential.universal.ChatColor
 import gg.essential.universal.wrappers.message.UTextComponent
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import me.oondanomala.essential.Multithreading
 import net.minecraft.client.Minecraft
 import net.minecraft.event.ClickEvent
 import java.io.File
@@ -21,7 +19,7 @@ object UploadScreenshotTask {
             if (file != null) {
                 ChatUtilities.sendMessage("&aUploading screenshot...")
 
-                MCDispatchers.PATCHER_SCOPE.launch(Dispatchers.IO) {
+                Multithreading.runAsync {
                     val link = client.upload(file)
                     val message = UTextComponent("${AsyncScreenshots.prefix}${ChatColor.GREEN}Screenshot was uploaded to $link.")
                     message.chatStyle.chatClickEvent = ClickEvent(ClickEvent.Action.OPEN_URL, link)
