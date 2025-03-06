@@ -24,6 +24,7 @@ public final class Essential {
         Essential.modVersion = modVersion;
         logger = LogManager.getLogger(modName);
         MinecraftForge.EVENT_BUS.register(GuiUtil.INSTANCE);
+        MinecraftForge.EVENT_BUS.register(Notifications.INSTANCE);
     }
 
     // Utility methods

@@ -19,7 +19,7 @@ object UploadScreenshotTask {
     fun execute(file: File?) {
         try {
             if (file != null) {
-                ChatUtilities.sendNotification("Screenshot Manager", "&aUploading screenshot...")
+                ChatUtilities.sendMessage("&aUploading screenshot...")
 
                 MCDispatchers.PATCHER_SCOPE.launch(Dispatchers.IO) {
                     val link = client.upload(file)
@@ -28,13 +28,10 @@ object UploadScreenshotTask {
                     Minecraft.getMinecraft().thePlayer.addChatComponentMessage(message)
                 }
             } else {
-                ChatUtilities.sendNotification(
-                    "Screenshot Manager",
-                    "&cFailed to upload screenshot, maybe the file was moved/deleted?"
-                )
+                ChatUtilities.sendMessage("&cFailed to upload screenshot, maybe the file was moved/deleted?")
             }
         } catch (e: Exception) {
-            ChatUtilities.sendNotification("Screenshot Manager", "&cFailed to upload screenshot. ${e.message}")
+            ChatUtilities.sendMessage("&cFailed to upload screenshot. ${e.message}")
             Patcher.instance.logger.error("Failed to upload screenshot.", e)
         }
     }

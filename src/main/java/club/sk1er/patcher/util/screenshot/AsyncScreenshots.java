@@ -87,7 +87,7 @@ public class AsyncScreenshots implements Runnable {
                 copyScreenshot(mc.thePlayer != null);
             }
         } catch (Exception e) {
-            ChatUtilities.sendNotification("Screenshot Manager", "Failed to capture screenshot. " + e.getMessage());
+            ChatUtilities.sendMessage("Failed to capture screenshot. " + e.getMessage());
             Patcher.instance.getLogger().error("Failed to capture screenshot.", e);
         }
     }

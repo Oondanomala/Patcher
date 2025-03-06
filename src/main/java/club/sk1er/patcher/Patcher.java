@@ -33,12 +33,10 @@ import club.sk1er.patcher.util.world.sound.SoundHandler;
 import club.sk1er.patcher.util.world.sound.audioswitcher.AudioSwitcher;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import gg.essential.api.EssentialAPI;
-import gg.essential.api.gui.Notifications;
 import me.oondanomala.essential.Multithreading;
+import me.oondanomala.essential.Notifications;
 import me.oondanomala.essential.WebUtil;
 import gg.essential.universal.UDesktop;
-import kotlin.Unit;
 import me.oondanomala.essential.Essential;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -162,30 +160,27 @@ public class Patcher {
     @EventHandler
     public void onLoadComplete(FMLLoadCompleteEvent event) {
         List<ModContainer> activeModList = Loader.instance().getActiveModList();
-        Notifications notifications = EssentialAPI.getNotifications();
-        this.detectIncompatibilities(activeModList, notifications);
-        this.detectReplacements(activeModList, notifications);
+        this.detectIncompatibilities(activeModList);
+        this.detectReplacements(activeModList);
 
         //noinspection ConstantConditions
         if (!ForgeVersion.mcVersion.equals("1.8.9") || ForgeVersion.getVersion().contains("2318")) return;
-        notifications.push("Patcher", "Outdated Forge has been detected (" + ForgeVersion.getVersion() + "). " +
+        Notifications.push("Patcher", "Outdated Forge has been detected (" + ForgeVersion.getVersion() + "). " +
             "Click to open the Forge website to download the latest version.", 30, () -> {
             String updateLink = "https://files.minecraftforge.net/net/minecraftforge/forge/index_1.8.9.html";
             try {
                 UDesktop.browse(URI.create(updateLink));
             } catch (Exception openException) {
                 this.logger.error("Failed to open Forge website.", openException);
-                notifications.push("Patcher", "Failed to open Forge website. Link is now copied to your clipboard.");
+                Notifications.push("Patcher", "Failed to open Forge website. Link is now copied to your clipboard.");
                 try {
                     UDesktop.setClipboardString(updateLink);
                 } catch (Exception clipboardException) {
                     // there is no hope
                     this.logger.error("Failed to copy Forge website to clipboard.", clipboardException);
-                    notifications.push("Patcher", "Failed to copy Forge website to clipboard.");
+                    Notifications.push("Patcher", "Failed to copy Forge website to clipboard.");
                 }
             }
-
-            return Unit.INSTANCE;
         });
     }
 
@@ -334,36 +329,36 @@ public class Patcher {
         this.forceSaveConfig();
     }
 
-    private void detectIncompatibilities(List<ModContainer> activeModList, Notifications notifications) {
+    private void detectIncompatibilities(List<ModContainer> activeModList) {
         for (ModContainer container : activeModList) {
             String modId = container.getModId();
             String baseMessage = container.getName() + " has been detected. ";
             if (PatcherConfig.entityCulling && modId.equals("enhancements")) {
-                notifications.push("Patcher", baseMessage + "Entity Culling is now disabled.");
+                Notifications.push("Patcher", baseMessage + "Entity Culling is now disabled.");
                 PatcherConfig.entityCulling = false;
             }
 
             if ((modId.equals("labymod") || modId.equals("enhancements")) || modId.equals("hychat")) {
                 if (PatcherConfig.compactChat) {
-                    notifications.push("Patcher", baseMessage + "Compact Chat is now disabled.");
+                    Notifications.push("Patcher", baseMessage + "Compact Chat is now disabled.");
                     PatcherConfig.compactChat = false;
                 }
 
                 if (PatcherConfig.chatPosition) {
-                    notifications.push("Patcher", baseMessage + "Chat Position is now disabled.");
+                    Notifications.push("Patcher", baseMessage + "Chat Position is now disabled.");
                     PatcherConfig.chatPosition = false;
                 }
             }
 
             if (PatcherConfig.optimizedFontRenderer && modId.equals("smoothfont")) {
-                notifications.push("Patcher", baseMessage + "Optimized Font Renderer is now disabled.");
+                Notifications.push("Patcher", baseMessage + "Optimized Font Renderer is now disabled.");
                 PatcherConfig.optimizedFontRenderer = false;
             }
         }
 
         try {
             Class.forName("net.labymod.addons.resourcepacks24.Resourcepacks24", false, getClass().getClassLoader());
-            notifications.push("Patcher", "The LabyMod addon \"Resourcepacks24\" conflicts with Patcher's resourcepack optimizations. Please remove it to make it work again.");
+            Notifications.push("Patcher", "The LabyMod addon \"Resourcepacks24\" conflicts with Patcher's resourcepack optimizations. Please remove it to make it work again.");
         } catch (ClassNotFoundException ignored) {
 
         }
@@ -371,7 +366,7 @@ public class Patcher {
         this.forceSaveConfig();
     }
 
-    private void detectReplacements(List<ModContainer> activeModList, Notifications notifications) {
+    private void detectReplacements(List<ModContainer> activeModList) {
         JsonObject replacedMods;
         try {
             replacedMods = this.readDuplicateModsJson().get();
@@ -391,7 +386,7 @@ public class Patcher {
 
         if (!replacements.isEmpty()) {
             for (String replacement : replacements) {
-                notifications.push("Patcher", replacement + " can be removed as it is replaced by Patcher.", 6);
+                Notifications.push("Patcher", replacement + " can be removed as it is replaced by Patcher.", 6);
             }
         }
     }

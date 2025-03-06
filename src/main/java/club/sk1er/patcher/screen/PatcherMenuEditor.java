@@ -15,6 +15,7 @@ import gg.essential.elementa.dsl.ComponentsKt;
 import gg.essential.elementa.dsl.UtilitiesKt;
 import gg.essential.universal.UMatrixStack;
 import kotlin.Unit;
+import me.oondanomala.essential.Notifications;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiIngameMenu;
@@ -82,7 +83,7 @@ public class PatcherMenuEditor {
             if (isFirstLaunch) {
                 long time = (System.currentTimeMillis() - PatcherTweaker.clientLoadTime);
                 if (PatcherConfig.startupNotification) {
-                    EssentialAPI.getNotifications().push("Minecraft Startup", "Minecraft started in " + time / 1000L + " seconds.");
+                    Notifications.push("Minecraft Startup", "Minecraft started in " + time / 1000L + " seconds.", 6);
                 }
                 Patcher.instance.getLogger().info("Minecraft started in {}ms.", time);
                 isFirstLaunch = false;
