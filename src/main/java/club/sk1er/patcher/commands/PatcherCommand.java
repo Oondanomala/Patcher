@@ -9,7 +9,7 @@ import gg.essential.api.commands.DisplayName;
 import gg.essential.api.commands.Greedy;
 import gg.essential.api.commands.Options;
 import gg.essential.api.commands.SubCommand;
-import gg.essential.api.utils.GuiUtil;
+import me.oondanomala.essential.GuiUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 

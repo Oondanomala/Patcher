@@ -1,5 +1,6 @@
 package me.oondanomala.essential;
 
+import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -21,5 +22,6 @@ public final class Essential {
         Essential.modName = modName;
         Essential.modVersion = modVersion;
         logger = LogManager.getLogger(modName);
+        MinecraftForge.EVENT_BUS.register(GuiUtil.INSTANCE);
     }
 }
