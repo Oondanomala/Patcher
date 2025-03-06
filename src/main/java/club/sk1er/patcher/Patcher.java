@@ -43,6 +43,7 @@ import gg.essential.api.utils.Multithreading;
 import gg.essential.api.utils.WebUtil;
 import gg.essential.universal.UDesktop;
 import kotlin.Unit;
+import me.oondanomala.essential.Essential;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.resources.IReloadableResourceManager;
@@ -145,6 +146,7 @@ public class Patcher {
             MinecraftHook.INSTANCE, ScreenshotPreview.INSTANCE,
             new MousePerspectiveKeybindHandler()
         );
+        Essential.init("Patcher", VERSION);
 
         checkLogs();
         loadBlacklistedServers();
