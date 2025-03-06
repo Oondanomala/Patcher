@@ -436,4 +436,8 @@ public class Patcher {
         this.patcherConfig.markDirty();
         this.patcherConfig.writeData();
     }
+
+    public static boolean isEssentialScreenshot() {
+        return Essential.isEssential() && gg.essential.api.EssentialAPI.getConfig().getEssentialScreenshots();
+    }
 }

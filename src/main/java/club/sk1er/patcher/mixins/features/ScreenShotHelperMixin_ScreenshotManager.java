@@ -1,8 +1,8 @@
 package club.sk1er.patcher.mixins.features;
 
+import club.sk1er.patcher.Patcher;
 import club.sk1er.patcher.config.PatcherConfig;
 import club.sk1er.patcher.util.screenshot.AsyncScreenshots;
-import gg.essential.api.EssentialAPI;
 import me.oondanomala.essential.Multithreading;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -33,7 +33,7 @@ public class ScreenShotHelperMixin_ScreenshotManager {
     @SuppressWarnings("ResultOfMethodCallIgnored")
     @Inject(method = "saveScreenshot(Ljava/io/File;Ljava/lang/String;IILnet/minecraft/client/shader/Framebuffer;)Lnet/minecraft/util/IChatComponent;", at = @At("HEAD"), cancellable = true)
     private static void patcher$screenshotManager(File gameDirectory, String screenshotName, int width, int height, Framebuffer buffer, CallbackInfoReturnable<IChatComponent> cir) {
-        if (PatcherConfig.screenshotManager && !EssentialAPI.getConfig().getEssentialScreenshots()) {
+        if (PatcherConfig.screenshotManager && !Patcher.isEssentialScreenshot()) {
             File screenshotDirectory = new File(Minecraft.getMinecraft().mcDataDir, "screenshots");
             if (!screenshotDirectory.exists()) {
                 screenshotDirectory.mkdir();
