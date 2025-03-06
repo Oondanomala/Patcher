@@ -2,7 +2,7 @@ package club.sk1er.patcher.screen.render.overlay;
 
 import club.sk1er.patcher.Patcher;
 import club.sk1er.patcher.config.PatcherConfig;
-import gg.essential.api.utils.Multithreading;
+import me.oondanomala.essential.Multithreading;
 import me.oondanomala.essential.TrustedHostsUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;

@@ -3,7 +3,7 @@ package club.sk1er.patcher.mixins.features;
 import club.sk1er.patcher.config.PatcherConfig;
 import club.sk1er.patcher.util.screenshot.AsyncScreenshots;
 import gg.essential.api.EssentialAPI;
-import gg.essential.api.utils.Multithreading;
+import me.oondanomala.essential.Multithreading;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.GlStateManager;

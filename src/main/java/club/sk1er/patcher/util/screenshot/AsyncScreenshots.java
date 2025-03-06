@@ -7,7 +7,7 @@ import club.sk1er.patcher.tasks.UploadScreenshotTask;
 import club.sk1er.patcher.util.chat.ChatUtilities;
 import gg.essential.api.commands.Command;
 import gg.essential.api.commands.DefaultHandler;
-import gg.essential.api.utils.Multithreading;
+import me.oondanomala.essential.Multithreading;
 import gg.essential.universal.ChatColor;
 import gg.essential.universal.UDesktop;
 import net.minecraft.client.Minecraft;
