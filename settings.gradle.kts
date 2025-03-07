@@ -8,7 +8,7 @@ pluginManagement {
         maven("https://repo.essential.gg/repository/maven-public")
     }
     plugins {
-        val egtVersion = "0.2.2"
+        val egtVersion = "0.6.6"
         id("gg.essential.multi-version.root") version egtVersion
     }
 }
@@ -24,5 +24,4 @@ listOf(
         projectDir = file("versions/$version")
         buildFileName = "../../build.gradle.kts"
     }
-
 }
