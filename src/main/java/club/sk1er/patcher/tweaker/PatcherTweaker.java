@@ -16,6 +16,8 @@ import org.apache.logging.log4j.core.Filter;
 import org.apache.logging.log4j.core.Logger;
 import org.apache.logging.log4j.core.LoggerContext;
 import org.apache.logging.log4j.core.filter.RegexFilter;
+import org.spongepowered.asm.launch.MixinBootstrap;
+import org.spongepowered.asm.mixin.Mixins;
 
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -39,6 +41,8 @@ public class PatcherTweaker implements IFMLLoadingPlugin {
     @SuppressWarnings("unchecked")
     public PatcherTweaker() {
         clientLoadTime = System.currentTimeMillis();
+        MixinBootstrap.init();
+        Mixins.addConfiguration("patcher.mixins.json");
         try {
             // Create a second internal tweaker, creating after OptiFine does its thing.
             FMLLaunchHandler launchHandler = ReflectionHelper.getPrivateValue(FMLLaunchHandler.class, null, "INSTANCE");
