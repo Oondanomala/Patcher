@@ -13,6 +13,7 @@ import gg.essential.elementa.components.UIImage;
 import gg.essential.elementa.components.Window;
 import gg.essential.elementa.dsl.ComponentsKt;
 import gg.essential.elementa.dsl.UtilitiesKt;
+import gg.essential.universal.UDesktop;
 import gg.essential.universal.UMatrixStack;
 import kotlin.Unit;
 import me.oondanomala.essential.Essential;
@@ -27,11 +28,13 @@ import net.minecraft.client.gui.GuiScreenOptionsSounds;
 import net.minecraft.client.gui.GuiScreenResourcePacks;
 import net.minecraft.client.resources.I18n;
 import net.minecraftforge.client.event.GuiScreenEvent;
+import net.minecraftforge.common.ForgeVersion;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import org.lwjgl.input.Keyboard;
 
+import java.net.URI;
 import java.util.List;
 
 public class PatcherMenuEditor {
@@ -87,6 +90,25 @@ public class PatcherMenuEditor {
                     Notifications.push("Minecraft Startup", "Minecraft started in " + time / 1000L + " seconds.", 6);
                 }
                 Patcher.instance.getLogger().info("Minecraft started in {}ms.", time);
+
+                ForgeVersion.CheckResult updateResult = ForgeVersion.getResult(Loader.instance().activeModContainer());
+                if (updateResult.status == ForgeVersion.Status.OUTDATED) {
+                    Notifications.push("Patcher Update", "A new Patcher update is available: " + updateResult.target +
+                        ". Click to open the download page.", 30, () -> {
+                        try {
+                            UDesktop.browse(new URI(updateResult.url));
+                        } catch (Exception openException) {
+                            Patcher.instance.getLogger().error("Failed to open the update download page.", openException);
+                            Notifications.push("Patcher", "Failed to open the update download page. Link is now copied to your clipboard.");
+                            try {
+                                UDesktop.setClipboardString(updateResult.url);
+                            } catch (Exception clipboardException) {
+                                Patcher.instance.getLogger().error("Failed to copy the update download link to clipboard.", clipboardException);
+                                Notifications.push("Patcher", "Failed to copy the update download link to clipboard.");
+                            }
+                        }
+                    });
+                }
                 isFirstLaunch = false;
             }
             if (PatcherConfig.cleanMainMenu) {
