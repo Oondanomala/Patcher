@@ -1,3 +1,17 @@
+# Patcher (zeroconfig fork)
+
+Patcher is a 1.8.9 and 1.12.2 Forge mod full of Vanilla bug fixes, Quality of Life improvements, and performance improvements.
+
+This is an improved fork that doesn't require Essential nor OneConfig to run, has more features, and has better performance.
+Some changes are based off of [PolyPatcher](https://github.com/Polyfrost/PolyPatcher) by Polyfrost.
+
+Unlike what the title says, this stil has all the configuration options of the original, and more!
+
+This is a fork adapted from the original ["Patcher"](https://sk1er.club/mods/patcher) by [Sk1erLLC](https://sk1er.club), used under CC BY-NC-SA 4.0. This fork is licensed under CC BY-NC-SA 4.0.
+This fork adds various changes and improvements as well as removing the dependency on Essential. For the original, please go [here](https://sk1er.club/mods/patcher) to download the mod.
+This fork also takes work from the "Patcher" fork ["PolyPatcher"](https://github.com/Polyfrost/PolyPatcher) by [Polyfrost](https://polyfrost.org), licensed under CC BY-NC-SA 4.0. For "PolyPatcher", please go [here](https://github.com/Polyfrost/PolyPatcher/releases) to download the mod.<br>
+Adapted from the disclaimer found in PolyPatcher.
+
 ## Feature List
 
 <details>
@@ -66,6 +80,7 @@
 - **Remove Water Overlay** - Remove the water texture overlay when underwater.
 - **Remove Inverted Colors from Crosshair** - Remove the inverted color effect on the crosshair.
 - **Fullbright** - Remove lighting updates, increasing visibility. (Can positively impact performance. May conflict with minimaps) *default
+- **Disable Night Vision** - Remove the effects of night vision. *(not in original)*
 - **Smart Fullbright** - Automatically Disable the Fullbright Effect when using OptiFine Shaders. (Requires Fullbright) *default
 - **Show Own Nametag** - See your nametag in third person.
 - **Clean Projectiles** - Show projectiles 2 ticks after they're shot up to stop them from obstructing your view. (Includes eggs, snowballs, and fishing hooks)
@@ -166,7 +181,7 @@
 - **GUI Crosshair** - Stop rendering the crosshair when in a GUI.
 - **Startup Notification** - Notify how long the game took to start. *default
 - **Clean Main Menu** - Remove the Realms button on the main menu as it's useless on 1.8.9. *default
-- **Clean Options Menu** - Remove the Twitch broadcast button on the options menu. *default
+- **Clean Options Menu** - Remove the Twitch broadcast button on the options menu. *(not in original)* *default
 - **Open to LAN Replacement** - Modify the Open to LAN button to either redirect to the server list or be removed.
 - **Smart Disconnect -** Choose between disconnecting or relogging when clicking the disconnect button. (Only works on multiplayer servers)
 - **Image Preview** - Preview image links when hovering over a supported URL. Press shift to use fullscreen and Control to render in native image resolution. (Currently supported: Imgur, Discord, Badlion screenshots)
@@ -206,7 +221,7 @@
 
 Patcher reproduces the functionality of these mods and as such, they are no longer needed.
 
-This list may not always be up-to-date. To view an updated list, click [here](https://static.sk1er.club/patcher/duplicate_mods.json)
+This list may not always be up-to-date. To view an updated list, click [here](data/duplicate_mods.json)
 - **Case Commands**
 - **Command Patcher**
 - **Compact Chat**
@@ -230,4 +245,4 @@ This list may not always be up-to-date. To view an updated list, click [here](ht
 
 </details>
 
-[![crayons 🙂](https://forthebadge.com/images/badges/made-with-crayons.svg)](https://sk1er.club/mods/patcher "Click for Patcher download")
+[![:how:](data/badge.svg)](https://github.com/Oondanomala/Patcher/releases/latest "Click for Patcher download")
