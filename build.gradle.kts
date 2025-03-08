@@ -9,8 +9,9 @@ plugins {
 
 val modGroup: String by project
 val modBaseName: String by project
+val modVersion: String by project
 group = modGroup
-base.archivesName.set("$modBaseName-${platform.mcVersionStr}")
+base.archivesName.set("$modBaseName-$modVersion (${platform.mcVersionStr})")
 
 val accessTransformerName = "patcher1${platform.mcMinor}_at.cfg"
 
