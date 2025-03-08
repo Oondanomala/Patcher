@@ -82,7 +82,7 @@ import java.util.stream.Collectors;
     version = Patcher.VERSION,
     clientSideOnly = true,
     guiFactory = "club.sk1er.patcher.config.DummyForgeConfig",
-    updateJSON = "https://raw.githubusercontent.com/Oondanomala/Patcher/data/zeroconfig/update.json"
+    updateJSON = "https://raw.githubusercontent.com/Oondanomala/Patcher/zeroconfig/data/update.json"
 )
 public class Patcher {
 
