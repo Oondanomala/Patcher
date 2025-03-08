@@ -1,0 +1,22 @@
+{
+  "case_commands": "Case Commands",
+  "command_patcher": "Command Patcher",
+  "compactchat": "Compact Chat",
+  "cross_chat": "Cross Chat",
+  "item_optimization": "Item Optimizations",
+  "mousebindfix": "MouseBindFix",
+  "resourceexploitfix": "Resource Exploit Fix",
+  "sk1er_fullscreen": "Windowed Fullscreen",
+  "CleanView": "Clean View",
+  "memoryfix": "MemoryFix",
+  "mousedelayfix": "MouseDelayFix",
+  "noclosemychat": "NoCloseMyChat",
+  "enhancements": "Vanilla Enhancements",
+  "portalinputfix": "PortalInputFix",
+  "betterscaledgui": "BetterScaledGUI",
+  "VoidChat": "Void Chat",
+  "fullbright": "Fullbright",
+  "InputFix": "InputFix",
+  "hudcaching": "HUD Caching",
+  "noscroll": "NoScroll"
+}

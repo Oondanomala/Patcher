@@ -276,7 +276,7 @@ public class ClassTransformer implements IClassTransformer {
     private void fetchSupportedOptiFineVersions() {
         HttpsURLConnection connection = null;
         try {
-            URL optifineVersions = new URL("https://static.sk1er.club/patcher/optifine.txt");
+            URL optifineVersions = new URL("https://raw.githubusercontent.com/Oondanomala/Patcher/zeroconfig/data/optifine.txt");
             connection = (HttpsURLConnection) optifineVersions.openConnection();
             connection.setRequestProperty("User-Agent", "Patcher OptiFine Fetcher");
             connection.setConnectTimeout(5000);
@@ -303,7 +303,7 @@ public class ClassTransformer implements IClassTransformer {
     private void updateOptiFineGenerations() {
         HttpsURLConnection connection = null;
         try {
-            URL optifineGenerations = new URL("https://static.sk1er.club/patcher/optifine_generations.json");
+            URL optifineGenerations = new URL("https://raw.githubusercontent.com/Oondanomala/Patcher/zeroconfig/data/optifine_generations.json");
             connection = (HttpsURLConnection) optifineGenerations.openConnection();
             connection.setRequestProperty("User-Agent", "Patcher OptiFine Fetcher");
             connection.setConnectTimeout(5000);

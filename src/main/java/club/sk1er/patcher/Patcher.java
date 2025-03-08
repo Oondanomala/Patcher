@@ -392,7 +392,7 @@ public class Patcher {
     }
 
     private CompletableFuture<JsonObject> readDuplicateModsJson() {
-        String url = "https://static.sk1er.club/patcher/duplicate_mods.json";
+        String url = "https://raw.githubusercontent.com/Oondanomala/Patcher/zeroconfig/data/duplicate_mods.json";
         return CompletableFuture.supplyAsync(() -> new JsonParser().parse(Objects.requireNonNull(WebUtil.fetchString(url))).getAsJsonObject(), Multithreading.getPool())
             .exceptionally((error) -> {
                 logger.error("Failed to fetch {}: {}", url, error);

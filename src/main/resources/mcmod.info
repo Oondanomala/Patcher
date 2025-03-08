@@ -5,12 +5,13 @@
     "description": "A Forge mod full of Vanilla bug fixes, Quality of Life improvements, and performance enhancements.",
     "version": "${version}",
     "mcversion": "${mcVersionStr}",
-    "url": "https://sk1er.club/mods/patcher",
+    "url": "https://github.com/Oondanomala/Patcher/tree/zeroconfig",
     "updateUrl": "",
     "authorList": [
-      "Sk1er LLC"
+      "Sk1er LLC",
+      "Oondanomala"
     ],
-    "credits": "prplz, 2pi, UserTeemu, DJtheRedstoner; SporkSpoon for the monkey",
+    "credits": "prplz, 2pi, UserTeemu, DJtheRedstoner, Polyfrost for some of the changes; SporkSpoon for the monkey",
     "logoFile": "patcher.png",
     "screenshots": [],
     "dependencies": []
