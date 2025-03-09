@@ -124,6 +124,7 @@
     "features.EntityLivingBaseMixin_CleanView",
     "features.EntityPlayerSPMixin_NauseaEffect",
     "features.EntityRendererMixin_CameraPerspective",
+    "features.EntityRendererMixin_DebugCrosshair",
     "features.EntityRendererMixin_NametagBackground",
     "features.EntityRendererMixin_NightVision",
     "features.EntityRendererMixin_ParallaxFix",
