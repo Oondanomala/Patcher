@@ -10,6 +10,7 @@ plugins {
 val modGroup: String by project
 val modBaseName: String by project
 val modVersion: String by project
+version = modVersion
 group = modGroup
 base.archivesName.set("$modBaseName-$modVersion (${platform.mcVersionStr})")
 
@@ -84,6 +85,7 @@ tasks {
     }
 
     shadowJar {
+        archiveVersion.set("")
         archiveClassifier.set("dev")
         configurations = listOf(shade)
         exclude("README.md")
@@ -108,6 +110,7 @@ tasks {
 
     remapJar {
         inputFile.set(shadowJar.get().archiveFile)
+        archiveVersion.set("")
         archiveClassifier.set("")
     }
 }
