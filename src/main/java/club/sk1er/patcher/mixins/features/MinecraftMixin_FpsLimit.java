@@ -21,8 +21,9 @@ public class MinecraftMixin_FpsLimit {
             cir.setReturnValue(PatcherConfig.unfocusedFPSAmount);
         } else if (PatcherConfig.customFpsLimit > 0) {
             cir.setReturnValue(PatcherConfig.customFpsLimit);
+        } else {
+            cir.setReturnValue(gameSettings.limitFramerate);
         }
-        cir.setReturnValue(gameSettings.limitFramerate);
     }
 
     @Inject(method = "isFramerateLimitBelowMax", at = @At("HEAD"), cancellable = true)
