@@ -96,7 +96,7 @@ public class SoundHandler implements IResourceManagerReloadListener {
                         }
                     );
                     //#else
-                    //$$ String[] category = entry.getValue().getLocation().getResourcePath().split("\\.");
+                    //$$ String[] category = entry.getValue().getLocation().getPath().split("\\.");
                     //$$ return ConfigUtil.createAndRegisterConfig(PropertyType.SLIDER,
                     //$$    WordUtils.capitalizeFully(category[0].replace("_", " ")),
                     //$$    category.length > 2 ? WordUtils.capitalizeFully(category[1].replace("_", " ")) : "Sounds", name, "Sound Multiplier for " + name,
