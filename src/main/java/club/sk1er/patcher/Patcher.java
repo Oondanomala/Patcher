@@ -33,11 +33,11 @@ import club.sk1er.patcher.util.world.sound.SoundHandler;
 import club.sk1er.patcher.util.world.sound.audioswitcher.AudioSwitcher;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import me.oondanomala.essential.Multithreading;
-import me.oondanomala.essential.Notifications;
-import me.oondanomala.essential.WebUtil;
 import gg.essential.universal.UDesktop;
-import me.oondanomala.essential.Essential;
+import me.oondanomala.assential.Assential;
+import me.oondanomala.assential.Multithreading;
+import me.oondanomala.assential.Notifications;
+import me.oondanomala.assential.WebUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.resources.IReloadableResourceManager;
@@ -144,7 +144,7 @@ public class Patcher {
             MinecraftHook.INSTANCE, ScreenshotPreview.INSTANCE,
             new MousePerspectiveKeybindHandler()
         );
-        Essential.init("Patcher", VERSION);
+        Assential.init("Patcher", VERSION);
 
         checkLogs();
         loadBlacklistedServers();
@@ -445,6 +445,6 @@ public class Patcher {
     }
 
     public static boolean isEssentialScreenshot() {
-        return Essential.isEssential() && gg.essential.api.EssentialAPI.getConfig().getEssentialScreenshots();
+        return Assential.isEssential() && gg.essential.api.EssentialAPI.getConfig().getEssentialScreenshots();
     }
 }

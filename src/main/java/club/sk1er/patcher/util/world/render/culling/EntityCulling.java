@@ -5,7 +5,7 @@ import club.sk1er.patcher.config.PatcherConfig;
 import club.sk1er.patcher.mixins.accessors.RenderManagerAccessor;
 import club.sk1er.patcher.util.chat.ChatUtilities;
 import gg.essential.universal.UDesktop;
-import me.oondanomala.essential.Notifications;
+import me.oondanomala.assential.Notifications;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.multiplayer.WorldClient;

@@ -1,4 +1,4 @@
-package me.oondanomala.essential;
+package me.oondanomala.assential;
 
 import net.minecraft.client.Minecraft;
 

@@ -2,7 +2,7 @@ package club.sk1er.patcher.util.world.sound.audioswitcher;
 
 import club.sk1er.patcher.Patcher;
 import club.sk1er.patcher.config.PatcherConfig;
-import me.oondanomala.essential.Notifications;
+import me.oondanomala.assential.Notifications;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;

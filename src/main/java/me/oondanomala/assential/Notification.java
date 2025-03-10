@@ -1,4 +1,4 @@
-package me.oondanomala.essential;
+package me.oondanomala.assential;
 
 import gg.essential.universal.UMouse;
 import gg.essential.universal.UResolution;

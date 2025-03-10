@@ -1,4 +1,4 @@
-package me.oondanomala.essential;
+package me.oondanomala.assential;
 
 public final class TrustedHostsUtil {
     // No point in overcomplicating it when this is all we need

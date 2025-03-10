@@ -1,4 +1,4 @@
-package me.oondanomala.essential;
+package me.oondanomala.assential;
 
 import gg.essential.universal.UMinecraft;
 import gg.essential.universal.UResolution;

@@ -1,4 +1,4 @@
-package me.oondanomala.essential;
+package me.oondanomala.assential;
 
 import gg.essential.universal.UChat;
 import net.minecraftforge.common.MinecraftForge;
@@ -6,12 +6,12 @@ import net.minecraftforge.fml.common.Loader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public final class Essential {
+public final class Assential {
     static Logger logger;
     static String modName;
     static String modVersion;
 
-    private Essential() {
+    private Assential() {
     }
 
     /**
@@ -21,8 +21,8 @@ public final class Essential {
      * @param modVersion The version of your mod, should be the same value passed in the {@link net.minecraftforge.fml.common.Mod @Mod} annotation
      */
     public static void init(String modName, String modVersion) {
-        Essential.modName = modName;
-        Essential.modVersion = modVersion;
+        Assential.modName = modName;
+        Assential.modVersion = modVersion;
         logger = LogManager.getLogger(modName);
         MinecraftForge.EVENT_BUS.register(GuiUtil.INSTANCE);
         MinecraftForge.EVENT_BUS.register(Notifications.INSTANCE);

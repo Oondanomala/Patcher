@@ -1,4 +1,4 @@
-package me.oondanomala.essential;
+package me.oondanomala.assential;
 
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
@@ -49,9 +49,9 @@ public abstract class Command extends CommandBase {
                 onCommand(args[0].toLowerCase(Locale.ENGLISH), Arrays.copyOfRange(args, 1, args.length));
             }
         } catch (SyntaxErrorException e) {
-            Essential.sendMessage("&cUsage: /" + name + " " + e.getMessage(), false);
+            Assential.sendMessage("&cUsage: /" + name + " " + e.getMessage(), false);
         } catch (CommandException e) {
-            Essential.sendMessage(e.getMessage(), true);
+            Assential.sendMessage(e.getMessage(), true);
         }
     }
 

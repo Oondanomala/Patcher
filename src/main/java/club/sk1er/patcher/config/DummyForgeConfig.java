@@ -1,7 +1,7 @@
 package club.sk1er.patcher.config;
 
 import club.sk1er.patcher.Patcher;
-import me.oondanomala.essential.GuiUtil;
+import me.oondanomala.assential.GuiUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.fml.client.IModGuiFactory;

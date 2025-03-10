@@ -5,7 +5,7 @@ import club.sk1er.patcher.config.PatcherConfig;
 import club.sk1er.patcher.render.ScreenshotPreview;
 import club.sk1er.patcher.tasks.UploadScreenshotTask;
 import club.sk1er.patcher.util.chat.ChatUtilities;
-import me.oondanomala.essential.Multithreading;
+import me.oondanomala.assential.Multithreading;
 import gg.essential.universal.ChatColor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiNewChat;

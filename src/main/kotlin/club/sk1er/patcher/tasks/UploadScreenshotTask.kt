@@ -6,7 +6,7 @@ import club.sk1er.patcher.util.chat.ChatUtilities
 import club.sk1er.patcher.util.screenshot.AsyncScreenshots
 import gg.essential.universal.ChatColor
 import gg.essential.universal.wrappers.message.UTextComponent
-import me.oondanomala.essential.Multithreading
+import me.oondanomala.assential.Multithreading
 import net.minecraft.client.Minecraft
 import net.minecraft.event.ClickEvent
 import java.io.File

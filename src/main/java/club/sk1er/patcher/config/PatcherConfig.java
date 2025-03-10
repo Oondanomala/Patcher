@@ -2,7 +2,7 @@ package club.sk1er.patcher.config;
 
 import club.sk1er.patcher.Patcher;
 import club.sk1er.patcher.tweaker.ClassTransformer;
-import me.oondanomala.essential.GuiUtil;
+import me.oondanomala.assential.GuiUtil;
 import gg.essential.vigilance.Vigilant;
 import gg.essential.vigilance.data.Property;
 import gg.essential.vigilance.data.PropertyType;

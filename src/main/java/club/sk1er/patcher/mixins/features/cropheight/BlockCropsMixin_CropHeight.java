@@ -3,7 +3,7 @@ package club.sk1er.patcher.mixins.features.cropheight;
 import club.sk1er.patcher.config.PatcherConfig;
 import club.sk1er.patcher.hooks.CropUtilities;
 import gg.essential.universal.UMinecraft;
-import me.oondanomala.essential.MinecraftUtil;
+import me.oondanomala.assential.MinecraftUtil;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;

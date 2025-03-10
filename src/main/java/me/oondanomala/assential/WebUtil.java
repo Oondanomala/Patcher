@@ -1,4 +1,4 @@
-package me.oondanomala.essential;
+package me.oondanomala.assential;
 
 import org.apache.commons.io.IOUtils;
 
@@ -16,7 +16,7 @@ public final class WebUtil {
         try {
             HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
             connection.setRequestMethod("GET");
-            connection.addRequestProperty("User-Agent", Essential.modName + "/" + Essential.modVersion);
+            connection.addRequestProperty("User-Agent", Assential.modName + "/" + Assential.modVersion);
             connection.setUseCaches(false);
             connection.setDoOutput(true);
             connection.setReadTimeout(10000);
@@ -26,7 +26,7 @@ public final class WebUtil {
                 return IOUtils.toString(stream, StandardCharsets.UTF_8);
             }
         } catch (IOException e) {
-            Essential.logger.error("Failed to fetch from {}", url, e);
+            Assential.logger.error("Failed to fetch from {}", url, e);
             return null;
         }
     }

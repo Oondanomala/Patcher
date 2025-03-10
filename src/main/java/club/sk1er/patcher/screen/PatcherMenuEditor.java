@@ -16,8 +16,8 @@ import gg.essential.elementa.dsl.UtilitiesKt;
 import gg.essential.universal.UDesktop;
 import gg.essential.universal.UMatrixStack;
 import kotlin.Unit;
-import me.oondanomala.essential.Essential;
-import me.oondanomala.essential.Notifications;
+import me.oondanomala.assential.Assential;
+import me.oondanomala.assential.Notifications;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiIngameMenu;
@@ -217,7 +217,7 @@ public class PatcherMenuEditor {
             }
         }
 
-        if (PatcherConfig.openToLanReplacement == 2 && gui instanceof GuiIngameMenu && Essential.isEssential()) {
+        if (PatcherConfig.openToLanReplacement == 2 && gui instanceof GuiIngameMenu && Assential.isEssential()) {
             EssentialConfig config = EssentialAPI.getConfig();
             if (config.getOpenToFriends() && config.getEssentialFull() && EssentialAPI.getOnboardingData().hasAcceptedEssentialTOS()) {
                 for (GuiButton button : mcButtonList) {
