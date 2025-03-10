@@ -143,6 +143,7 @@
     "features.GuiMultiplayerMixin_FastServerJoin",
     "features.GuiNewChatMixin_ChatDelay",
     "features.GuiNewChatMixin_CompactChat",
+    "features.GuiNewChatMixin_ExpandChatHistory",
     "features.GuiNewChatMixin_ExtendChatBackground",
     "features.GuiNewChatMixin_TransparentChat",
     "features.GuiPlayerTabOverlayMixin_BossbarHeight",
