@@ -47,12 +47,15 @@ val shade: Configuration by configurations.creating {
 
 dependencies {
     // Uncomment to launch the game with Essential loaded, for testing.
-    // Don't forget to add --tweakClass gg.essential.loader.stage0.EssentialSetupTweaker to the launch CLI arguments
+    // Don't forget to add --tweakClass gg.essential.loader.stage0.EssentialSetupTweaker to the launch CLI arguments and to re-enable transitive dependencies
     //implementation("gg.essential:loader-launchwrapper:1.1.3")
 
-    compileOnly("gg.essential:essential-$platform:4246+g8be73312c")
-    shade("gg.essential:universalcraft-$platform:373")
-    shade("gg.essential:elementa:695")
+    compileOnly("gg.essential:essential-$platform:4246+g8be73312c") {
+        isTransitive = false
+    }
+    shade("gg.essential:universalcraft-$platform:421")
+    shade("gg.essential:elementa:710")
+    // 312 has broken transparency, avoid it until it's fixed
     shade("gg.essential:vigilance:306")
 
     shade("com.github.ben-manes.caffeine:caffeine:2.9.3")

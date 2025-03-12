@@ -130,7 +130,7 @@ Adapted from the disclaimer found in PolyPatcher.
 - **Disable Item Frames** - Stop item frames from rendering.
 - **Disable Mapped Item frames** - Stop item frames only with maps as their item from rendering.
 - **Disable Grounded Arrows** - Stop arrows that are in the ground from rendering.
-- **Disable Attached Arrows** - Stop arrows that are attached to a player from Rendering.
+- **Disable Attached Arrows** - Stop arrows that are attached to a player from rendering.
 - **Disable Skulls** - Stop skulls from rendering.
 - **Disable Nametags Boxes** - Remove the transparent box around the nametag.
 - **Unstacked Items** - Render stacks of items on the ground as just one instead of having up to 5 copies in one stack.

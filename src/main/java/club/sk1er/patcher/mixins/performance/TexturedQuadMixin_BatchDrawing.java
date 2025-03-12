@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(TexturedQuad.class)
-public class TexturedQuadMixin_BatchDraw {
+public class TexturedQuadMixin_BatchDrawing {
 
     //#if MC==10809
     @Unique

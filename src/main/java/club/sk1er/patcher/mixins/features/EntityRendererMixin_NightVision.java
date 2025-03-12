@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(EntityRenderer.class)
 public class EntityRendererMixin_NightVision {
     @Inject(method = "getNightVisionBrightness", at = @At("HEAD"), cancellable = true)
-    public void disableNightVision(EntityLivingBase entityLivingBaseIn, float partialTicks, CallbackInfoReturnable<Float> cir) {
+    public void patcher$disableNightVision(EntityLivingBase entityLivingBaseIn, float partialTicks, CallbackInfoReturnable<Float> cir) {
         if (PatcherConfig.disableNightVision) {
             cir.setReturnValue(0f);
         }

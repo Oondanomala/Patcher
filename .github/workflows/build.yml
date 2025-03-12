@@ -5,16 +5,18 @@ on:
     branches:
       - "**"
     paths-ignore:
-      - 'README.md'
-      - 'LICENSE.md'
-      - '.editorconfig'
-      - '.gitignore'
+      - "README.md"
+      - "LICENSE.md"
+      - ".editorconfig"
+      - ".gitignore"
+      - "data/**"
   pull_request:
     paths-ignore:
-      - 'README.md'
-      - 'LICENSE.md'
-      - '.editorconfig'
-      - '.gitignore'
+      - "README.md"
+      - "LICENSE.md"
+      - ".editorconfig"
+      - ".gitignore"
+      - "data/**"
 
 concurrency:
   # Maximum of one running workflow per pull request source branch

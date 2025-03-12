@@ -78,7 +78,7 @@ public class EntityRendering {
     }
 
     @SubscribeEvent
-    public void setHorseTransparentPre(RenderLivingEvent.Post<EntityHorse> event) {
+    public void setHorseTransparentPost(RenderLivingEvent.Post<EntityHorse> event) {
         if (shouldMakeTransparent) {
             GlStateManager.disableBlend();
             GlStateManager.disableAlpha();

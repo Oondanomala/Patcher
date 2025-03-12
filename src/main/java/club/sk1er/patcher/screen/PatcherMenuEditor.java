@@ -8,14 +8,7 @@ import club.sk1er.patcher.screen.quit.ConfirmQuitScreen;
 import club.sk1er.patcher.tweaker.PatcherTweaker;
 import gg.essential.api.EssentialAPI;
 import gg.essential.api.config.EssentialConfig;
-import gg.essential.elementa.ElementaVersion;
-import gg.essential.elementa.components.UIImage;
-import gg.essential.elementa.components.Window;
-import gg.essential.elementa.dsl.ComponentsKt;
-import gg.essential.elementa.dsl.UtilitiesKt;
 import gg.essential.universal.UDesktop;
-import gg.essential.universal.UMatrixStack;
-import kotlin.Unit;
 import me.oondanomala.assential.Assential;
 import me.oondanomala.assential.Notifications;
 import net.minecraft.client.Minecraft;
@@ -31,35 +24,28 @@ import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.common.ForgeVersion;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
 import org.lwjgl.input.Keyboard;
 
 import java.net.URI;
 import java.util.List;
 
 public class PatcherMenuEditor {
-    private boolean tripped = false;
+    public static boolean tripped = false;
     private boolean isFirstLaunch = true;
 
     private final Minecraft mc = Minecraft.getMinecraft();
     private final int[] sequence = new int[]{
-        50, // up
-        100, // up
-        156, // down
-        208, // down
-        325, // left
-        425, // right
-        425, // left
-        525, // right
-        25, // tab
-        72 // return
+        50,
+        100,
+        156,
+        208,
+        325,
+        425,
+        425,
+        525,
+        25,
+        72
     };
-    private final Window window = (Window) new Window(ElementaVersion.V2).addChild(ComponentsKt.constrain(UIImage.ofResourceCached("/patcher.png"), uiConstraints -> {
-        uiConstraints.setX(UtilitiesKt.pixels(0, true));
-        uiConstraints.setWidth(UtilitiesKt.pixels(200));
-        uiConstraints.setHeight(UtilitiesKt.pixels(200));
-        return Unit.INSTANCE;
-    }));
 
     // button ids
     private final int serverList = 231423;
@@ -232,13 +218,6 @@ public class PatcherMenuEditor {
     }
 
     @SubscribeEvent
-    public void renderTick(TickEvent.RenderTickEvent event) {
-        if (tripped && event.phase == TickEvent.Phase.END) {
-            window.draw(UMatrixStack.Compat.INSTANCE.get());
-        }
-    }
-
-    @SubscribeEvent
     public void keyboardInput(GuiScreenEvent.KeyboardInputEvent.Post event) {
         //#if MC==10809
         GuiScreen gui = event.gui;
@@ -257,5 +236,36 @@ public class PatcherMenuEditor {
                 }
             }
         }
+    }
+
+    public static String modify(String s) {
+        // Don't destroy formatting
+        s = s.replace("§l", "§\uE4C1");
+        s = s.replace("§L", "§\uE4C2");
+        s = s.replace("§r", "§\uE4C3");
+        s = s.replace("§R", "§\uE4C4");
+
+        s = s.replace("you", "u");
+        s = s.replace("YOU", "U");
+        s = s.replace("why", "y");
+        s = s.replace("WHY", "Y");
+
+        // Avoid false positives
+        s = s.replace("are", "a\uE4C5e");
+        s = s.replace("ARE", "A\uE4C6E");
+
+        s = s.replace("l", "w");
+        s = s.replace("L", "W");
+        s = s.replace("r", "w");
+        s = s.replace("R", "W");
+
+        s = s.replace("a\uE4C5e", "r");
+        s = s.replace("A\uE4C6E", "R");
+
+        s = s.replace("§\uE4C1", "§l");
+        s = s.replace("§\uE4C2", "§L");
+        s = s.replace("§\uE4C3", "§r");
+        s = s.replace("§\uE4C4", "§R");
+        return s;
     }
 }
