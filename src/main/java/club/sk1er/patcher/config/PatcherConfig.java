@@ -272,7 +272,7 @@ public class PatcherConfig extends Vigilant {
 
     @Property(
         type = PropertyType.SWITCH, name = "Unfocused FPS",
-        description = "Toggle changing your FPS to whatever Unfocused FPS is set to when not tabbed into the window.",
+        description = "Toggle changing your FPS to whatever Unfocused FPS Amount is set to when not tabbed into the window.",
         category = "Miscellaneous", subcategory = "General"
     )
     public static boolean unfocusedFPS;
@@ -284,6 +284,22 @@ public class PatcherConfig extends Vigilant {
         min = 15, max = 240
     )
     public static int unfocusedFPSAmount = 60;
+
+    @Property(
+        type = PropertyType.SWITCH, name = "Minimized FPS",
+        description = "Toggle changing your FPS to whatever Minimized FPS Amount is set to when the window is minimized.",
+        category = "Miscellaneous", subcategory = "General"
+    )
+    public static boolean minimizedFPS;
+
+    @Property(
+        type = PropertyType.SLIDER, name = "Minimized FPS Amount",
+        description = "Change the maximum FPS when the window is minimized, saving resources.\n" +
+        "§cLow values may cause the window to take longer to come back up.",
+        category = "Miscellaneous", subcategory = "General",
+        min = 1, max = 240
+    )
+    public static int minimizedFPSAmount = 15;
 
     @Property(
         type = PropertyType.NUMBER, name = "Custom FPS Limit",
@@ -1312,6 +1328,7 @@ public class PatcherConfig extends Vigilant {
         try {
             addDependency("smartFullbright", "fullbright");
             addDependency("unfocusedFPSAmount", "unfocusedFPS");
+            addDependency("minimizedFPSAmount", "minimizedFPS");
             addDependency("instantFullscreen", "windowedFullscreen");
             addDependency("tabHeight", "tabHeightAllow");
             addDependency("consecutiveCompactChat", "compactChat");

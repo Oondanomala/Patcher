@@ -50,8 +50,10 @@ Adapted from the disclaimer found in PolyPatcher.
 - **Disable Hotbar Scrolling** - Remove the ability to scroll through your hotbar.
 - **Crosshair Perspective** - Remove the crosshair when in third person.
 - **Unfocused Sounds** - Change the volume of sounds when you're not tabbed into the window.
-- **Unfocused FPS** - Toggle changing your FPS to whatever Unfocused FPS is set to when not tabbed into the window.**
+- **Unfocused FPS** - Toggle changing your FPS to whatever Unfocused FPS Amount is set to when not tabbed into the window.
 - **Unfocused FPS Amount** - Change the maximum FPS when you're not tabbed into the window, saving resources.
+- **Minimized FPS** - Toggle changing your FPS to whatever Minimized FPS Amount is set to when the window is minimized.
+- **Minimized FPS Amount** - Change the maximum FPS when the window is minimized, saving resources.
 - **Log Optimizer** - Delete all files in the logs folder, as these can usually take up a lot of space. (These files are not recoverable once deleted)
 - **Log Optimizer Amount** - Choose how many days old a file must be before being deleted.
 - **Better Camera** - Stop tall grass, plants, reeds, etc. from affecting your FOV as done in 1.14+. *default
