@@ -77,6 +77,7 @@ Adapted from the disclaimer found in PolyPatcher.
 - **Fire Overlay Height** - Change the height of the fire overlay.
 - **Fire Overlay Opacity** - Change the opacity of the fire overlay.
 - **Hide Fire Overlay with Fire Resistance** - Hide the fire overlay when you have fire resistance active. The overlay will blink 5 seconds before your fire resistance is about to run out.
+- **Pumpkin Overlay Opacity** - Change the opacity of the pumpkin overlay.
 - **Remove Water Overlay** - Remove the water texture overlay when underwater.
 - **Remove Inverted Colors from Crosshair** - Remove the inverted color effect on the crosshair.
 - **Fullbright** - Remove lighting updates, increasing visibility. (Can positively impact performance. May conflict with minimaps) *default

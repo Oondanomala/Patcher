@@ -168,6 +168,13 @@ public class PatcherConfig extends Vigilant {
     public static boolean hideFireOverlayWithFireResistance;
 
     @Property(
+        type = PropertyType.PERCENT_SLIDER, name = "Pumpkin Overlay Opacity",
+        description = "Change the opacity of the pumpkin overlay.",
+        category = "Miscellaneous", subcategory = "Overlays"
+    )
+    public static float pumpkinOverlayOpacity = 1.0F;
+
+    @Property(
         type = PropertyType.SWITCH, name = "Disable Titles",
         description = "Stop titles from appearing.",
         category = "Miscellaneous", subcategory = "Overlays", i18nSubcategory = "Titles"
