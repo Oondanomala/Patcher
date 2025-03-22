@@ -123,6 +123,7 @@
     "features.EntityFXMixin_TrackCullState",
     "features.EntityLivingBaseMixin_CleanView",
     "features.EntityPlayerSPMixin_NauseaEffect",
+    "features.EntityRenderer_DebugChunkBorders",
     "features.EntityRendererMixin_CameraPerspective",
     "features.EntityRendererMixin_DebugCrosshair",
     "features.EntityRendererMixin_NametagBackground",

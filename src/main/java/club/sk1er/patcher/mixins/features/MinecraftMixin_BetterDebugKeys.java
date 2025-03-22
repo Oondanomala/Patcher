@@ -82,13 +82,17 @@ public class MinecraftMixin_BetterDebugKeys {
             debugKeycode = Keyboard.KEY_F3;
         }
         if (Keyboard.isKeyDown(debugKeycode)) {
-            if (k == Keyboard.KEY_Q) {
+            if (k == Keyboard.KEY_G) {
+                DebugChunkBordersHook.shouldRender = !DebugChunkBordersHook.shouldRender;
+                patcher$sendDebugMessage("Chunk borders: " + (DebugChunkBordersHook.shouldRender ? "shown" : "hidden"));
+            } else if (k == Keyboard.KEY_Q) {
                 String debugKeybind = GameSettings.getKeyDisplayString(debugKeycode);
                 ChatUtilities.sendMessage("&e&l[Debug]:&r Key bindings:", false);
                 ChatUtilities.sendMessage(debugKeybind + " + A = Reload chunks", false);
                 ChatUtilities.sendMessage(debugKeybind + " + B = Show hitboxes", false);
                 ChatUtilities.sendMessage(debugKeybind + " + D = Clear chat", false);
                 //ChatUtilities.sendMessage(debugKeybind + " + F = Cycle render distance (Shift to invert)", false);
+                ChatUtilities.sendMessage(debugKeybind + " + G = Show chunk boundaries", false);
                 ChatUtilities.sendMessage(debugKeybind + " + H = Advanced tooltips", false);
                 ChatUtilities.sendMessage(debugKeybind + " + P = Pause on lost focus", false);
                 ChatUtilities.sendMessage(debugKeybind + " + Q = Show this list", false);
