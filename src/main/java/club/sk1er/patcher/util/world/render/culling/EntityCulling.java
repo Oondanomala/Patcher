@@ -51,10 +51,10 @@ public class EntityCulling {
     private static final RenderManager renderManager = mc.getRenderManager();
     private static final RenderManagerAccessor renderManagerAccessor = (RenderManagerAccessor) renderManager;
     private static final ConcurrentHashMap<UUID, OcclusionQuery> queries = new ConcurrentHashMap<>();
-    private static final boolean SUPPORT_NEW_GL = GLContext.getCapabilities().OpenGL33;
+    private static final int GL_QUERY_MODE = GLContext.getCapabilities().OpenGL33 ? GL33.GL_ANY_SAMPLES_PASSED : GL15.GL_SAMPLES_PASSED;
     public static boolean shouldPerformCulling = false;
-    private int destroyTimer;
     public static boolean renderingSpawnerEntity = false;
+    private int destroyTimer;
 
     /**
      * Used for checking if the entities' nametag can be rendered if the user still wants
@@ -175,13 +175,12 @@ public class EntityCulling {
         if (query.refresh) {
             query.nextQuery = getQuery();
             query.refresh = false;
-            int mode = SUPPORT_NEW_GL ? GL33.GL_ANY_SAMPLES_PASSED : GL15.GL_SAMPLES_PASSED;
-            GL15.glBeginQuery(mode, query.nextQuery);
+            GL15.glBeginQuery(GL_QUERY_MODE, query.nextQuery);
             drawSelectionBoundingBox(entity.getEntityBoundingBox()
                 .expand(.2, .2, .2)
                 .offset(-renderManagerAccessor.getRenderPosX(), -renderManagerAccessor.getRenderPosY(), -renderManagerAccessor.getRenderPosZ())
             );
-            GL15.glEndQuery(mode);
+            GL15.glEndQuery(GL_QUERY_MODE);
         }
 
         return query.occluded;
