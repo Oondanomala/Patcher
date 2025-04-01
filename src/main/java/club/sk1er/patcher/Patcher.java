@@ -73,7 +73,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 @Mod(
@@ -168,7 +167,7 @@ public class Patcher {
     public void onLoadComplete(FMLLoadCompleteEvent event) {
         List<ModContainer> activeModList = Loader.instance().getActiveModList();
         this.detectIncompatibilities(activeModList);
-        this.detectReplacements(activeModList);
+        Multithreading.runAsync(() -> detectReplacements(activeModList));
 
         //noinspection ConstantConditions
         if (!ForgeVersion.mcVersion.equals("1.8.9") || ForgeVersion.getVersion().contains("2318")) return;
@@ -375,10 +374,11 @@ public class Patcher {
 
     private void detectReplacements(List<ModContainer> activeModList) {
         JsonObject replacedMods;
+        final String url = "https://raw.githubusercontent.com/Oondanomala/Patcher/zeroconfig/data/duplicate_mods.json";
         try {
-            replacedMods = this.readDuplicateModsJson().get();
+            replacedMods = new JsonParser().parse(Objects.requireNonNull(WebUtil.fetchString(url))).getAsJsonObject();
         } catch (Exception e) {
-            logger.error("Failed to fetch list of replaced mods.", e);
+            logger.error("Failed to fetch list of replaced mods from {}.", url, e);
             return;
         }
 
@@ -396,15 +396,6 @@ public class Patcher {
                 Notifications.push("Patcher", replacement + " can be removed as it is replaced by Patcher.", 6);
             }
         }
-    }
-
-    private CompletableFuture<JsonObject> readDuplicateModsJson() {
-        String url = "https://raw.githubusercontent.com/Oondanomala/Patcher/zeroconfig/data/duplicate_mods.json";
-        return CompletableFuture.supplyAsync(() -> new JsonParser().parse(Objects.requireNonNull(WebUtil.fetchString(url))).getAsJsonObject(), Multithreading.getPool())
-            .exceptionally((error) -> {
-                logger.error("Failed to fetch {}: {}", url, error);
-                return null;
-            });
     }
 
     public PatcherConfig getPatcherConfig() {
