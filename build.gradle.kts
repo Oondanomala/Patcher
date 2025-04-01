@@ -76,6 +76,10 @@ dependencies {
     }
 }
 
+sourceSets.main {
+    output.setResourcesDir(sourceSets.main.flatMap { it.java.classesDirectory })
+}
+
 tasks {
     compileKotlin {
         kotlinOptions {
