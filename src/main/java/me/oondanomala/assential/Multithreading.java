@@ -12,7 +12,7 @@ public final class Multithreading {
     }
 
     public static void runAsync(Runnable runnable) {
-        POOL.submit(runnable);
+        POOL.execute(runnable);
     }
 
     public static ExecutorService getPool() {
