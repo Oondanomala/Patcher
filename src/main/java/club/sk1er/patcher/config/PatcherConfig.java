@@ -752,6 +752,13 @@ public class PatcherConfig extends Vigilant {
     public static boolean disableSkulls;
 
     @Property(
+        type = PropertyType.SWITCH, name = "Disable Falling Blocks",
+        description = "Stop falling blocks from rendering.",
+        category = "Performance", subcategory = "Entity Rendering"
+    )
+    public static boolean disableFallingBlocks;
+
+    @Property(
         type = PropertyType.SWITCH, name = "Disable End Portals",
         description = "Stop end portals from rendering.",
         category = "Performance", subcategory = "General"
