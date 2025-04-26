@@ -47,6 +47,7 @@ Adapted from the disclaimer found in PolyPatcher.
 - **Slowness FOV** - Modify Your FOV when having the slowness effect.
 - **Better Keybind Handling** - Makes keys re-register when closing a GUI, like in 1.12+. (Does not work on macOS due to LWJGL issues) *default
 - **Separate Sound & Texture Reloading** - Separate reloading resources into reloading sounds (F3+S) and reloading textures (F3+T).
+- **Debug Keybind Feedback** - Send a chat message when using debug keybinds, like in 1.12+.
 - **Disable Hotbar Scrolling** - Remove the ability to scroll through your hotbar.
 - **Crosshair Perspective** - Remove the crosshair when in third person.
 - **Unfocused Sounds** - Change the volume of sounds when you're not tabbed into the window.

@@ -109,6 +109,13 @@ public class PatcherConfig extends Vigilant {
     public static boolean separateResourceLoading;
 
     @Property(
+        type = PropertyType.SWITCH, name = "Debug Keybind Feedback",
+        description = "Send a chat message when using debug keybinds, like in 1.12+.",
+        category = "Miscellaneous", subcategory = "General"
+    )
+    public static boolean debugKeybindFeedback = true;
+
+    @Property(
         type = PropertyType.SWITCH, name = "Fullbright",
         description = "Remove lighting updates, increasing visibility.\n§eCan positively impact performance.\n§cMay conflict with minimaps.",
         category = "Miscellaneous", subcategory = "Rendering", triggerActionOnInitialization = false
@@ -1388,8 +1395,8 @@ public class PatcherConfig extends Vigilant {
             //noinspection ConstantConditions
             Function0<Boolean> minecraft112 = () -> ForgeVersion.mcVersion.equals("1.12.2");
             Arrays.asList(
-                "resourceExploitFix", "newKeybindHandling", "separateResourceLoading", "futureHitBoxes",
-                "leftHandInFirstPerson", "extendedChatLength", "chatPosition", "parallaxFix",
+                "resourceExploitFix", "newKeybindHandling", "separateResourceLoading", "debugKeybindFeedback",
+                "futureHitBoxes", "leftHandInFirstPerson", "extendedChatLength", "chatPosition", "parallaxFix",
                 "crosshairPerspective", "extendChatBackground", "cleanOptionsMenu", "vanillaGlassPanes"
             ).forEach(property -> hidePropertyIf(property, minecraft112));
 
