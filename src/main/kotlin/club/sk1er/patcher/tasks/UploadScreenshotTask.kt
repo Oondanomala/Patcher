@@ -5,10 +5,10 @@ import club.sk1er.patcher.imgur.Imgur
 import club.sk1er.patcher.util.chat.ChatUtilities
 import club.sk1er.patcher.util.screenshot.AsyncScreenshots
 import gg.essential.universal.ChatColor
-import gg.essential.universal.wrappers.message.UTextComponent
 import me.oondanomala.assential.Multithreading
 import net.minecraft.client.Minecraft
 import net.minecraft.event.ClickEvent
+import net.minecraft.util.ChatComponentText
 import java.io.File
 
 object UploadScreenshotTask {
@@ -21,7 +21,7 @@ object UploadScreenshotTask {
 
                 Multithreading.runAsync {
                     val link = client.upload(file)
-                    val message = UTextComponent("${AsyncScreenshots.prefix}${ChatColor.GREEN}Screenshot was uploaded to $link.")
+                    val message = ChatComponentText("${AsyncScreenshots.prefix}${ChatColor.GREEN}Screenshot was uploaded to $link.")
                     message.chatStyle.chatClickEvent = ClickEvent(ClickEvent.Action.OPEN_URL, link)
                     Minecraft.getMinecraft().thePlayer.addChatComponentMessage(message)
                 }
