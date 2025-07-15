@@ -38,9 +38,9 @@ public abstract class Command extends CommandBase {
 
     @Override
     //#if MC==10809
-    public void processCommand(ICommandSender sender, String[] args) {
+    public final void processCommand(ICommandSender sender, String[] args) {
     //#else
-    //$$ public void execute(MinecraftServer server, ICommandSender sender, String[] args) {
+    //$$ public final void execute(MinecraftServer server, ICommandSender sender, String[] args) {
     //#endif
         try {
             if (args.length == 0) {
@@ -57,9 +57,9 @@ public abstract class Command extends CommandBase {
 
     @Override
     //#if MC==10809
-    public List<String> addTabCompletionOptions(ICommandSender sender, String[] args, BlockPos pos) {
+    public final List<String> addTabCompletionOptions(ICommandSender sender, String[] args, BlockPos pos) {
     //#else
-    //$$ public List<String> getTabCompletions(MinecraftServer server, ICommandSender sender, String[] args, BlockPos targetPos) {
+    //$$ public final List<String> getTabCompletions(MinecraftServer server, ICommandSender sender, String[] args, BlockPos targetPos) {
     //#endif
         String[] lowercaseArgs = Arrays.stream(args).map(String::toLowerCase).toArray(String[]::new);
         return getListOfStringsMatchingLastWord(lowercaseArgs, addTabCompletions(Arrays.copyOfRange(lowercaseArgs, 0, args.length - 1)));
