@@ -140,6 +140,7 @@
     "features.GuiIngameForgeMixin_ActionbarText",
     "features.GuiIngameForgeMixin_CrosshairRendering",
     "features.GuiIngameForgeMixin_TitleRendering",
+    "features.GuiIngameMixin_CrosshairRendering",
     "features.GuiIngameMixin_CrosshairVisibility",
     "features.GuiIngameMixin_PumpkinOverlayOpacity",
     "features.GuiMultiplayerMixin_FastServerJoin",

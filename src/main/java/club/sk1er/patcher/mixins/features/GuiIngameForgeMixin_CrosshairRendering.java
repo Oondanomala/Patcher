@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.injection.Slice;
 
 @Mixin(GuiIngameForge.class)
 public class GuiIngameForgeMixin_CrosshairRendering {
+    //#if MC==1.8.9
     @Redirect(
         method = "renderCrosshairs",
         slice = @Slice(from = @At(value = "CONSTANT", args = "intValue=775", ordinal = 0)),
@@ -20,4 +21,5 @@ public class GuiIngameForgeMixin_CrosshairRendering {
             GlStateManager.tryBlendFuncSeparate(srcFactor, dstFactor, srcFactorAlpha, dstFactorAlpha);
         }
     }
+    //#endif
 }
