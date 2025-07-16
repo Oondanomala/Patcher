@@ -339,12 +339,12 @@ public class Patcher {
         for (ModContainer container : activeModList) {
             String modId = container.getModId();
             String baseMessage = container.getName() + " has been detected. ";
-            if (PatcherConfig.entityCulling && modId.equals("enhancements")) {
+            if (PatcherConfig.entityCulling && (modId.equals("enhancements") || modId.equals("entityculling"))) {
                 Notifications.push("Patcher", baseMessage + "Entity Culling is now disabled.");
                 PatcherConfig.entityCulling = false;
             }
 
-            if ((modId.equals("labymod") || modId.equals("enhancements")) || modId.equals("hychat")) {
+            if (modId.equals("labymod") || modId.equals("enhancements") || modId.equals("hychat")) {
                 if (PatcherConfig.compactChat) {
                     Notifications.push("Patcher", baseMessage + "Compact Chat is now disabled.");
                     PatcherConfig.compactChat = false;
