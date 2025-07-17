@@ -1070,6 +1070,14 @@ public class PatcherConfig extends Vigilant {
     public static boolean startupNotification = true;
 
     @Property(
+        type = PropertyType.SELECTOR, name = "Startup Sound",
+        description = "Play the selected sound when the game starts.",
+        category = "Screens", subcategory = "General",
+        options = {"None", "Ding", "Pling"}
+    )
+    public static int startupSound = 0;
+
+    @Property(
         type = PropertyType.SWITCH, name = "Damage Glance",
         description = "View the damage value of the currently held item above your hotbar.",
         category = "Screens", subcategory = "Combat Utilities"

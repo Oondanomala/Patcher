@@ -186,6 +186,7 @@ Adapted from the disclaimer found in PolyPatcher.
 - **Container Opacity** - Change the opacity of supported containers. Includes Chests & Survival inventory.
 - **GUI Crosshair** - Stop rendering the crosshair when in a GUI.
 - **Startup Notification** - Notify how long the game took to start. *default
+- **Startup Sound** - Play the selected sound when the game starts.
 - **Clean Main Menu** - Remove the Realms button on the main menu as it's useless on 1.8.9. *default
 - **Clean Options Menu** - Remove the Twitch broadcast button on the options menu. *(not in original)* *default
 - **Open to LAN Replacement** - Modify the Open to LAN button to either redirect to the server list or be removed.

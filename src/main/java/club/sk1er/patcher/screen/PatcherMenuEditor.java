@@ -9,6 +9,7 @@ import club.sk1er.patcher.tweaker.PatcherTweaker;
 import gg.essential.api.EssentialAPI;
 import gg.essential.api.config.EssentialConfig;
 import gg.essential.universal.UDesktop;
+import gg.essential.universal.USound;
 import me.oondanomala.assential.Assential;
 import me.oondanomala.assential.Notifications;
 import net.minecraft.client.Minecraft;
@@ -94,6 +95,11 @@ public class PatcherMenuEditor {
                             }
                         }
                     });
+                }
+                if (PatcherConfig.startupSound == 1) {
+                    USound.INSTANCE.playExpSound();
+                } else if (PatcherConfig.startupSound == 2) {
+                    USound.INSTANCE.playPlingSound();
                 }
                 isFirstLaunch = false;
             }
