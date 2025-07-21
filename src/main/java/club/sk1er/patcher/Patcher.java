@@ -22,6 +22,7 @@ import club.sk1er.patcher.util.enhancement.EnhancementManager;
 import club.sk1er.patcher.util.enhancement.ReloadListener;
 import club.sk1er.patcher.util.fov.FovHandler;
 import club.sk1er.patcher.util.keybind.FunctionKeyChanger;
+import club.sk1er.patcher.util.keybind.KeybindChatPeek;
 import club.sk1er.patcher.util.keybind.KeybindDropModifier;
 import club.sk1er.patcher.util.keybind.MousePerspectiveKeybindHandler;
 import club.sk1er.patcher.util.keybind.linux.LinuxKeybindFix;
@@ -107,7 +108,7 @@ public class Patcher {
     private final SavesWatcher savesWatcher = new SavesWatcher();
     private final AudioSwitcher audioSwitcher = new AudioSwitcher();
 
-    private KeyBinding dropModifier, hideScreen, customDebug, clearShaders;
+    private KeyBinding chatPeek, dropModifier, hideScreen, customDebug, clearShaders;
 
     private PatcherConfig patcherConfig;
     private PatcherSoundConfig patcherSoundConfig;
@@ -117,6 +118,7 @@ public class Patcher {
     @Mod.EventHandler
     public void onInit(FMLInitializationEvent event) {
         registerKeybinds(
+            chatPeek = new KeybindChatPeek(),
             dropModifier = new KeybindDropModifier(),
             hideScreen = new FunctionKeyChanger.KeybindHideScreen(),
             customDebug = new FunctionKeyChanger.KeybindCustomDebug(),
@@ -408,6 +410,10 @@ public class Patcher {
 
     public Logger getLogger() {
         return logger;
+    }
+
+    public KeyBinding getChatPeek() {
+        return chatPeek;
     }
 
     public KeyBinding getDropModifier() {
