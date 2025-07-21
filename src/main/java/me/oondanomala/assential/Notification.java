@@ -34,8 +34,8 @@ class Notification extends Gui {
     private final String title;
     private final String message;
     private final float duration;
-    private long timeRemaining;
     public final Runnable clickAction;
+    private long timeRemaining;
 
     public final int height;
     private final int titleHeight;
@@ -72,16 +72,19 @@ class Notification extends Gui {
         hovered = (mouseX > left && mouseX <= right && mouseY > top && mouseY < bottom) && !Minecraft.getMinecraft().inGameHasFocus;
         if (!hovered) timeRemaining -= deltaTime;
 
+        final int borderColor = hovered ? BORDER_COLOR_HOVER : BORDER_COLOR;
+        final int progressBarColor = hovered ? PROGRESS_BAR_COLOR_HOVER : PROGRESS_BAR_COLOR;
+
         GlStateManager.translate(0, 0, 1000);
         // Inner background
         drawRect(left, top, right, bottom, BACKGROUND_COLOR);
         // Outer border
-        drawHorizontalLine(left, right - 1, top, hovered ? BORDER_COLOR_HOVER : BORDER_COLOR);
-        drawHorizontalLine(left, right - 1, bottom - 1, hovered ? BORDER_COLOR_HOVER : BORDER_COLOR);
-        drawVerticalLine(left, top, bottom, hovered ? BORDER_COLOR_HOVER : BORDER_COLOR);
-        drawVerticalLine(right - 1, top, bottom, hovered ? BORDER_COLOR_HOVER : BORDER_COLOR);
+        drawHorizontalLine(left, right - 1, top, borderColor);
+        drawHorizontalLine(left, right - 1, bottom - 1, borderColor);
+        drawVerticalLine(left, top, bottom, borderColor);
+        drawVerticalLine(right - 1, top, bottom, borderColor);
         // Progress bar
-        drawRect(left + 1, bottom - 4, left + 1 + (timeRemaining / duration) * (WIDTH - 2), bottom - 1, hovered ? PROGRESS_BAR_COLOR_HOVER : PROGRESS_BAR_COLOR);
+        drawRect(left + 1, bottom - 4, left + 1 + (timeRemaining / duration) * (WIDTH - 2), bottom - 1, progressBarColor);
         // Title
         drawSplitString(title, left + LEFT_PADDING, top + TOP_PADDING, TEXT_SPACE, TITLE_COLOR);
         // Message
