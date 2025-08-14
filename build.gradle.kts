@@ -34,6 +34,13 @@ loom {
             programArgs("--mixin", "patcher.mixins.json")
         }
     }
+    // For some reason loom defaults to tab indentation
+    decompilers {
+        named("vineflower") {
+            // Use indent-string for newer vineflower
+            options.put("ind", "    ")
+        }
+    }
 }
 
 repositories {
