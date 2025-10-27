@@ -212,6 +212,7 @@
     "features.optifine.EntityRendererMixin_ZoomTweaks",
     "features.optifine.GuiOverlayDebugMixin_SimplifyFpsCounter",
     "features.optifine.GuiOverlayDebugMixin_VanillaMetricsRenderer",
+    "features.render.EntityMixin_UnlimitedRenderDistance",
     "features.render.item.ItemRendererMixin_FireRendering",
     "features.render.item.ItemRendererMixin_RemoveWaterOverlay",
     "misc.GuiOverlayDebugMixin_ShowPatcherVersion",

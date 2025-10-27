@@ -863,6 +863,15 @@ public class PatcherConfig extends Vigilant {
     public static boolean playerBackFaceCulling;
 
     @Property(
+        type = PropertyType.SWITCH, name = "Unlimited Entity Render Distance",
+        description = "Makes entities always render, no matter how far away you are from them.\n" +
+            "Entities may still disappear when far away for other reasons, such as servers unloading them.\n" +
+            "§cWill negatively impact performance.",
+        category = "Performance", subcategory = "Entity Rendering"
+    )
+    public static boolean unlimitedEntityRenderDistance;
+
+    @Property(
         type = PropertyType.SWITCH, name = "Entity Render Distance Toggle",
         description = "Toggle allowing a custom entity render distance.",
         category = "Performance", subcategory = "Entity Rendering"

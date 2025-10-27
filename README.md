@@ -137,6 +137,7 @@ Adapted from the disclaimer found in PolyPatcher.
 - **Disable Falling Blocks** - Stop falling blocks from rendering.
 - **Disable Nametags Boxes** - Remove the transparent box around the nametag.
 - **Unstacked Items** - Render stacks of items on the ground as just one instead of having up to 5 copies in one stack.
+- **Unlimited Entity Render Distance** - Makes entities always render, no matter how far away you are from them. Entities may still disappear when far away for other reasons, such as servers unloading them. (Will negatively impact performance).
 - **Entity Render Distance Toggle** - Toggle allowing a custom entity render distance.
 - **Hostile Entity Render Distance** - Stop rendering hostile entities outside a specified radius.
 - **Passive Entity Render Distance** - Stop rendering passive entities outside a specified radius.
