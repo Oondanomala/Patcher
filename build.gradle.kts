@@ -53,8 +53,8 @@ dependencies {
     compileOnly("gg.essential:essential-$platform:4246+g8be73312c") {
         isTransitive = false
     }
-    shade("gg.essential:universalcraft-$platform:421")
-    shade("gg.essential:elementa:710")
+    shade("gg.essential:universalcraft-$platform:436")
+    shade("gg.essential:elementa:714")
     // 312 has broken transparency, avoid it until it's fixed
     shade("gg.essential:vigilance:306")
 
