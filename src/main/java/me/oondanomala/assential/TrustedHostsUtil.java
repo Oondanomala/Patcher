@@ -15,6 +15,10 @@ public final class TrustedHostsUtil {
     private TrustedHostsUtil() {
     }
 
+    /**
+     * Returns an array of hosts considered trusted by Essential.
+     * The array is not defensively copied.
+     */
     public static String[] getTrustedHosts() {
         return TRUSTED_HOSTS;
     }

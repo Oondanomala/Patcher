@@ -71,6 +71,15 @@ public abstract class Command extends CommandBase {
         return new String[0];
     }
 
+    /**
+     * Equivalent to {@link Integer#parseInt(String)},
+     * but will throw a {@link SyntaxErrorException} with
+     * the provided {@code errorMessage} instead of a {@link NumberFormatException}.
+     *
+     * @param arg          The string to parse
+     * @param errorMessage The error message for the {@link SyntaxErrorException} that will be thrown
+     * @throws SyntaxErrorException If the given argument is not a valid integer.
+     */
     protected static int parseInt(String arg, String errorMessage) throws SyntaxErrorException {
         try {
             return Integer.parseInt(arg);
@@ -79,6 +88,15 @@ public abstract class Command extends CommandBase {
         }
     }
 
+    /**
+     * Equivalent to {@link Float#parseFloat(String)},
+     * but will throw a {@link SyntaxErrorException} with
+     * the provided {@code errorMessage} instead of a {@link NumberFormatException}.
+     *
+     * @param arg          The string to parse
+     * @param errorMessage The error message for the {@link SyntaxErrorException} that will be thrown
+     * @throws SyntaxErrorException If the given argument is not a valid float.
+     */
     protected static float parseFloat(String arg, String errorMessage) throws SyntaxErrorException {
         try {
             return Float.parseFloat(arg);
