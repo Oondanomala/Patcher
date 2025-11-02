@@ -20,8 +20,6 @@ import club.sk1er.patcher.asm.external.mods.optifine.reflectionoptimizations.com
 import club.sk1er.patcher.asm.external.mods.optifine.reflectionoptimizations.modern.CustomColorsReflectionOptimizer;
 import club.sk1er.patcher.asm.external.mods.optifine.reflectionoptimizations.modern.ItemModelMesherReflectionOptimizer;
 import club.sk1er.patcher.asm.external.mods.optifine.reflectionoptimizations.modern.RenderChunkReflectionOptimizer;
-import club.sk1er.patcher.asm.external.mods.optifine.signfix.GuiEditSignTransformer;
-import club.sk1er.patcher.asm.external.mods.optifine.signfix.TileEntitySignRendererTransformer;
 import club.sk1er.patcher.asm.external.mods.optifine.witherfix.EntityWitherTransformer;
 import club.sk1er.patcher.asm.external.mods.optifine.xpfix.GuiIngameForgeTransformer;
 import club.sk1er.patcher.asm.external.mods.pingtag.TagRendererListenerTransformer;
@@ -144,8 +142,6 @@ public class ModClassTransformer implements IClassTransformer {
     }
 
     private void registerLSeriesFixesTransformers() {
-        registerTransformer(new GuiEditSignTransformer());
-        registerTransformer(new TileEntitySignRendererTransformer());
         registerTransformer(new RandomEntitiesTransformer());
         registerTransformer(new EntityWitherTransformer());
     }
