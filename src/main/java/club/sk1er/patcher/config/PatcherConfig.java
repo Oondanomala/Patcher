@@ -940,6 +940,13 @@ public class PatcherConfig extends Vigilant {
     }
 
     @Property(
+        type = PropertyType.SWITCH, name = "White Button Text",
+        description = "Makes button text white on hover instead of yellow, like in 1.14+.",
+        category = "Screens", subcategory = "General"
+    )
+    public static boolean whiteButtonText;
+
+    @Property(
         type = PropertyType.SWITCH, name = "Remove Container Background",
         description = "Remove the dark background inside a container.",
         category = "Screens", subcategory = "General"

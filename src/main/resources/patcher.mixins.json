@@ -135,6 +135,7 @@
     "features.EntityRendererMixin_ViewBobbing",
     "features.FontRendererMixin_ShadowTypes",
     "features.GuiAchievementMixin_CancelRender",
+    "features.GuiButton_WhiteHoverText",
     "features.GuiChatMixin_ExtendedChatLength",
     "features.GuiChatMixin_SafeChatClicksHistory",
     "features.GuiContainerMixin_ClickOutOfContainers",
