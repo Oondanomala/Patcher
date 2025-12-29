@@ -8,13 +8,13 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import org.lwjgl.input.Mouse;
 
-import java.util.Deque;
 import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.Queue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public final class Notifications {
     static final Notifications INSTANCE = new Notifications();
-    private static final Deque<Notification> notifications = new LinkedList<>();
+    private static final Queue<Notification> notifications = new LinkedBlockingQueue<>();
     private static long lastTime = -1;
     private static long deltaTime;
 
@@ -68,9 +68,9 @@ public final class Notifications {
                 Notification notification = iterator.next();
                 if (notification.hovered) {
                     USound.INSTANCE.playButtonPress();
-                    notification.clickAction.run();
                     iterator.remove();
                     event.setCanceled(true);
+                    notification.clickAction.run();
                     break;
                 }
             }
