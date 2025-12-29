@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "1.8.22" apply false
+    kotlin("jvm") version "2.1.21" apply false
     id("gg.essential.multi-version.root")
 }
 

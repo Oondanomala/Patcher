@@ -1,10 +1,11 @@
 import gg.essential.gradle.util.noServerRunConfigs
+import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
 plugins {
     kotlin("jvm")
     id("gg.essential.multi-version")
     id("gg.essential.defaults")
-    id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("com.gradleup.shadow") version "9.4.+"
 }
 
 val modGroup: String by project
@@ -37,8 +38,7 @@ loom {
     // For some reason loom defaults to tab indentation
     decompilers {
         named("vineflower") {
-            // Use indent-string for newer vineflower
-            options.put("ind", "    ")
+            options.put("indent-string", "    ")
         }
     }
 }
@@ -46,6 +46,7 @@ loom {
 repositories {
     maven("https://repo.essential.gg/repository/maven-public/")
     maven("https://repo.spongepowered.org/repository/maven-public/")
+    maven("https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1")
 }
 
 val shade: Configuration by configurations.creating {
@@ -60,8 +61,8 @@ dependencies {
     compileOnly("gg.essential:essential-$platform:4246+g8be73312c") {
         isTransitive = false
     }
-    shade("gg.essential:universalcraft-$platform:436")
-    shade("gg.essential:elementa:714")
+    shade("gg.essential:universalcraft-$platform:491")
+    shade("gg.essential:elementa:743")
     // 312 has broken transparency, avoid it until it's fixed
     shade("gg.essential:vigilance:306")
 
@@ -81,19 +82,24 @@ dependencies {
         exclude(module = "commons-io")
         exclude(module = "log4j-core")
     }
+
+    modRuntimeOnly("me.djtheredstoner:DevAuth-forge-legacy:1.2.2")
 }
 
 sourceSets.main {
     output.setResourcesDir(sourceSets.main.flatMap { it.java.classesDirectory })
 }
 
-tasks {
-    compileKotlin {
-        kotlinOptions {
-            freeCompilerArgs += listOf("-Xopt-in=kotlin.RequiresOptIn", "-Xno-param-assertions", "-Xjvm-default=all-compatibility")
-        }
+kotlin {
+    compilerOptions {
+        languageVersion = KotlinVersion.KOTLIN_1_9
+        apiVersion = KotlinVersion.KOTLIN_1_9
+        optIn.add("kotlin.RequiresOptIn")
+        freeCompilerArgs.addAll("-Xno-param-assertions", "-Xjvm-default=all-compatibility")
     }
+}
 
+tasks {
     processResources {
         rename("(.+_at.cfg)", "META-INF/$1")
     }
@@ -102,7 +108,6 @@ tasks {
         archiveVersion.set("")
         archiveClassifier.set("dev")
         configurations = listOf(shade)
-        exclude("README.md")
     }
 
     jar {
