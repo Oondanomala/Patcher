@@ -38,6 +38,7 @@ Adapted from the disclaimer found in PolyPatcher.
   <summary>Miscellaneous</summary>
 
 # Miscellaneous
+- **Notify Mod Updates** - Show a notification on game startup if a mod has an update available. Individual mods (including Patcher itself) can be toggled in Forge's settings. This option does not affect Patcher's own update notification. *default
 - **Remove Ground Foliage** - Stop plants/flower from rendering.
 - **1.12 Farm Selection Boxes** - Replace the selection box for crops with the 1.12 variant. (Only works on Hypixel & Singleplayer) *default
 - **FOV Modifier** - Allow for modifying FOV change states.

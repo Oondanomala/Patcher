@@ -24,6 +24,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.common.ForgeVersion;
 import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.ModContainer;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.lwjgl.input.Keyboard;
 
@@ -78,24 +79,20 @@ public class PatcherMenuEditor {
                 }
                 Patcher.instance.getLogger().info("Minecraft started in {}ms.", time);
 
-                ForgeVersion.CheckResult updateResult = ForgeVersion.getResult(Loader.instance().activeModContainer());
-                if (updateResult.status == ForgeVersion.Status.OUTDATED) {
-                    Notifications.push("Patcher Update", "A new Patcher update is available: " + updateResult.target +
-                        ". Click to open the download page.", 30, () -> {
-                        try {
-                            UDesktop.browse(new URI(updateResult.url));
-                        } catch (Exception openException) {
-                            Patcher.instance.getLogger().error("Failed to open the update download page.", openException);
-                            Notifications.push("Patcher", "Failed to open the update download page. Link is now copied to your clipboard.");
-                            try {
-                                UDesktop.setClipboardString(updateResult.url);
-                            } catch (Exception clipboardException) {
-                                Patcher.instance.getLogger().error("Failed to copy the update download link to clipboard.", clipboardException);
-                                Notifications.push("Patcher", "Failed to copy the update download link to clipboard.");
-                            }
+                if (PatcherConfig.notifyModUpdates) {
+                    for (ModContainer mod : Loader.instance().getActiveModList()) {
+                        ForgeVersion.CheckResult updateResult = ForgeVersion.getResult(mod);
+                        if (updateResult.status == ForgeVersion.Status.OUTDATED) {
+                            pushModUpdateNotification(mod.getName(), updateResult);
                         }
-                    });
+                    }
+                } else {
+                    ForgeVersion.CheckResult updateResult = ForgeVersion.getResult(Loader.instance().activeModContainer());
+                    if (updateResult.status == ForgeVersion.Status.OUTDATED) {
+                        pushModUpdateNotification("Patcher", updateResult);
+                    }
                 }
+
                 if (PatcherConfig.startupSound == 1) {
                     USound.INSTANCE.playExpSound();
                 } else if (PatcherConfig.startupSound == 2) {
@@ -242,6 +239,28 @@ public class PatcherMenuEditor {
                 }
             }
         }
+    }
+
+    private void pushModUpdateNotification(String modName, ForgeVersion.CheckResult updateCheckResult) {
+        Notifications.push(modName + " Update", "A new " + modName + " update is available: "
+            + updateCheckResult.target + ". Click to open the download page.", 30, () -> {
+            if (updateCheckResult.url == null) {
+                Notifications.push("Patcher", modName + " does not link to an update download page.");
+                return;
+            }
+            try {
+                UDesktop.browse(new URI(updateCheckResult.url));
+            } catch (Exception openException) {
+                Patcher.instance.getLogger().error("Failed to open the update download page.", openException);
+                Notifications.push("Patcher", "Failed to open the update download page. Link is now copied to your clipboard.");
+                try {
+                    UDesktop.setClipboardString(updateCheckResult.url);
+                } catch (Exception clipboardException) {
+                    Patcher.instance.getLogger().error("Failed to copy the update download link to clipboard.", clipboardException);
+                    Notifications.push("Patcher", "Failed to copy the update download link to clipboard.");
+                }
+            }
+        });
     }
 
     public static String modify(String s) {
