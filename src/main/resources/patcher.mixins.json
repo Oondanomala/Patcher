@@ -148,6 +148,7 @@
     "features.GuiIngameMixin_CrosshairRendering",
     "features.GuiIngameMixin_CrosshairVisibility",
     "features.GuiIngameMixin_PumpkinOverlayOpacity",
+    "features.GuiKeyBindingList_CategoryOrder",
     "features.GuiMultiplayerMixin_FastServerJoin",
     "features.GuiNewChatMixin_ChatDelay",
     "features.GuiNewChatMixin_ChatOverlay",
