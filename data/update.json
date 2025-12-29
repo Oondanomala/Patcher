@@ -1,10 +1,11 @@
 {
   "homepage": "https://github.com/Oondanomala/Patcher/releases/latest",
   "promos": {
-    "1.12.2-recommended": "1.10.2",
-    "1.8.9-recommended": "1.10.2"
+    "1.12.2-recommended": "1.10.3",
+    "1.8.9-recommended": "1.10.3"
   },
   "1.12.2": {
+    "1.10.3": "Additions:\n  Patcher will now send a notification if any loaded mod has an update available. As usual, mods can be individually disabled in Forge's configs\nFixes:\n  Fixed the update notification's failure notification crashing the game",
     "1.10.2": "Additions:\n  Added option to make button text white on hover instead of yellow, like in 1.14+\nFixes:\n  Fixed compatibility with the 5zig mod",
     "1.10.1": "Additions:\n  Backported the 1.14 sign edit GUI to 1.12.2 (makes the GUI use a text field for text editing)\n  Added option to have an unlimited entity render distance\nFixes:\n  Fixed Alternate Text Shadow and Disable Text Shadow making text shift around the cursor in text fields\nMisc:\n  Updated UniversalCraft and Elementa to their latest versions",
     "1.10.0": "Additions:\n  Added option to change the pumpkin overlay opacity\n  Added options to change the maximum FPS when the window is minimized\n  Added the Chat Peek keybind back, this is yet another feature that got moved into Essential\n  Added option to play a sound on game startup\n  Added options to disable the rendering of falling blocks and paintings\n  Made entity culling automatically disable itself if the EntityCulling mod is loaded\nFixes:\n  Fixed \"Remove Inverted Colors from Crosshair\" not working\n  The duplicate mods json is now fetched in another thread, improving startup performance\n  Micro optimization to entity culling\nMisc:\n  Updated UniversalCraft and Elementa to their latest versions, should fix the config sliders being laggy among other things",
@@ -15,6 +16,7 @@
     "1.8.8": "Additions:\n  Add cactus to 1.14+ crop hitboxes\n  Add option to remove vertical view bobbing\nFixes:\n  Resolve achievement menu breaking with remove container background\n  Resolve resource pack folder sometimes not opening on windows\n  Resolve not being able to open chests with a block 2 blocks above it\n  Resolve image preview breaking on Imgur links\nMisc:\n  Change \"inventoryscale\" command to be hidden from autocomplete (this command was moved to \"/patcher invscale\")\n  Fixed patcher not working in dev environments"
   },
   "1.8.9": {
+    "1.10.3": "Additions:\n  Backported the 1.12+ improved keybinding category order in the controls menu\n  Patcher will now send a notification if any loaded mod has an update available. As usual, mods can be individually disabled in Forge's configs\n  Fixed crash when trying to clone a book with no NBT data\nFixes:\n  Fixed the update notification's failure notification crashing the game",
     "1.10.2": "Additions:\n  Added option to make button text white on hover instead of yellow, like in 1.14+\nFixes:\n  Fixed compatibility with the 5zig mod",
     "1.10.1": "Additions:\n  Backported the 1.14 sign edit GUI to 1.8.9 (makes the GUI use a text field for text editing)\n  Added option to have an unlimited entity render distance\nFixes:\n  Fixed Alternate Text Shadow and Disable Text Shadow making text shift around the cursor in text fields\nMisc:\n  Updated UniversalCraft and Elementa to their latest versions",
     "1.10.0": "Additions:\n  Added option to change the pumpkin overlay opacity\n  Added options to change the maximum FPS when the window is minimized\n  Added the Chat Peek keybind back, this is yet another feature that got moved into Essential\n  Backported the 1.12 debug chunk overlay to 1.8\n  Backported the 1.12 debug keybind feedback to 1.8\n  Added option to play a sound on game startup\n  Added options to disable the rendering of falling blocks and paintings\n  Made entity culling automatically disable itself if the EntityCulling mod is loaded\nFixes:\n  The duplicate mods json is now fetched in another thread, improving startup performance\n  Micro optimization to entity culling\nMisc:\n  Updated UniversalCraft and Elementa to their latest versions, should fix the config sliders being laggy among other things",
