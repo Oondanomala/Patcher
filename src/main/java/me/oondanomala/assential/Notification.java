@@ -51,8 +51,9 @@ class Notification extends Gui {
         this.clickAction = clickAction;
 
         FontRenderer fontRenderer = Minecraft.getMinecraft().fontRendererObj;
-        titleHeight = title.isEmpty() ? 0 : fontRenderer.listFormattedStringToWidth(title, TEXT_SPACE).size() * fontRenderer.FONT_HEIGHT;
-        int messageHeight = message.isEmpty() ? 0 : fontRenderer.listFormattedStringToWidth(message, TEXT_SPACE).size() * fontRenderer.FONT_HEIGHT;
+        // Unlike what this horribly named method says, it's actually returning the height
+        titleHeight = title.isEmpty() ? 0 : fontRenderer.splitStringWidth(title, TEXT_SPACE);
+        int messageHeight = message.isEmpty() ? 0 : fontRenderer.splitStringWidth(message, TEXT_SPACE);
         titlePadding = title.isEmpty() || message.isEmpty() ? 0 : 5;
 
         height = titleHeight + messageHeight + TOP_PADDING + BOTTOM_PADDING + titlePadding;
