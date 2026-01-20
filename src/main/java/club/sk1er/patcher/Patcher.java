@@ -21,8 +21,6 @@ import club.sk1er.patcher.util.chat.ChatHandler;
 import club.sk1er.patcher.util.enhancement.EnhancementManager;
 import club.sk1er.patcher.util.enhancement.ReloadListener;
 import club.sk1er.patcher.util.fov.FovHandler;
-import club.sk1er.patcher.util.keybind.FunctionKeyChanger;
-import club.sk1er.patcher.util.keybind.KeybindChatPeek;
 import club.sk1er.patcher.util.keybind.KeybindDropModifier;
 import club.sk1er.patcher.util.keybind.MousePerspectiveKeybindHandler;
 import club.sk1er.patcher.util.keybind.linux.LinuxKeybindFix;
@@ -60,6 +58,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.network.FMLNetworkEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.lwjgl.input.Keyboard;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -118,11 +117,12 @@ public class Patcher {
     @Mod.EventHandler
     public void onInit(FMLInitializationEvent event) {
         registerKeybinds(
-            chatPeek = new KeybindChatPeek(),
+            // Use §r to have a different name from Essential's Chat Peek keybind
+            chatPeek = new KeyBinding("Chat Peek§r", Keyboard.KEY_NONE, "Patcher"),
             dropModifier = new KeybindDropModifier(),
-            hideScreen = new FunctionKeyChanger.KeybindHideScreen(),
-            customDebug = new FunctionKeyChanger.KeybindCustomDebug(),
-            clearShaders = new FunctionKeyChanger.KeybindClearShaders()
+            hideScreen = new KeyBinding("Hide Screen", Keyboard.KEY_F1, "Patcher"),
+            customDebug = new KeyBinding("Custom F3", Keyboard.KEY_F3, "Patcher"),
+            clearShaders = new KeyBinding("Clear Vanilla Shaders", Keyboard.KEY_F4, "Patcher")
         );
 
         patcherConfig = PatcherConfig.INSTANCE;
