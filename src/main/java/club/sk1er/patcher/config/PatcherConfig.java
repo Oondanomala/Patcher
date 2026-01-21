@@ -106,7 +106,7 @@ public class PatcherConfig extends Vigilant {
         description = "Separate reloading resources into reloading sounds (F3+S) and reloading textures (F3+T).",
         category = "Miscellaneous", subcategory = "General"
     )
-    public static boolean separateResourceLoading;
+    public static boolean separateResourceLoading = true;
 
     @Property(
         type = PropertyType.SWITCH, name = "Debug Keybind Feedback",
@@ -129,7 +129,7 @@ public class PatcherConfig extends Vigilant {
         description = "Remove lighting updates, increasing visibility.\n§eCan positively impact performance.\n§cMay conflict with minimaps.",
         category = "Miscellaneous", subcategory = "Rendering", triggerActionOnInitialization = false
     )
-    public static boolean fullbright = true;
+    public static boolean fullbright;
 
     @Property(
         type = PropertyType.SWITCH, name = "Smart Fullbright",
@@ -143,14 +143,14 @@ public class PatcherConfig extends Vigilant {
         description = "Remove the effects of night vision.",
         category = "Miscellaneous", subcategory = "Rendering"
     )
-    public static boolean disableNightVision = false;
+    public static boolean disableNightVision;
 
     @Property(
         type = PropertyType.SWITCH, name = "Nausea Effect",
         description = "Remove the nether portal effect appearing when clearing nausea.",
         category = "Miscellaneous", subcategory = "Overlays"
     )
-    public static boolean nauseaEffect;
+    public static boolean nauseaEffect = true;
 
     @Property(
         type = PropertyType.SWITCH, name = "Disable Achievements",
@@ -209,7 +209,7 @@ public class PatcherConfig extends Vigilant {
         description = "Automatically scale titles if the title goes over the screen.",
         category = "Miscellaneous", subcategory = "Titles"
     )
-    public static boolean autoTitleScale;
+    public static boolean autoTitleScale = true;
 
     @Property(
         type = PropertyType.PERCENT_SLIDER, name = "Title Opacity",
@@ -277,7 +277,7 @@ public class PatcherConfig extends Vigilant {
         description = "Remove the crosshair when in third person.",
         category = "Miscellaneous", subcategory = "General"
     )
-    public static boolean crosshairPerspective;
+    public static boolean crosshairPerspective = true;
 
     @Property(
         type = PropertyType.PERCENT_SLIDER, name = "Unfocused Sounds",
@@ -549,7 +549,7 @@ public class PatcherConfig extends Vigilant {
         description = "Render actionbar messages with shadowed text.",
         category = "Miscellaneous", subcategory = "Rendering"
     )
-    public static boolean shadowedActionbarText;
+    public static boolean shadowedActionbarText = true;
 
     @Property(
         type = PropertyType.SWITCH, name = "Add Background to Actionbar",
@@ -845,7 +845,7 @@ public class PatcherConfig extends Vigilant {
             "but will resolve special entities being occluded when they typically shouldn't be.",
         category = "Performance", subcategory = "Culling"
     )
-    public static boolean checkArmorstandRules;
+    public static boolean checkArmorstandRules = true;
 
     @Property(
         type = PropertyType.SWITCH, name = "Disable Enchantment Glint",
@@ -1246,7 +1246,7 @@ public class PatcherConfig extends Vigilant {
         description = "Change the way screenshotting works as a whole, creating a whole new process to screenshotting such as uploading to Imgur, copying to clipboard, etc.\n§cEssential's Screenshot Manager must be disabled for this to work.",
         category = "Screenshots", subcategory = "General"
     )
-    public static boolean screenshotManager;
+    public static boolean screenshotManager = true;
 
     @Property(
         type = PropertyType.SWITCH, name = "No Feedback",
