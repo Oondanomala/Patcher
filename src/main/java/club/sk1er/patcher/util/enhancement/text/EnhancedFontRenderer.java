@@ -4,6 +4,7 @@ import club.sk1er.patcher.util.enhancement.Enhancement;
 import club.sk1er.patcher.util.enhancement.hash.StringHash;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
+import me.oondanomala.assential.Multithreading;
 import net.minecraft.client.renderer.GLAllocation;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public final class EnhancedFontRenderer implements Enhancement {
         .removalListener((key, value, cause) -> {
             if (value == null) return;
             glRemoval.add(((CachedString) value).getListId());
-        }).executor(POOL).maximumSize(5000).build();
+        }).executor(Multithreading.getPool()).maximumSize(5000).build();
 
     public EnhancedFontRenderer() {
         instances.add(this);
