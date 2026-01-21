@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Logger;
 
 public final class Assential {
     static Logger logger;
-    static String modName;
+    static String modName = "Assential";
     static String modVersion;
 
     private Assential() {
