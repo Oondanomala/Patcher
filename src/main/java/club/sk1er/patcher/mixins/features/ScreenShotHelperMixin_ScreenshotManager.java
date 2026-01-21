@@ -34,7 +34,7 @@ public class ScreenShotHelperMixin_ScreenshotManager {
     @Inject(method = "saveScreenshot(Ljava/io/File;Ljava/lang/String;IILnet/minecraft/client/shader/Framebuffer;)Lnet/minecraft/util/IChatComponent;", at = @At("HEAD"), cancellable = true)
     private static void patcher$screenshotManager(File gameDirectory, String screenshotName, int width, int height, Framebuffer buffer, CallbackInfoReturnable<IChatComponent> cir) {
         if (PatcherConfig.screenshotManager && !Patcher.isEssentialScreenshot()) {
-            File screenshotDirectory = new File(Minecraft.getMinecraft().mcDataDir, "screenshots");
+            File screenshotDirectory = new File(gameDirectory, "screenshots");
             if (!screenshotDirectory.exists()) {
                 screenshotDirectory.mkdir();
             }
