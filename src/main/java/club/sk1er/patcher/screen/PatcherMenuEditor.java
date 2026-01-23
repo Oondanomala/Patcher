@@ -78,6 +78,8 @@ public class PatcherMenuEditor {
                     Notifications.push("Minecraft Startup", "Minecraft started in " + time / 1000L + " seconds.", 6);
                 }
                 Patcher.instance.getLogger().info("Minecraft started in {}ms.", time);
+                // Has to happen here as Forge prevents editing of gameSettings when initializing
+                Minecraft.getMinecraft().gameSettings.snooperEnabled = false;
 
                 if (PatcherConfig.notifyModUpdates) {
                     for (ModContainer mod : Loader.instance().getActiveModList()) {
@@ -109,22 +111,36 @@ public class PatcherMenuEditor {
                     }
                 }
             }
-        }
-        //#if MC==10809
-        else if (gui instanceof GuiOptions && PatcherConfig.cleanOptionsMenu) {
-            for (GuiButton button : mcButtonList) {
-                if (button.displayString.equals(I18n.format("options.stream"))) {
-                    button.visible = false;
-                    button.enabled = false;
-                } else if (button.displayString.equals(I18n.format("options.sounds"))) {
-                    button.xPosition = width / 2 + 5;
-                } else if (button.displayString.equals(I18n.format("options.skinCustomisation"))) {
-                    button.yPosition = height / 6 + 72 - 6;
+        } else if (gui instanceof GuiOptions) {
+            final String snooperSettings = I18n.format("options.snooper.view");
+            //#if MC==1.8.9
+            if (PatcherConfig.cleanOptionsMenu) {
+                final String broadcastSettings = I18n.format("options.stream");
+                final String soundSettings = I18n.format("options.sounds");
+                final String videoSettings = I18n.format("options.video");
+                final String languageSetting = I18n.format("options.language");
+                final String resourcePackSettings = I18n.format("options.resourcepack");
+
+                for (GuiButton button : mcButtonList) {
+                    String buttonString = button.displayString;
+                    if (buttonString.equals(broadcastSettings) || buttonString.equals(snooperSettings)) {
+                        button.visible = false;
+                        button.enabled = false;
+                    } else if (buttonString.equals(soundSettings)) {
+                        button.xPosition = width / 2 + 5;
+                    } else if (buttonString.equals(videoSettings) || buttonString.equals(languageSetting) || buttonString.equals(resourcePackSettings)) {
+                        button.yPosition -= button.height + 4;
+                    }
+                }
+            } else
+            //#endif
+            {   for (GuiButton button : mcButtonList) {
+                    if (button.displayString.equals(snooperSettings)) {
+                        button.enabled = false;
+                    }
                 }
             }
-        }
-        //#endif
-        else if (gui instanceof GuiScreenResourcePacks) {
+        } else if (gui instanceof GuiScreenResourcePacks) {
             if (!Loader.isModLoaded("ResourcePackOrganizer")) {
                 for (GuiButton button : mcButtonList) {
                     button.width = 200;

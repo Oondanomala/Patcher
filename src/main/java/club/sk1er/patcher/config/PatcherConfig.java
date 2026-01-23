@@ -1183,7 +1183,7 @@ public class PatcherConfig extends Vigilant {
 
     @Property(
         type = PropertyType.SWITCH, name = "Clean Options Menu",
-        description = "Remove the Twitch broadcast button on the options menu.",
+        description = "Remove the Twitch broadcast and snooper settings buttons on the options menu.",
         category = "Screens", subcategory = "General"
     )
     public static boolean cleanOptionsMenu = true;
