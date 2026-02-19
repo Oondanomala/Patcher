@@ -61,8 +61,8 @@ public abstract class Command extends CommandBase {
     //#else
     //$$ public final List<String> getTabCompletions(MinecraftServer server, ICommandSender sender, String[] args, BlockPos targetPos) {
     //#endif
-        String[] lowercaseArgs = Arrays.stream(args).map(String::toLowerCase).toArray(String[]::new);
-        return getListOfStringsMatchingLastWord(lowercaseArgs, addTabCompletions(Arrays.copyOfRange(lowercaseArgs, 0, args.length - 1)));
+        Arrays.setAll(args, i -> args[i].toLowerCase());
+        return getListOfStringsMatchingLastWord(args, addTabCompletions(Arrays.copyOfRange(args, 0, args.length - 1)));
     }
 
     protected abstract void onCommand(String subCommand, String[] args) throws CommandException;
