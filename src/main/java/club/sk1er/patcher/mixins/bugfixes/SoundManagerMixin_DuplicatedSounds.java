@@ -27,7 +27,6 @@ public abstract class SoundManagerMixin_DuplicatedSounds {
 
     private final List<String> patcher$pausedSounds = new ArrayList<>();
 
-    @SuppressWarnings("InvalidInjectorMethodSignature")
     @Redirect(
         method = "pauseAllSounds",
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/audio/SoundManager$SoundSystemStarterThread;pause(Ljava/lang/String;)V", remap = false)

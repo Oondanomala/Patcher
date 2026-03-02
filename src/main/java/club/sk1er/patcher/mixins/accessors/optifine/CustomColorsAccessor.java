@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 public interface CustomColorsAccessor {
     @Dynamic("OptiFine")
     @Invoker(remap = false)
-    public static int invokeGetTextColor(int index, int color) {
+    static int invokeGetTextColor(int index, int color) {
         throw new AssertionError("Mixin failed to inject into OptiFine");
     }
 }

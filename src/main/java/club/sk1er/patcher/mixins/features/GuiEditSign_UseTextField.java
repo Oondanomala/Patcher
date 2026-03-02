@@ -70,6 +70,7 @@ public abstract class GuiEditSign_UseTextField extends GuiScreen {
         boolean standing = tileSign.getBlockType() == Blocks.standing_sign;
 
         GlStateManager.pushMatrix();
+        //noinspection IntegerDivisionInFloatingPointContext
         GlStateManager.translate(width / 2, 123.046875f, 0);
         GlStateManager.scale(-93.75f, -93.75f, 1);
         GlStateManager.rotate(180f, 0, 1, 0);

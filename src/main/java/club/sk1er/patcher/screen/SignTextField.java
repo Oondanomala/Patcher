@@ -21,6 +21,7 @@ public class SignTextField extends GuiTextField {
         int lineScrollOffset = thisAccessor.getLineScrollOffset();
         String text = fontRenderer.trimStringToWidth(getText().substring(lineScrollOffset), getWidth());
         GlStateManager.pushMatrix();
+        //noinspection IntegerDivisionInFloatingPointContext
         GlStateManager.translate(-fontRenderer.getStringWidth(text) / 2, 0, 0);
 
         int j = getCursorPosition() - lineScrollOffset;
