@@ -19,7 +19,7 @@ public class DummyForgeConfig implements IModGuiFactory {
         return null;
     }
 
-    //#if MC==10809
+    //#if MC==1.8.9
     @Override
     public Class<? extends GuiScreen> mainConfigGuiClass() {
         return DummyForgeConfigGUI.class;
@@ -36,7 +36,7 @@ public class DummyForgeConfig implements IModGuiFactory {
     //$$ }
 
     //$$ @Override
-    //$$ public GuiScreen createConfigGui(GuiScreen guiScreen) {
+    //$$ public GuiScreen createConfigGui(GuiScreen parentScreen) {
     //$$     return Patcher.instance.getPatcherConfig().gui();
     //$$ }
     //#endif
