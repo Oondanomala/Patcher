@@ -1,10 +1,11 @@
 {
   "homepage": "https://github.com/Oondanomala/Patcher/releases/latest",
   "promos": {
-    "1.12.2-recommended": "1.10.3",
-    "1.8.9-recommended": "1.10.3"
+    "1.12.2-recommended": "1.10.4",
+    "1.8.9-recommended": "1.10.4"
   },
   "1.12.2": {
+    "1.10.4": "Additions:\n  Completely removed the snooper\n  Forcefully disabled Realms notifications, as they don't work anyway\n  Made the server edit, direct connect, and add server GUIs close when pressing escape\nFixes:\n  Cache Font Data no longer creates 50 useless background threads\n  Fixed a (harmless) error when loading a replay with ReplayMod\nMisc:\n  Improved a bunch of default config values\n  The startup time notification is now even more accurate\n  General code cleanup",
     "1.10.3": "Additions:\n  Patcher will now send a notification if any loaded mod has an update available. As usual, mods can be individually disabled in Forge's configs\nFixes:\n  Fixed the update notification's failure notification crashing the game",
     "1.10.2": "Additions:\n  Added option to make button text white on hover instead of yellow, like in 1.14+\nFixes:\n  Fixed compatibility with the 5zig mod",
     "1.10.1": "Additions:\n  Backported the 1.14 sign edit GUI to 1.12.2 (makes the GUI use a text field for text editing)\n  Added option to have an unlimited entity render distance\nFixes:\n  Fixed Alternate Text Shadow and Disable Text Shadow making text shift around the cursor in text fields\nMisc:\n  Updated UniversalCraft and Elementa to their latest versions",
@@ -16,6 +17,7 @@
     "1.8.8": "Additions:\n  Add cactus to 1.14+ crop hitboxes\n  Add option to remove vertical view bobbing\nFixes:\n  Resolve achievement menu breaking with remove container background\n  Resolve resource pack folder sometimes not opening on windows\n  Resolve not being able to open chests with a block 2 blocks above it\n  Resolve image preview breaking on Imgur links\nMisc:\n  Change \"inventoryscale\" command to be hidden from autocomplete (this command was moved to \"/patcher invscale\")\n  Fixed patcher not working in dev environments"
   },
   "1.8.9": {
+    "1.10.4": "Additions:\n  Completely removed the snooper\n  Forcefully disabled Realms notifications, as they don't work anyway\n  Backported the 1.9+ spectator switcher debug keybind to 1.8\n  Made the server edit, direct connect, and add server GUIs close when pressing escape\nFixes:\n  Cache Font Data no longer creates 50 useless background threads\n  Fixed a (harmless) error when loading a replay with ReplayMod\nMisc:\n  Improved a bunch of default config values\n  The startup time notification is now even more accurate\n  General code cleanup",
     "1.10.3": "Additions:\n  Backported the 1.12+ improved keybinding category order in the controls menu\n  Patcher will now send a notification if any loaded mod has an update available. As usual, mods can be individually disabled in Forge's configs\n  Fixed crash when trying to clone a book with no NBT data\nFixes:\n  Fixed the update notification's failure notification crashing the game",
     "1.10.2": "Additions:\n  Added option to make button text white on hover instead of yellow, like in 1.14+\nFixes:\n  Fixed compatibility with the 5zig mod",
     "1.10.1": "Additions:\n  Backported the 1.14 sign edit GUI to 1.8.9 (makes the GUI use a text field for text editing)\n  Added option to have an unlimited entity render distance\nFixes:\n  Fixed Alternate Text Shadow and Disable Text Shadow making text shift around the cursor in text fields\nMisc:\n  Updated UniversalCraft and Elementa to their latest versions",
