@@ -39,6 +39,7 @@ import me.oondanomala.assential.Notifications;
 import me.oondanomala.assential.WebUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.command.ICommand;
@@ -215,14 +216,14 @@ public class Patcher {
             return;
         }
 
-        String serverIP = Minecraft.getMinecraft().getCurrentServerData().serverIP;
-        if (serverIP == null || blacklistedServers.contains(serverIP)) {
+        ServerData serverData = Minecraft.getMinecraft().getCurrentServerData();
+        if (serverData == null || serverData.serverIP == null || blacklistedServers.contains(serverData.serverIP)) {
             GuiChatTransformer.maxChatLength = 100;
             return;
         }
 
         boolean compatible = ProtocolVersionDetector.instance.isCompatibleWithVersion(
-            serverIP,
+            serverData.serverIP,
             315 // 1.11
         );
 
