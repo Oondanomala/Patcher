@@ -21,6 +21,7 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiScreenOptionsSounds;
 import net.minecraft.client.gui.GuiScreenResourcePacks;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.settings.GameSettings;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.common.ForgeVersion;
 import net.minecraftforge.fml.common.Loader;
@@ -80,7 +81,9 @@ public class PatcherMenuEditor {
                 }
                 Patcher.instance.getLogger().info("Minecraft started in {}ms.", time);
                 // Has to happen here as Forge prevents editing of gameSettings when initializing
-                Minecraft.getMinecraft().gameSettings.snooperEnabled = false;
+                GameSettings settings = mc.gameSettings;
+                settings.snooperEnabled = false;
+                settings.realmsNotifications = false;
 
                 if (PatcherConfig.notifyModUpdates) {
                     for (ModContainer mod : Loader.instance().getActiveModList()) {
@@ -114,6 +117,7 @@ public class PatcherMenuEditor {
             }
         } else if (gui instanceof GuiOptions) {
             final String snooperSettings = I18n.format("options.snooper.view");
+            final int realmNotifications = GameSettings.Options.REALMS_NOTIFICATIONS.returnEnumOrdinal();
             //#if MC==1.8.9
             if (PatcherConfig.cleanOptionsMenu) {
                 final String broadcastSettings = I18n.format("options.stream");
@@ -131,12 +135,14 @@ public class PatcherMenuEditor {
                         button.xPosition = width / 2 + 5;
                     } else if (buttonString.equals(videoSettings) || buttonString.equals(languageSetting) || buttonString.equals(resourcePackSettings)) {
                         button.yPosition -= button.height + 4;
+                    } else if (button.id == realmNotifications) {
+                        button.enabled = false;
                     }
                 }
             } else
             //#endif
             {   for (GuiButton button : mcButtonList) {
-                    if (button.displayString.equals(snooperSettings)) {
+                    if (button.displayString.equals(snooperSettings) || button.id == realmNotifications) {
                         button.enabled = false;
                     }
                 }
