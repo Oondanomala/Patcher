@@ -9,15 +9,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(TileEntityEnchantmentTableRenderer.class)
 public class TileEntityEnchantmentTableRendererMixin_CancelRender {
-
-    private final String patcher$renderTileEntityAtDesc =
-        //#if MC==10809
-        "renderTileEntityAt(Lnet/minecraft/tileentity/TileEntityEnchantmentTable;DDDFI)V";
+    @Inject(method =
+        //#if MC==1.8.9
+        "renderTileEntityAt(Lnet/minecraft/tileentity/TileEntityEnchantmentTable;DDDFI)V",
         //#else
-        //$$ "render(Lnet/minecraft/tileentity/TileEntityEnchantmentTable;DDDFIF)V";
+        //$$ "render(Lnet/minecraft/tileentity/TileEntityEnchantmentTable;DDDFIF)V",
         //#endif
-
-    @Inject(method = patcher$renderTileEntityAtDesc, at = @At("HEAD"), cancellable = true)
+        at = @At("HEAD"), cancellable = true)
     private void patcher$cancelRendering(CallbackInfo ci) {
         if (PatcherConfig.disableEnchantmentBooks) {
             ci.cancel();

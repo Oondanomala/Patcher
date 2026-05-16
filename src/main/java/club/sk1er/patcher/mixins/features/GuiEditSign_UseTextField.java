@@ -23,6 +23,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(GuiEditSign.class)
 public abstract class GuiEditSign_UseTextField extends GuiScreen {
     @Shadow
+    //#if MC==1.12.2
+    //$$ @org.spongepowered.asm.mixin.Final
+    //#endif
     private TileEntitySign tileSign;
     @Shadow
     private int editLine;

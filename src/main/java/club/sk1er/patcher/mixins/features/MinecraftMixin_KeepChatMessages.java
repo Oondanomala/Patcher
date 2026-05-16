@@ -8,18 +8,16 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(Minecraft.class)
 public class MinecraftMixin_KeepChatMessages {
-
-    private final String patcher$clearChatMessagesTarget =
-        //#if MC==10809
-        "Lnet/minecraft/client/gui/GuiNewChat;clearChatMessages()V";
-        //#else
-        //$$ "Lnet/minecraft/client/gui/GuiNewChat;clearChatMessages(Z)V";
-        //#endif
-
     // this is so ugly : (
-    @Redirect(method = "displayGuiScreen", at = @At(value = "INVOKE", target = patcher$clearChatMessagesTarget))
+    @Redirect(method = "displayGuiScreen", at = @At(value = "INVOKE", target =
+        //#if MC==1.8.9
+        "Lnet/minecraft/client/gui/GuiNewChat;clearChatMessages()V"
+        //#else
+        //$$ "Lnet/minecraft/client/gui/GuiNewChat;clearChatMessages(Z)V"
+        //#endif
+    ))
     private void patcher$keepChatMessages(GuiNewChat instance
-                                          //#if MC==11202
+                                          //#if MC==1.12.2
                                           //$$ , boolean clearSentMessages
                                           //#endif
     ) {

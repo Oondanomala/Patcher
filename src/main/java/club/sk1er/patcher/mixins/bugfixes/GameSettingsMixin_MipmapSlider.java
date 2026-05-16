@@ -6,6 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.GameSettings;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
@@ -13,6 +14,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class GameSettingsMixin_MipmapSlider implements GameSettingsExt {
     @Shadow protected Minecraft mc;
 
+    @Unique
     private boolean patcher$needsResourceRefresh;
 
     @Override

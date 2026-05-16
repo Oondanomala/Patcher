@@ -11,16 +11,15 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
 @Mixin(ModelPlayer.class)
 public abstract class ModelPlayerMixin_FixedTransformations extends ModelBiped {
-
-    @Shadow
-    private boolean smallArms;
-
     @ModifyConstant(method = "<init>", constant = @Constant(floatValue = 2.5F))
     private float patcher$fixAlexArmHeight(float original) {
         return PatcherConfig.fixedAlexArms ? 2.0F : original;
     }
 
-    //#if MC==10809
+    //#if MC==1.8.9
+    @Shadow
+    private boolean smallArms;
+
     /**
      * @author asbyth
      * @reason Resolve item positions being incorrect on Alex models (MC-72397)

@@ -6,6 +6,7 @@ import net.minecraft.util.ChatStyle;
 import net.minecraft.util.IChatComponent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -15,8 +16,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class EntityMixin_DisplayNames {
     @Shadow protected abstract HoverEvent getHoverEvent();
 
+    @Unique
     private long patcher$displayNameCachedAt;
-
+    @Unique
     private IChatComponent patcher$cachedDisplayName;
 
     @Inject(method = "getDisplayName", at = @At("RETURN"))

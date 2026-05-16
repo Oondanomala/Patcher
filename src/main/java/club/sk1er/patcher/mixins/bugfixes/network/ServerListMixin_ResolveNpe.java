@@ -8,11 +8,13 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 
 import java.util.List;
 
 @Mixin(ServerList.class)
 public abstract class ServerListMixin_ResolveNpe {
+    @Unique
     private static final Logger patcher$logger = LogManager.getLogger("Patcher - ServerList");
 
     @Shadow @Final

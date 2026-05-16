@@ -2,12 +2,14 @@ package club.sk1er.patcher.mixins.performance.render.item;
 
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ItemStack.class)
 public class ItemStackMixin_CacheDisplayName {
+    @Unique
     private String patcher$cachedDisplayName;
 
     @Inject(method = "getDisplayName", at = @At("HEAD"), cancellable = true)

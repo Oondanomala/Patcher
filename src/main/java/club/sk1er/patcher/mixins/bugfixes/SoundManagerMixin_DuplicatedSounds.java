@@ -5,6 +5,7 @@ import net.minecraft.client.audio.SoundManager;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Coerce;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -25,6 +26,7 @@ public abstract class SoundManagerMixin_DuplicatedSounds {
 
     @Shadow @Final private Map<String, ISound> playingSounds;
 
+    @Unique
     private final List<String> patcher$pausedSounds = new ArrayList<>();
 
     @Redirect(

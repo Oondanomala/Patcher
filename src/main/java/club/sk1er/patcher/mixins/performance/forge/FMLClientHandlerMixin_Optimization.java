@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.ModContainer;
 import net.minecraftforge.fml.common.registry.LanguageRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 //#endif
@@ -18,6 +19,7 @@ import org.spongepowered.asm.mixin.Mixin;
 @SuppressWarnings("UnstableApiUsage")
 public class FMLClientHandlerMixin_Optimization {
     //#if MC==10809
+    @Unique
     private static final CharMatcher patcher$DISALLOWED_CHAR_MATCHER = CharMatcher.anyOf(FontRendererHook.characterDictionary).negate();
 
     /**
