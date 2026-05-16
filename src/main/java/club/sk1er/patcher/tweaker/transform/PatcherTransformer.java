@@ -116,7 +116,6 @@ public interface PatcherTransformer {
     }
 
     default boolean isDevelopment() {
-        Object o = Launch.blackboard.get("fml.deobfuscatedEnvironment");
-        return o != null && (boolean) o;
+        return Launch.blackboard.get("fml.deobfuscatedEnvironment") == Boolean.TRUE;
     }
 }

@@ -147,7 +147,6 @@ public class ModClassTransformer implements IClassTransformer {
     }
 
     public static boolean isDevelopment() {
-        Object o = Launch.blackboard.get("fml.deobfuscatedEnvironment");
-        return o != null && (boolean) o;
+        return Launch.blackboard.get("fml.deobfuscatedEnvironment") == Boolean.TRUE;
     }
 }
