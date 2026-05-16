@@ -28,6 +28,7 @@ import net.minecraftforge.fml.common.ModContainer;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.lwjgl.input.Keyboard;
 
+import java.lang.management.ManagementFactory;
 import java.net.URI;
 import java.util.List;
 
@@ -73,7 +74,7 @@ public class PatcherMenuEditor {
 
         if (gui instanceof GuiMainMenu) {
             if (isFirstLaunch) {
-                long time = (System.currentTimeMillis() - PatcherTweaker.clientLoadTime);
+                long time = ManagementFactory.getRuntimeMXBean().getUptime();
                 if (PatcherConfig.startupNotification) {
                     Notifications.push("Minecraft Startup", "Minecraft started in " + time / 1000L + " seconds.", 6);
                 }

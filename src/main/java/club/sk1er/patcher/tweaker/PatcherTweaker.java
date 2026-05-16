@@ -35,12 +35,8 @@ import java.util.zip.ZipFile;
 
 @IFMLLoadingPlugin.MCVersion(ForgeVersion.mcVersion)
 public class PatcherTweaker implements IFMLLoadingPlugin {
-
-    public static long clientLoadTime;
-
     @SuppressWarnings("unchecked")
     public PatcherTweaker() {
-        clientLoadTime = System.currentTimeMillis();
         MixinBootstrap.init();
         Mixins.addConfiguration("patcher.mixins.json");
         try {
