@@ -31,3 +31,4 @@ Thumbs.db
 .vscode
 
 versions/*/tmp.srg
+.kotlin

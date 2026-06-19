@@ -5,7 +5,7 @@ plugins {
     kotlin("jvm")
     id("gg.essential.multi-version")
     id("gg.essential.defaults")
-    id("com.gradleup.shadow") version "9.4.+"
+    id("com.gradleup.shadow") version "9.6.+"
 }
 
 val modGroup: String by project
@@ -21,6 +21,7 @@ loom {
     noServerRunConfigs()
     forge {
         accessTransformer(rootProject.file("src/main/resources/$accessTransformerName"))
+        mixinConfig("patcher.mixins.json")
     }
     mixin {
         defaultRefmapName.set("patcher.mixins.refmap.json")
@@ -32,7 +33,6 @@ loom {
             property("mixin.debug.verbose", "true")
             property("mixin.debug.export", "true")
             property("mixin.dumpTargetOnFailure", "true")
-            programArgs("--mixin", "patcher.mixins.json")
         }
     }
     // For some reason loom defaults to tab indentation
@@ -61,12 +61,15 @@ dependencies {
     compileOnly("gg.essential:essential-$platform:4246+g8be73312c") {
         isTransitive = false
     }
-    shade("gg.essential:universalcraft-$platform:491")
-    shade("gg.essential:elementa:743")
+    shade("gg.essential:universalcraft-$platform:543")
+    shade("gg.essential:elementa:787")
     // 312 has broken transparency, avoid it until it's fixed
     shade("gg.essential:vigilance:306")
 
-    shade("com.github.ben-manes.caffeine:caffeine:2.9.3")
+    shade("com.github.ben-manes.caffeine:caffeine:2.9.3") {
+        exclude(module = "checker-qual")
+        exclude(module = "error_prone_annotations")
+    }
     shade("com.github.char:Koffee:88ba1b0") {
         exclude(module = "asm-commons")
         exclude(module = "asm-tree")
@@ -77,13 +80,11 @@ dependencies {
     //  this means we can't use MixinExtras :(
     //shade("org.spongepowered:mixin:0.8.5-SNAPSHOT")
     shade("org.spongepowered:mixin:0.7.11-SNAPSHOT") {
-        exclude(module = "guava")
-        exclude(module = "gson")
-        exclude(module = "commons-io")
-        exclude(module = "log4j-core")
+        isTransitive = false
     }
 
-    modRuntimeOnly("me.djtheredstoner:DevAuth-forge-legacy:1.2.2")
+    runtimeOnly("me.djtheredstoner:DevAuth-forge-legacy:1.2.2")
+        ?.because("Allows authenticating into a Minecraft account in dev")
 }
 
 sourceSets.main {
@@ -105,15 +106,15 @@ tasks {
     }
 
     shadowJar {
+        duplicatesStrategy = DuplicatesStrategy.FAIL
+        failOnDuplicateEntries = true
         archiveVersion.set("")
         archiveClassifier.set("dev")
         configurations = listOf(shade)
+        exclude("fabric.mod.json", "jandex.idx")
     }
 
     jar {
-        dependsOn(shadowJar)
-        duplicatesStrategy = DuplicatesStrategy.FAIL
-
         manifest.attributes(mapOf(
             "FMLCorePlugin" to "club.sk1er.patcher.tweaker.PatcherTweaker",
             "ModSide" to "CLIENT",
@@ -122,8 +123,6 @@ tasks {
             "ForceLoadAsMod" to true,
             "Main-Class" to "club.sk1er.container.ContainerMessage",
             "TweakClass" to "org.spongepowered.asm.launch.MixinTweaker",
-            "TweakOrder" to "0",
-            "MixinConfigs" to "patcher.mixins.json"
         ))
     }
 
