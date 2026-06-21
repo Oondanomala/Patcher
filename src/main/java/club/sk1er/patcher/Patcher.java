@@ -140,8 +140,8 @@ public class Patcher {
             this, soundHandler, dropModifier, audioSwitcher,
             new OverlayHandler(), new EntityRendering(), new FovHandler(),
             new ChatHandler(), new GlanceRenderer(), new EntityCulling(),
-            new ArmorStatusRenderer(), new PatcherMenuEditor(), new ImagePreview(),
-            new TitleFix(), new LinuxKeybindFix(),
+            new ArmorStatusRenderer(), new PatcherMenuEditor(),
+            new ImagePreview(), new TitleFix(), new LinuxKeybindFix(),
             new MetricsRenderer(), new HUDCaching(), new EntityRendererHook(),
             MinecraftHook.INSTANCE, ScreenshotPreview.INSTANCE,
             new MousePerspectiveKeybindHandler()

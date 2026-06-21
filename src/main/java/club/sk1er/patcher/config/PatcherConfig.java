@@ -1370,6 +1370,12 @@ public class PatcherConfig extends Vigilant {
 
     public static PatcherConfig INSTANCE = new PatcherConfig(); // Needs to be at the bottom or the default values take priority
 
+    // Cached square distance values
+    public static int entityRenderDistanceSq;
+    public static int hostileEntityRenderDistanceSq;
+    public static int passiveEntityRenderDistanceSq;
+    public static int playerRenderDistanceSq;
+
     public PatcherConfig() {
         super(new File("./config/patcher.toml"), "Patcher (" + Patcher.VERSION + ")");
         initialize();
@@ -1378,6 +1384,27 @@ public class PatcherConfig extends Vigilant {
         registerListener("fullbright", reloadWorld);
         registerListener("removeGroundFoliage", reloadWorld);
         registerListener("vanillaGlassPanes", reloadWorld);
+
+        entityRenderDistanceSq = entityRenderDistance * entityRenderDistance;
+        hostileEntityRenderDistanceSq = hostileEntityRenderDistance * hostileEntityRenderDistance;
+        passiveEntityRenderDistanceSq = passiveEntityRenderDistance * passiveEntityRenderDistance;
+        playerRenderDistanceSq = playerRenderDistance * playerRenderDistance;
+        registerListener("entityRenderDistance", o -> {
+            int distance = (int) o;
+            entityRenderDistanceSq = distance * distance;
+        });
+        registerListener("hostileEntityRenderDistance", o -> {
+            int distance = (int) o;
+            hostileEntityRenderDistanceSq = distance * distance;
+        });
+        registerListener("passiveEntityRenderDistance", o -> {
+            int distance = (int) o;
+            passiveEntityRenderDistanceSq = distance * distance;
+        });
+        registerListener("playerRenderDistance", o -> {
+            int distance = (int) o;
+            playerRenderDistanceSq = distance * distance;
+        });
 
         try {
             addDependency("smartFullbright", "fullbright");
