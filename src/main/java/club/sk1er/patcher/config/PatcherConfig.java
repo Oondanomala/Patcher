@@ -1336,6 +1336,57 @@ public class PatcherConfig extends Vigilant {
 
     // EXPERIMENTAL
 
+    @Property(
+        type = PropertyType.SWITCH, name = "Player Fade",
+        description = "Fade players away the closer you get to them.\n" +
+                      "§cHas depth sorting issues.",
+        category = "Experimental", subcategory = "Rendering"
+    )
+    public static boolean playerFade;
+
+    @Property(
+        type = PropertyType.DECIMAL_SLIDER, name = "Player Fade Start",
+        description = "Change the distance at which players start to fade out.",
+        category = "Experimental", subcategory = "Rendering",
+        minF = 1F, maxF = 10F
+    )
+    public static float playerFadeStart = 5.5F;
+
+    @Property(
+        type = PropertyType.DECIMAL_SLIDER, name = "Player Fade End",
+        description = "Change the distance at which players are completely invisible.",
+        category = "Experimental", subcategory = "Rendering",
+        maxF = 10F
+    )
+    public static float playerFadeEnd = 1F;
+
+    @Property(
+        type = PropertyType.SELECTOR, name = "Player Fade Opacity Mode",
+        description = "Change whether players fade out or keep a fixed transparency.",
+        category = "Experimental", subcategory = "Rendering",
+        options = {"Fade", "Fixed"}
+    )
+    public static int playerFadeMode = 0;
+
+    @Property(
+        type = PropertyType.PERCENT_SLIDER, name = "Player Fade Opacity Threshold",
+        description = "Change the threshold at which transparent players will be rendered without writing to the depth buffer.\n" +
+            "Overwriting the depth buffer causes transparent players to draw over anything else that is drawn after it, " +
+            "while not writing to it will cause the same elements to draw above the player and additionally will render players in the incorrect Z order.\n" +
+            "§eDepth writing is better for high opacity, and not writing is better for low opacity.",
+        category = "Experimental", subcategory = "Rendering",
+        maxF = 1F
+    )
+    public static float playerFadeOpacityThreshold = 0.25F;
+
+    @Property(
+        type = PropertyType.PERCENT_SLIDER, name = "Player Fade Opacity",
+        description = "Change the fixed opacity for nearby players.",
+        category = "Experimental", subcategory = "Rendering",
+        maxF = 1F
+    )
+    public static float playerFadeOpacity = 0.5F;
+
     /*@Property(
         type = PropertyType.SWITCH, name = "Cache Entrypoints",
         description = "Cache Forge mod entry points, improving startup time as Forge no longer needs to walk through " +
@@ -1375,6 +1426,8 @@ public class PatcherConfig extends Vigilant {
     public static int hostileEntityRenderDistanceSq;
     public static int passiveEntityRenderDistanceSq;
     public static int playerRenderDistanceSq;
+    public static float playerFadeStartSq;
+    public static float playerFadeEndSq;
 
     public PatcherConfig() {
         super(new File("./config/patcher.toml"), "Patcher (" + Patcher.VERSION + ")");
@@ -1389,6 +1442,8 @@ public class PatcherConfig extends Vigilant {
         hostileEntityRenderDistanceSq = hostileEntityRenderDistance * hostileEntityRenderDistance;
         passiveEntityRenderDistanceSq = passiveEntityRenderDistance * passiveEntityRenderDistance;
         playerRenderDistanceSq = playerRenderDistance * playerRenderDistance;
+        playerFadeStartSq = playerFadeStart * playerFadeStart;
+        playerFadeEndSq = playerFadeEnd * playerFadeEnd;
         registerListener("entityRenderDistance", o -> {
             int distance = (int) o;
             entityRenderDistanceSq = distance * distance;
@@ -1404,6 +1459,14 @@ public class PatcherConfig extends Vigilant {
         registerListener("playerRenderDistance", o -> {
             int distance = (int) o;
             playerRenderDistanceSq = distance * distance;
+        });
+        registerListener("playerFadeStart", o -> {
+            float start = (float) o;
+            playerFadeStartSq = start * start;
+        });
+        registerListener("playerFadeEnd", o -> {
+            float end = (float) o;
+            playerFadeEndSq = end * end;
         });
 
         try {
@@ -1440,6 +1503,12 @@ public class PatcherConfig extends Vigilant {
                 "passiveEntityRenderDistance", "hostileEntityRenderDistance"
             ).forEach(property -> addDependency(property, "entityRenderDistanceToggle"));
 
+            addDependency("playerFadeStart", "playerFade");
+            addDependency("playerFadeEnd", "playerFade");
+            addDependency("playerFadeMode", "playerFade");
+            addDependency("playerFadeOpacityThreshold", "playerFade");
+            addDependency("playerFadeOpacity", "playerFadeMode", i -> playerFade && (int) i == 1);
+
             addDependency("cacheFontData", "optimizedFontRenderer");
             addDependency("chunkUpdateLimit", "limitChunks");
 
@@ -1471,7 +1540,8 @@ public class PatcherConfig extends Vigilant {
             Arrays.asList(
                 "resourceExploitFix", "newKeybindHandling", "separateResourceLoading", "debugKeybindFeedback",
                 "futureHitBoxes", "leftHandInFirstPerson", "extendedChatLength", "chatPosition", "parallaxFix",
-                "crosshairPerspective", "extendChatBackground", "cleanOptionsMenu", "vanillaGlassPanes"
+                "crosshairPerspective", "extendChatBackground", "cleanOptionsMenu", "vanillaGlassPanes",
+                "playerFade", "playerFadeStart", "playerFadeEnd"
             ).forEach(property -> hidePropertyIf(property, minecraft112));
 
             hidePropertyIf("keyboardLayout", () -> !SystemUtils.IS_OS_LINUX);

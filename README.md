@@ -32,6 +32,12 @@ Adapted from the disclaimer found in PolyPatcher.
 
 # Experimental
 - **HUD Caching** - Reuse frames from the HUD instead of constantly recreating them every frame, as most HUD elements will stay the same for a long amount of time. (This may cause stuff with animations to feel "choppy".)
+- **Player Fade** - Fade players away the closer you get to them. Has depth sorting issues.
+- **Player Fade Start** - Change the distance at which players start to fade out.
+- **Player Fade End** - Change the distance at which players are completely invisible.
+- **Player Fade Opacity Mode** - Change whether players fade out or keep a fixed transparency.
+- **Player Fade Opacity Threshold** - Change the threshold at which transparent players will be rendered without writing to the depth buffer. Overwriting the depth buffer causes transparent players to draw over anything else that is drawn after it while not writing to it will cause the same elements to draw above the player and additionally will render players in the incorrect Z order. Depth writing is better for high opacity, and not writing is better for low opacity.
+- **Player Fade Opacity** - Change the fixed opacity for nearby players.
 
 </details>
 <details>
