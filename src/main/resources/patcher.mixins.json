@@ -262,6 +262,7 @@
     "performance.WorldMixin_Optimization",
     "performance.forge.FluidRegistryMixin_Optimization",
     "performance.forge.FMLClientHandlerMixin_Optimization",
+    "performance.forge.ModelLoaderMixin_SkipFirstBaking",
     "performance.hudcaching.EntityRendererMixin_HUDCaching",
     "performance.hudcaching.FramebufferMixin_HUDCaching",
     "performance.hudcaching.GlStateManagerMixin_HUDCaching",
