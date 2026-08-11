@@ -10,7 +10,6 @@ import club.sk1er.patcher.asm.external.forge.loader.ModContainerFactoryTransform
 import club.sk1er.patcher.asm.external.forge.render.block.BlockInfoTransformer;
 import club.sk1er.patcher.asm.external.forge.render.block.ForgeBlockModelRendererTransformer;
 import club.sk1er.patcher.asm.external.forge.render.lighting.VertexLighterFlatTransformer;
-import club.sk1er.patcher.asm.external.forge.render.screen.GuiModListTransformer;
 import club.sk1er.patcher.asm.external.forge.render.screen.GuiUtilsTransformer;
 import club.sk1er.patcher.asm.external.lwjgl.KeyboardTransformer;
 import club.sk1er.patcher.asm.external.lwjgl.LibraryLWJGLOpenALTransformer;
@@ -144,7 +143,6 @@ public class ClassTransformer implements IClassTransformer {
 
         // forge classes
         //#if MC==1.8.9
-        registerTransformer(new GuiModListTransformer());
         registerTransformer(new ModClassLoaderTransformer());
         registerTransformer(new ForgeChunkManagerTransformer());
         registerTransformer(new BlockInfoTransformer());
