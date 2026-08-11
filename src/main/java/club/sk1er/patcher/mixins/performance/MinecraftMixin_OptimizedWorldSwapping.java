@@ -8,6 +8,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(Minecraft.class)
 public class MinecraftMixin_OptimizedWorldSwapping {
+    // TODO: MixinExtras @WrapWithCondition
     @Redirect(
         method = "loadWorld(Lnet/minecraft/client/multiplayer/WorldClient;Ljava/lang/String;)V",
         at = @At(value = "INVOKE", target = "Ljava/lang/System;gc()V")
