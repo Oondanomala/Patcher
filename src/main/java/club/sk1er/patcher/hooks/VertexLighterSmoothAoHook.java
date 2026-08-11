@@ -3,7 +3,6 @@ package club.sk1er.patcher.hooks;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.client.model.pipeline.BlockInfo;
 
-@SuppressWarnings("unused")
 public class VertexLighterSmoothAoHook {
     public static void calcLightmap(BlockInfo blockInfo, float[] lightmap, float x, float y, float z) {
         x *= 2;
