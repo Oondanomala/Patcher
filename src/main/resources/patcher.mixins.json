@@ -48,6 +48,7 @@
     "bugfixes.GameSettingsMixin_MipmapSlider",
     "bugfixes.GuiContainerMixin_SplitRemnants",
     "bugfixes.GuiGameOverMixin_ResolveButtonClick",
+    "bugfixes.GuiIngameForgeMixin_FixAbsorptionHealth",
     "bugfixes.GuiIngameForgeMixin_FixProfilerSection",
     "bugfixes.GuiIngameForgeMixin_HotbarAlpha",
     "bugfixes.GuiIngameMixin_ScoreboardTextTransparency",

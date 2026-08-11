@@ -17,10 +17,4 @@ public class GuiIngameForgeHook {
         }
         return mc.fontRendererObj.drawString(recordPlaying, -stringWidth >> 1, -4, color, PatcherConfig.shadowedActionbarText);
     }
-
-    public static int fixHealthMargin(int original) {
-        if (mc.thePlayer.isPotionActive(Potion.poison)) original -= 36;
-        else if (mc.thePlayer.isPotionActive(Potion.wither)) original -= 108;
-        return original;
-    }
 }

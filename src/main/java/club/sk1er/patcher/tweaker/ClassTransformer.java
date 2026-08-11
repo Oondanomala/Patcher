@@ -14,7 +14,6 @@ import club.sk1er.patcher.asm.external.forge.render.block.ForgeBlockModelRendere
 import club.sk1er.patcher.asm.external.forge.render.lighting.LightUtilTransformer;
 import club.sk1er.patcher.asm.external.forge.render.lighting.VertexLighterFlatTransformer;
 import club.sk1er.patcher.asm.external.forge.render.lighting.VertexLighterSmoothAoTransformer;
-import club.sk1er.patcher.asm.external.forge.render.screen.GuiIngameForgeTransformer;
 import club.sk1er.patcher.asm.external.forge.render.screen.GuiModListTransformer;
 import club.sk1er.patcher.asm.external.forge.render.screen.GuiUtilsTransformer;
 import club.sk1er.patcher.asm.external.lwjgl.KeyboardTransformer;
@@ -80,8 +79,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class ClassTransformer implements IClassTransformer {
-
-    public static final boolean outputBytecode = "true".equals(System.getProperty("patcher.debugBytecode", "false"));
+    public static final boolean OUTPUT_BYTECODE = Boolean.getBoolean("patcher.debugBytecode");
     public static String optifineVersion = "NONE";
     private final Logger logger = LogManager.getLogger("Patcher - Class Transformer");
     private final Multimap<String, PatcherTransformer> transformerMap = ArrayListMultimap.create();
@@ -164,7 +162,6 @@ public class ClassTransformer implements IClassTransformer {
         registerTransformer(new LightUtilTransformer());
         registerTransformer(new ModContainerFactoryTransformer());
         //#endif
-        registerTransformer(new GuiIngameForgeTransformer());
         //registerTransformer(new JarDiscovererTransformer());
 
         // lwjgl
@@ -196,7 +193,7 @@ public class ClassTransformer implements IClassTransformer {
             logger.error("Exception when transforming {} : {}", transformedName, e.getClass().getSimpleName(), e);
         }
 
-        if (outputBytecode) {
+        if (OUTPUT_BYTECODE) {
             File bytecodeDirectory = new File("bytecode");
             if (!bytecodeDirectory.exists()) bytecodeDirectory.mkdirs();
 
