@@ -10,7 +10,6 @@ import club.sk1er.patcher.asm.external.forge.loader.ModContainerFactoryTransform
 import club.sk1er.patcher.asm.external.forge.render.ForgeHooksClientTransformer;
 import club.sk1er.patcher.asm.external.forge.render.block.BlockInfoTransformer;
 import club.sk1er.patcher.asm.external.forge.render.block.ForgeBlockModelRendererTransformer;
-import club.sk1er.patcher.asm.external.forge.render.lighting.LightUtilTransformer;
 import club.sk1er.patcher.asm.external.forge.render.lighting.VertexLighterFlatTransformer;
 import club.sk1er.patcher.asm.external.forge.render.screen.GuiModListTransformer;
 import club.sk1er.patcher.asm.external.forge.render.screen.GuiUtilsTransformer;
@@ -155,7 +154,6 @@ public class ClassTransformer implements IClassTransformer {
         registerTransformer(new ForgeBlockModelRendererTransformer());
         registerTransformer(new MinecraftForgeTransformer());
         registerTransformer(new ASMModParserTransformer());
-        registerTransformer(new LightUtilTransformer());
         registerTransformer(new ModContainerFactoryTransformer());
         //#endif
         //registerTransformer(new JarDiscovererTransformer());
