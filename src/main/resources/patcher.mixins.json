@@ -260,6 +260,7 @@
     "performance.RenderGlobalMixin_LimitVisGraphScan",
     "performance.ResourcePackRepositoryMixin_FasterSearching",
     "performance.TexturedQuadMixin_BatchDrawing",
+    "performance.TextureManangerMixin_MemoryLeak",
     "performance.TileEntityMobSpawnerRendererMixin_EntityCulling",
     "performance.VisGraphMixin_LimitScan",
     "performance.WorldClientMixin_AnimationTick",
