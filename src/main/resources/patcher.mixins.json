@@ -263,6 +263,7 @@
     "performance.WorldMixin_Optimization",
     "performance.forge.FluidRegistryMixin_Optimization",
     "performance.forge.FMLClientHandlerMixin_Optimization",
+    "performance.forge.ModelLoaderMixin_ClearModelErrors",
     "performance.forge.ModelLoaderMixin_SkipFirstBaking",
     "performance.forge.VertexLighterSmoothAoMixin_FasterLightmap",
     "performance.hudcaching.EntityRendererMixin_HUDCaching",
