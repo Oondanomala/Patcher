@@ -1,4 +1,4 @@
-package club.sk1er.patcher.mixins.performance;
+package club.sk1er.patcher.mixins.performance.leaks;
 
 import net.minecraft.world.IBlockAccess;
 import org.spongepowered.asm.mixin.Shadow;
@@ -10,8 +10,7 @@ import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(NodeProcessor.class)
 public class NodeProcessorMixin_MemoryLeak {
-
-    //#if MC==10809
+    //#if MC==1.8.9
     @Shadow protected IBlockAccess blockaccess;
 
     @Inject(method = "postProcess", at = @At("HEAD"))

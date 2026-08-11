@@ -1,4 +1,4 @@
-package club.sk1er.patcher.mixins.performance;
+package club.sk1er.patcher.mixins.performance.leaks;
 
 import net.minecraft.block.BlockRedstoneTorch;
 import net.minecraft.world.World;
@@ -11,7 +11,7 @@ import java.util.WeakHashMap;
 
 @Mixin(BlockRedstoneTorch.class)
 public class BlockRedstoneTorchMixin_MemoryLeak {
-    //#if MC==10809
+    //#if MC==1.8.9
     @Shadow private static Map<World, List<BlockRedstoneTorch.Toggle>> toggles = new WeakHashMap<>();
     //#endif
 }

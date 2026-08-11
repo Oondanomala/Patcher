@@ -1,4 +1,4 @@
-package club.sk1er.patcher.mixins.performance;
+package club.sk1er.patcher.mixins.performance.leaks;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.server.MinecraftServer;

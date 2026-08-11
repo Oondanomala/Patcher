@@ -1,6 +1,6 @@
-package club.sk1er.patcher.mixins.performance;
+package club.sk1er.patcher.mixins.performance.leaks;
 
-//#if MC==10809
+//#if MC==1.8.9
 import club.sk1er.patcher.mixins.accessors.MinecraftForgeClientAccessor;
 //#endif
 import net.minecraft.client.Minecraft;
@@ -27,7 +27,7 @@ public class MinecraftMixin_MemoryIssues {
         }
     }
 
-    //#if MC==10809
+    //#if MC==1.8.9
     @SuppressWarnings("UnstableApiUsage")
     @Inject(
         method = "loadWorld(Lnet/minecraft/client/multiplayer/WorldClient;Ljava/lang/String;)V",

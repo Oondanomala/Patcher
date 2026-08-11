@@ -1,4 +1,4 @@
-package club.sk1er.patcher.mixins.performance.forge;
+package club.sk1er.patcher.mixins.performance.leaks;
 
 import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraftforge.fml.client.GuiModList;

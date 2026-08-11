@@ -1,4 +1,4 @@
-package club.sk1er.patcher.mixins.performance;
+package club.sk1er.patcher.mixins.performance.leaks;
 
 import net.minecraft.client.renderer.texture.ITextureObject;
 import net.minecraft.client.renderer.texture.TextureManager;
