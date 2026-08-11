@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(EntityRenderer.class)
 public class EntityRendererMixin_LeftHandedness {
-    //#if MC==10809
+    //#if MC==1.8.9
     @Shadow @Final public ItemRenderer itemRenderer;
 
     @Dynamic("OptiFine adds its own version of renderHand")
