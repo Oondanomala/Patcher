@@ -8,6 +8,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(MinecraftServer.class)
 public class MinecraftServerMixin_MemoryLeak {
+    //#if MC==1.8.9
     @ModifyVariable(
         method = "addFaviconToStatusResponse",
         at = @At(value = "INVOKE", target = "Lnet/minecraft/network/ServerStatusResponse;setFavicon(Ljava/lang/String;)V", shift = At.Shift.AFTER),
@@ -17,4 +18,5 @@ public class MinecraftServerMixin_MemoryLeak {
         buf1.release();
         return buf1;
     }
+    //#endif
 }
