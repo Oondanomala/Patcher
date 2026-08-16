@@ -241,6 +241,7 @@
     "performance.EntityRendererMixin_CancelLightmapBuild",
     "performance.EntityRendererMixin_EntityCulling",
     "performance.EntityRendererMixin_SkipTwitchRendering",
+    "performance.EnumFacingMixin_ReduceAllocations",
     "performance.FontRendererMixin_Optimization",
     "performance.GameRulesValueMixin_Optimization",
     "performance.LoadingScreenRendererMixin_SkipProgress",
