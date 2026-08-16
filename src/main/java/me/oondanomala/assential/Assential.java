@@ -39,7 +39,7 @@ public final class Assential {
     // Utility methods
     static void sendMessage(String message, boolean prefix) {
         if (prefix) {
-            message = "&e[" + modName + "]&r " + message;
+            message = "§e[" + modName + "]§r " + message;
         }
         UChat.chat(message);
     }

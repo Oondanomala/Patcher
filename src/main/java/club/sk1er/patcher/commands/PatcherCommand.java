@@ -26,13 +26,13 @@ public class PatcherCommand extends Command {
             GuiUtil.open(Objects.requireNonNull(Patcher.instance.getPatcherConfig().gui()));
 
         } else if (subCommand.equals("help")) {
-            ChatUtilities.sendMessage("&bUsage for /" + name, false);
-            ChatUtilities.sendMessage("&c/" + name + " blacklist <ip>&7 - Tell the client that you don't want to use the 1.11+ chat length on the specified server IP.", false);
-            ChatUtilities.sendMessage("&c/" + name + " fov <amount>&7 - Change your FOV to a custom value.", false);
-            ChatUtilities.sendMessage("&c/" + name + " fps <amount>&7 - Choose what to limit the game's framerate to outside of Minecraft's options. 0 will use your normal framerate.", false);
-            ChatUtilities.sendMessage("&c/" + name + " scale <0|1|2|3|4|5|auto|help|large|none|normal|off|small>&7 - Change the scale of your inventory independent of your GUI scale.", false);
-            ChatUtilities.sendMessage("&c/" + name + " sendcoords [additional information]&7 - Send your current coordinates in chat. Anything after 'sendcoords' will be put at the end of the message.", false);
-            ChatUtilities.sendMessage("&c/" + name + " sounds&7 - Open the Sound Configuration GUI.", false);
+            ChatUtilities.sendMessage("§bUsage for /" + name, false);
+            ChatUtilities.sendMessage("§c/" + name + " blacklist <ip>§7 - Tell the client that you don't want to use the 1.11+ chat length on the specified server IP.", false);
+            ChatUtilities.sendMessage("§c/" + name + " fov <amount>§7 - Change your FOV to a custom value.", false);
+            ChatUtilities.sendMessage("§c/" + name + " fps <amount>§7 - Choose what to limit the game's framerate to outside of Minecraft's options. 0 will use your normal framerate.", false);
+            ChatUtilities.sendMessage("§c/" + name + " scale <0|1|2|3|4|5|auto|help|large|none|normal|off|small>§7 - Change the scale of your inventory independent of your GUI scale.", false);
+            ChatUtilities.sendMessage("§c/" + name + " sendcoords [additional information]§7 - Send your current coordinates in chat. Anything after 'sendcoords' will be put at the end of the message.", false);
+            ChatUtilities.sendMessage("§c/" + name + " sounds§7 - Open the Sound Configuration GUI.", false);
 
         } else if (subCommand.equals("blacklist")) {
             if (args.length == 0) {
@@ -85,8 +85,8 @@ public class PatcherCommand extends Command {
     }
 
     private void blacklist(String ip) {
-        String status = Patcher.instance.addOrRemoveBlacklist(ip) ? "&cnow" : "&ano longer";
-        ChatUtilities.sendMessage("Server &e\"" + ip + "\" &ris " + status + " &rblacklisted from chat length extension.");
+        String status = Patcher.instance.addOrRemoveBlacklist(ip) ? "§cnow" : "§ano longer";
+        ChatUtilities.sendMessage("Server §e\"" + ip + "\" §ris " + status + " §rblacklisted from chat length extension.");
         Patcher.instance.saveBlacklistedServers();
     }
 
@@ -97,18 +97,18 @@ public class PatcherCommand extends Command {
             throw new CommandException("Changing your FOV above 110 is disabled due to game-breaking visual bugs.");
         }
         Minecraft mc = Minecraft.getMinecraft();
-        ChatUtilities.sendMessage("FOV changed from &e" + mc.gameSettings.fovSetting + "&r to &a" + fov + ".");
+        ChatUtilities.sendMessage("FOV changed from §e" + mc.gameSettings.fovSetting + "§r to §a" + fov + ".");
         mc.gameSettings.fovSetting = fov;
         mc.gameSettings.saveOptions();
     }
 
     private void scale(String arg) throws CommandException {
         if (arg.equals("help")) {
-            ChatUtilities.sendMessage("             &eInventory Scale", false);
-            ChatUtilities.sendMessage("&7Usage: /patcher scale <scaling>", false);
-            ChatUtilities.sendMessage("&7Scaling may be a number between 1-5, or", false);
-            ChatUtilities.sendMessage("&7small/normal/large/auto", false);
-            ChatUtilities.sendMessage("&7Use '/patcher scale off' to disable scaling.", false);
+            ChatUtilities.sendMessage("             §eInventory Scale", false);
+            ChatUtilities.sendMessage("§7Usage: /patcher scale <scaling>", false);
+            ChatUtilities.sendMessage("§7Scaling may be a number between 1-5, or", false);
+            ChatUtilities.sendMessage("§7small/normal/large/auto", false);
+            ChatUtilities.sendMessage("§7Use '/patcher scale off' to disable scaling.", false);
             return;
         }
 

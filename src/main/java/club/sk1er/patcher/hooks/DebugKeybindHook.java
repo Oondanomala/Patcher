@@ -26,7 +26,7 @@ public class DebugKeybindHook {
 
     public static void handleDebugHelpKeybind(int debugKeycode) {
         String debugKeybind = GameSettings.getKeyDisplayString(debugKeycode);
-        ChatUtilities.sendMessage("&e&l[Debug]:&r Key bindings:", false);
+        ChatUtilities.sendMessage("§e§l[Debug]:§r Key bindings:", false);
         ChatUtilities.sendMessage(debugKeybind + " + A = Reload chunks", false);
         ChatUtilities.sendMessage(debugKeybind + " + B = Show hitboxes", false);
         ChatUtilities.sendMessage(debugKeybind + " + D = Clear chat", false);
@@ -42,7 +42,7 @@ public class DebugKeybindHook {
 
     public static void sendDebugMessage(String message) {
         if (PatcherConfig.debugKeybindFeedback) {
-            ChatUtilities.sendMessage("&e&l[Debug]:&r " + message, false);
+            ChatUtilities.sendMessage("§e§l[Debug]:§r " + message, false);
         }
     }
 }

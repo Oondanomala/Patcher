@@ -93,11 +93,11 @@ public class ChatHandler {
                         HoverEvent hoverEvent = component.getChatStyle().getChatHoverEvent();
                         if (hoverEvent == null) {
                             component.getChatStyle().setChatHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
-                                new ChatComponentIgnored(ChatUtilities.translate("&7Sent at &e" + time + "&7."))));
+                                new ChatComponentIgnored("§7Sent at §e" + time + "§7.")));
                         } else {
                             IChatComponent value = hoverEvent.getValue();
                             value.appendText("\n");
-                            value.appendText(ChatUtilities.translate("&7Sent at &e" + time + "&7."));
+                            value.appendText("§7Sent at §e" + time + "§7.");
                         }
                     } else {
                         queue.addAll(component.getSiblings());

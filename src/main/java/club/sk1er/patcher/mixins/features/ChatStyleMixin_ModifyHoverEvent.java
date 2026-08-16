@@ -2,7 +2,6 @@ package club.sk1er.patcher.mixins.features;
 
 import club.sk1er.patcher.config.PatcherConfig;
 import club.sk1er.patcher.util.chat.ChatHandler;
-import club.sk1er.patcher.util.chat.ChatUtilities;
 import net.minecraft.event.ClickEvent;
 import net.minecraft.event.HoverEvent;
 import net.minecraft.util.ChatComponentText;
@@ -43,7 +42,7 @@ public abstract class ChatStyleMixin_ModifyHoverEvent {
         }
 
         String actionMessage = action == ClickEvent.Action.RUN_COMMAND ? "Runs " : "Opens ";
-        String msg = ChatUtilities.translate("&7" + actionMessage + "&e" + chatClickEvent.getValue() + " &7on click.");
+        String msg = "§7" + actionMessage + "§e" + chatClickEvent.getValue() + " §7on click.";
         if (hoverEvent == null) {
             ChatComponentText textComponent = new ChatComponentText(msg);
             this.patcher$appendTimestamp(textComponent);
@@ -73,7 +72,7 @@ public abstract class ChatStyleMixin_ModifyHoverEvent {
     private void patcher$appendTimestamp(IChatComponent textComponent) {
         if (PatcherConfig.timestamps && PatcherConfig.timestampsStyle == 1) {
             textComponent.appendText("\n");
-            textComponent.appendText(ChatUtilities.translate("&7Sent at &e" + ChatHandler.getCurrentTime() + "&7."));
+            textComponent.appendText("§7Sent at §e" + ChatHandler.getCurrentTime() + "§7.");
         }
     }
 }

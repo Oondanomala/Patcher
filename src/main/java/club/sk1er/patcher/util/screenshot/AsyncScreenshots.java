@@ -30,7 +30,7 @@ import java.util.Date;
 
 public class AsyncScreenshots implements Runnable {
 
-    public static final String prefix = ChatUtilities.translate("&e[Patcher] &r");
+    public static final String prefix = "§e[Patcher] §r";
     private static BufferedImage image;
     private static File screenshot;
     private final int width, height;
@@ -107,36 +107,36 @@ public class AsyncScreenshots implements Runnable {
         favoriteComponent.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/patcher $favorite"));
         favoriteComponent.getChatStyle()
             .setChatHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ChatComponentText(
-                ChatUtilities.translate("&7This will save the screenshot to a new folder called\n" +
-                    "&afavorite_screenshots &7in your Minecraft directory.\n" +
-                    "&cThis cannot be done once a new screenshot is taken."))));
+                "§7This will save the screenshot to a new folder called\n" +
+                "§afavorite_screenshots §7in your Minecraft directory.\n" +
+                "§cThis cannot be done once a new screenshot is taken.")));
 
         final IChatComponent deleteComponent = new ChatComponentText(ChatColor.RED.toString() + ChatColor.BOLD +
             (compact ? "DEL" : "DELETE"));
         deleteComponent.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/patcher $delete"));
         deleteComponent.getChatStyle()
             .setChatHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ChatComponentText(
-                ChatUtilities.translate("&7This will delete the screenshot from your screenshots folder.\n" +
-                    "&cThis is not recoverable and cannot be deleted once a\n" +
-                    "&cnew screenshot is taken or made favorite."))));
+                "§7This will delete the screenshot from your screenshots folder.\n" +
+                "§cThis is not recoverable and cannot be deleted once a\n" +
+                "§cnew screenshot is taken or made favorite.")));
 
         final IChatComponent imgurComponent = new ChatComponentText(ChatColor.GREEN.toString() + ChatColor.BOLD +
             (compact ? "UPL" : "UPLOAD"));
         imgurComponent.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/patcher $upload"));
         imgurComponent.getChatStyle()
             .setChatHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ChatComponentText(
-                ChatUtilities.translate("&7Upload the screenshot to Imgur, an image hosting website.\n" +
-                    "&cThis cannot be uploaded once a new screenshot\n" +
-                    "&cis taken, made favorite, or deleted."))));
+                "§7Upload the screenshot to Imgur, an image hosting website.\n" +
+                "§cThis cannot be uploaded once a new screenshot\n" +
+                "§cis taken, made favorite, or deleted.")));
 
         final IChatComponent copyComponent = new ChatComponentText(ChatColor.AQUA.toString() + ChatColor.BOLD +
             (compact ? "CPY" : "COPY"));
         copyComponent.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/patcher $copyss"));
         copyComponent.getChatStyle()
             .setChatHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ChatComponentText(
-                ChatUtilities.translate("&7Copy this image to your system clipboard.\n" +
-                    "&cThis cannot be copied once a new screenshot\n" +
-                    "&cis taken, made favorite, or deleted."))));
+                "§7Copy this image to your system clipboard.\n" +
+                "§cThis cannot be copied once a new screenshot\n" +
+                "§cis taken, made favorite, or deleted.")));
 
         final IChatComponent folderComponent = new ChatComponentText(ChatColor.BLUE.toString() + ChatColor.BOLD +
             (compact ? "DIR" : "FOLDER"));
@@ -144,7 +144,7 @@ public class AsyncScreenshots implements Runnable {
             .setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_FILE, screenshotDirectory.getCanonicalPath()));
         folderComponent.getChatStyle()
             .setChatHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ChatComponentText(
-                ChatUtilities.translate("&7Open your screenshots folder."))));
+                "§7Open your screenshots folder.")));
 
         final IChatComponent controlsMessage = new ChatComponentText("");
         if (PatcherConfig.favoriteScreenshot) controlsMessage.appendSibling(favoriteComponent);
@@ -183,22 +183,22 @@ public class AsyncScreenshots implements Runnable {
 
             ImageIO.write(image, "png", favoritedScreenshots);
             screenshot.delete();
-            ChatUtilities.sendMessage("&e" + screenshot.getName() + " has been favorited.");
+            ChatUtilities.sendMessage("§e" + screenshot.getName() + " has been favorited.");
         } catch (Throwable e) {
-            ChatUtilities.sendMessage("&cFailed to favorite screenshot, maybe the file was moved/deleted?");
+            ChatUtilities.sendMessage("§cFailed to favorite screenshot, maybe the file was moved/deleted?");
         }
     }
 
     public static void deleteScreenshot() {
         try {
             if (screenshot.exists() && screenshot.delete()) {
-                ChatUtilities.sendMessage("&c" + screenshot.getName() + " has been deleted.");
+                ChatUtilities.sendMessage("§c" + screenshot.getName() + " has been deleted.");
                 screenshot = null;
             } else {
-                ChatUtilities.sendMessage("&cCouldn't find " + screenshot.getName());
+                ChatUtilities.sendMessage("§cCouldn't find " + screenshot.getName());
             }
         } catch (NullPointerException e) {
-            ChatUtilities.sendMessage("&cFailed to delete screenshot, maybe the file was moved/deleted?");
+            ChatUtilities.sendMessage("§cFailed to delete screenshot, maybe the file was moved/deleted?");
         }
     }
 
@@ -210,7 +210,7 @@ public class AsyncScreenshots implements Runnable {
         try {
             copyScreenshot(true);
         } catch (HeadlessException e) {
-            ChatUtilities.sendMessage("&cFailed to copy screenshot to clipboard.");
+            ChatUtilities.sendMessage("§cFailed to copy screenshot to clipboard.");
             Patcher.instance.getLogger().error("Failed to copy screenshot to clipboard.", e);
         }
     }
@@ -220,7 +220,7 @@ public class AsyncScreenshots implements Runnable {
         Multithreading.runAsync(() -> Toolkit.getDefaultToolkit().getSystemClipboard().setContents(sel, null));
 
         if (message) {
-            ChatUtilities.sendMessage("&aScreenshot has been copied to your clipboard.");
+            ChatUtilities.sendMessage("§aScreenshot has been copied to your clipboard.");
         }
     }
 

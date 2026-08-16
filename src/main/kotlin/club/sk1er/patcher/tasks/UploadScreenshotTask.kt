@@ -17,7 +17,7 @@ object UploadScreenshotTask {
     fun execute(file: File?) {
         try {
             if (file != null) {
-                ChatUtilities.sendMessage("&aUploading screenshot...")
+                ChatUtilities.sendMessage("§aUploading screenshot...")
 
                 Multithreading.runAsync {
                     val link = client.upload(file)
@@ -26,10 +26,10 @@ object UploadScreenshotTask {
                     Minecraft.getMinecraft().thePlayer.addChatComponentMessage(message)
                 }
             } else {
-                ChatUtilities.sendMessage("&cFailed to upload screenshot, maybe the file was moved/deleted?")
+                ChatUtilities.sendMessage("§cFailed to upload screenshot, maybe the file was moved/deleted?")
             }
         } catch (e: Exception) {
-            ChatUtilities.sendMessage("&cFailed to upload screenshot. ${e.message}")
+            ChatUtilities.sendMessage("§cFailed to upload screenshot. ${e.message}")
             Patcher.instance.logger.error("Failed to upload screenshot.", e)
         }
     }

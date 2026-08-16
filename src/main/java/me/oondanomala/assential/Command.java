@@ -49,7 +49,7 @@ public abstract class Command extends CommandBase {
                 onCommand(args[0].toLowerCase(Locale.ENGLISH), Arrays.copyOfRange(args, 1, args.length));
             }
         } catch (SyntaxErrorException e) {
-            Assential.sendMessage("&cUsage: /" + name + " " + e.getMessage(), false);
+            Assential.sendMessage("§cUsage: /" + name + " " + e.getMessage(), false);
         } catch (CommandException e) {
             Assential.sendMessage(e.getMessage(), true);
         }
