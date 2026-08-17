@@ -5,7 +5,6 @@ import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.FieldInsnNode;
-import org.objectweb.asm.tree.FieldNode;
 import org.objectweb.asm.tree.InsnList;
 import org.objectweb.asm.tree.InsnNode;
 import org.objectweb.asm.tree.JumpInsnNode;
@@ -39,7 +38,6 @@ public class GuiChatTransformer implements PatcherTransformer {
      */
     @Override
     public void transform(ClassNode classNode, String name) {
-        classNode.fields.add(new FieldNode(Opcodes.ACC_PRIVATE, "holdingShift", "Z", null, null));
         for (MethodNode methodNode : classNode.methods) {
             String methodName = mapMethodName(classNode, methodNode);
 
@@ -74,113 +72,8 @@ public class GuiChatTransformer implements PatcherTransformer {
                     methodNode.instructions.insertBefore(methodNode.instructions.getLast().getPrevious(), setText());
                     break;
                 }
-                case "drawScreen":
-                case "func_73863_a": {
-                    LabelNode ifne = new LabelNode();
-                    methodNode.instructions.insert(getOption(ifne));
-
-                    ListIterator<AbstractInsnNode> iterator = methodNode.instructions.iterator();
-
-                    while (iterator.hasNext()) {
-                        AbstractInsnNode next = iterator.next();
-
-                        if (next instanceof MethodInsnNode) {
-                            if (next.getOpcode() == Opcodes.INVOKESTATIC) {
-                                String methodInsnName = mapMethodNameFromNode(next);
-
-                                if (methodInsnName.equals("drawRect") || methodInsnName.equals("func_73734_a")) {
-                                    methodNode.instructions.insertBefore(next.getNext(), ifne);
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    break;
-                }
-
-                case "keyTyped":
-                case "func_73869_a": {
-                    final ListIterator<AbstractInsnNode> iterator = methodNode.instructions.iterator();
-
-                    while (iterator.hasNext()) {
-                        AbstractInsnNode next = iterator.next();
-
-                        if (next instanceof MethodInsnNode && next.getOpcode() == Opcodes.INVOKEVIRTUAL) {
-                            final String methodNameInsn = mapMethodNameFromNode(next);
-
-                            if (methodNameInsn.equals("displayGuiScreen") || methodNameInsn.equals("func_147108_a")) {
-                                AbstractInsnNode unused = next;
-                                for (int i = 0; i < 8; i++) {
-                                    unused = unused.getPrevious();
-                                }
-
-                                boolean insert = unused instanceof MethodInsnNode && unused.getOpcode() == Opcodes.INVOKEVIRTUAL;
-
-                                if (insert) {
-                                    for (int i = 0; i < 4; i++) {
-                                        next = next.getPrevious();
-                                    }
-
-                                    LabelNode gotoInsn = new LabelNode();
-                                    methodNode.instructions.insertBefore(next, checkChat(gotoInsn));
-
-                                    for (int i = 0; i < 4; i++) {
-                                        next = next.getNext();
-                                    }
-
-                                    methodNode.instructions.insertBefore(next.getNext(), gotoInsn);
-                                }
-                            }
-                        }
-                    }
-
-                    break;
-                }
-
-                case "func_73864_a":
-                case "mouseClicked": {
-                    final ListIterator<AbstractInsnNode> iterator = methodNode.instructions.iterator();
-
-                    while (iterator.hasNext()) {
-                        final AbstractInsnNode next = iterator.next();
-
-                        if (next instanceof MethodInsnNode && next.getOpcode() == Opcodes.INVOKEVIRTUAL) {
-                            final String methodInsnName = mapMethodNameFromNode(next);
-                            if (methodInsnName.equals("handleComponentClick") || methodInsnName.equals("func_175276_a")) {
-                                methodNode.instructions.insertBefore(next.getNext().getNext(),
-                                    new MethodInsnNode(Opcodes.INVOKESTATIC, getHookClass("GuiNewChatHook"), "mouseClicked", "()V", false));
-                            }
-                        }
-                    }
-
-                    break;
-                }
             }
         }
-    }
-
-    private InsnList checkChat(LabelNode gotoInsn) {
-        InsnList list = new InsnList();
-        list.add(getPatcherSetting("shiftChat", "Z"));
-        LabelNode ifeq = new LabelNode();
-        list.add(new JumpInsnNode(Opcodes.IFEQ, ifeq));
-        list.add(new VarInsnNode(Opcodes.ALOAD, 0));
-        list.add(new FieldInsnNode(Opcodes.GETFIELD, "net/minecraft/client/gui/GuiChat", "holdingShift", "Z"));
-        LabelNode ifne = new LabelNode();
-        list.add(new JumpInsnNode(Opcodes.IFNE, ifne));
-        list.add(new VarInsnNode(Opcodes.ALOAD, 0));
-        list.add(new FieldInsnNode(Opcodes.GETFIELD, "net/minecraft/client/gui/GuiChat", "field_146297_k", "Lnet/minecraft/client/Minecraft;"));
-        list.add(new InsnNode(Opcodes.ACONST_NULL));
-        list.add(new MethodInsnNode(Opcodes.INVOKEVIRTUAL, "net/minecraft/client/Minecraft", "func_147108_a", "(Lnet/minecraft/client/gui/GuiScreen;)V", false));
-        list.add(new JumpInsnNode(Opcodes.GOTO, gotoInsn));
-        list.add(ifne);
-        list.add(new VarInsnNode(Opcodes.ALOAD, 0));
-        list.add(new FieldInsnNode(Opcodes.GETFIELD, "net/minecraft/client/gui/GuiChat", "field_146415_a", "Lnet/minecraft/client/gui/GuiTextField;"));
-        list.add(new LdcInsnNode(""));
-        list.add(new MethodInsnNode(Opcodes.INVOKEVIRTUAL, "net/minecraft/client/gui/GuiTextField", "func_146180_a", "(Ljava/lang/String;)V", false));
-        list.add(new JumpInsnNode(Opcodes.GOTO, gotoInsn));
-        list.add(ifeq);
-        return list;
     }
 
     private InsnList setText() {
@@ -256,16 +149,6 @@ public class GuiChatTransformer implements PatcherTransformer {
         list.add(new LdcInsnNode(""));
         list.add(gotoInsn2);
         list.add(new VarInsnNode(Opcodes.ASTORE, 2));
-        return list;
-    }
-
-    private InsnList getOption(LabelNode ifne) {
-        InsnList list = new InsnList();
-        list.add(new VarInsnNode(Opcodes.ALOAD, 0));
-        list.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "net/minecraft/client/gui/GuiChat", "func_146272_n", "()Z", false));
-        list.add(new FieldInsnNode(Opcodes.PUTFIELD, "net/minecraft/client/gui/GuiChat", "holdingShift", "Z"));
-        list.add(getPatcherSetting("transparentChatInputField", "Z"));
-        list.add(new JumpInsnNode(Opcodes.IFNE, ifne));
         return list;
     }
 }
