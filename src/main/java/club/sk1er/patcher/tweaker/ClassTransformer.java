@@ -26,7 +26,6 @@ import club.sk1er.patcher.asm.render.screen.GuiNewChatTransformer;
 import club.sk1er.patcher.asm.render.screen.GuiPlayerTabOverlayTransformer;
 import club.sk1er.patcher.asm.render.screen.InventoryEffectRendererTransformer;
 import club.sk1er.patcher.asm.render.world.RenderGlobalTransformer;
-import club.sk1er.patcher.asm.render.world.VertexFormatTransformer;
 import club.sk1er.patcher.asm.render.world.VisGraphTransformer;
 import club.sk1er.patcher.asm.render.world.entity.LayerCustomHeadTransformer;
 import club.sk1er.patcher.asm.render.world.entity.LayerHeldItemTransformer;
@@ -132,7 +131,6 @@ public class ClassTransformer implements IClassTransformer {
         registerTransformer(new GuiChatTransformer());
         registerTransformer(new VisGraphTransformer());
         registerTransformer(new EffectRendererTransformer());
-        registerTransformer(new VertexFormatTransformer());
         registerTransformer(new LayerHeldItemTransformer());
         registerTransformer(new NetHandlerPlayServerTransformer());
         registerTransformer(new EntityWitherTransformer());
