@@ -17,28 +17,26 @@ import java.util.concurrent.Executors;
 
 public class SavesWatcher {
 
-    private WatchService watchService;
     private final Minecraft mc = Minecraft.getMinecraft();
     private final Path savesFolder = new File(mc.mcDataDir, "saves").toPath();
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
-    @SuppressWarnings("ConstantConditions")
     public void watch() {
         this.executor.execute(() -> {
             try {
-                this.watchService = FileSystems.getDefault().newWatchService();
-                this.savesFolder.register(this.watchService,
+                WatchService watchService = FileSystems.getDefault().newWatchService();
+                this.savesFolder.register(watchService,
                     StandardWatchEventKinds.ENTRY_CREATE,
                     StandardWatchEventKinds.ENTRY_DELETE,
                     StandardWatchEventKinds.ENTRY_MODIFY);
 
                 WatchKey key;
-                while ((key = this.watchService.take()) != null) {
+                while ((key = watchService.take()) != null) {
                     for (WatchEvent<?> ignored : key.pollEvents()) {
                         if (this.mc.currentScreen instanceof GuiSelectWorld) {
                             this.mc.addScheduledTask(() -> {
                                 if (this.mc.currentScreen instanceof GuiSelectWorld) {
-                                    //#if MC==10809
+                                    //#if MC==1.8.9
                                     this.mc.displayGuiScreen(((GuiSelectWorldAccessor) new GuiSelectWorld(mc.currentScreen)).getParentScreen());
                                     //#else
                                     //$$ this.mc.displayGuiScreen(((GuiSelectWorldAccessor) new GuiWorldSelection(mc.currentScreen)).getPrevScreen());

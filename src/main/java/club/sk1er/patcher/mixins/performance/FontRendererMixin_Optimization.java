@@ -25,7 +25,7 @@ public class FontRendererMixin_Optimization implements FontRendererExt {
             cir.setReturnValue(this.patcher$fontRendererHook.getStringWidth(text));
         } else {
             Map<String, Integer> cache = this.patcher$fontRendererHook.getEnhancedFontRenderer().getStringWidthCache();
-            if (cache.size() != 0) {
+            if (!cache.isEmpty()) {
                 cache.clear();
             }
         }

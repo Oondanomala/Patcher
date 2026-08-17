@@ -1,6 +1,5 @@
 package club.sk1er.patcher.mixins.features.lefthand;
 
-import club.sk1er.patcher.config.PatcherConfig;
 import club.sk1er.patcher.hooks.ItemRendererHook;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
@@ -20,15 +19,12 @@ public class RenderItemMixin_LeftHandedness {
     //#if MC==1.8.9
     @Inject(method = "renderItemModelTransform", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/entity/RenderItem;renderItem(Lnet/minecraft/item/ItemStack;Lnet/minecraft/client/resources/model/IBakedModel;)V"))
     private void patcher$flipItemAgain(ItemStack stack, IBakedModel model, ItemCameraTransforms.TransformType cameraTransformType, CallbackInfo ci) {
-        if (ItemRendererHook.isRenderingItemInFirstPerson) {
-            ItemRendererHook.isRenderingItemInFirstPerson = false;
-        } else {
-            return;
-        }
-        if (PatcherConfig.leftHandInFirstPerson && !(stack.getItem().isFull3D() || stack.getItem() instanceof ItemBow)) {
-            ItemRendererHook.isRenderingItemInFirstPerson = false;
-            GlStateManager.scale(-1, 1, 1);
-            GL11.glFrontFace(GL11.GL_CCW);
+        if (ItemRendererHook.isRenderingLeftHandItem) {
+            ItemRendererHook.isRenderingLeftHandItem = false;
+            if (!(stack.getItem().isFull3D() || stack.getItem() instanceof ItemBow)) {
+                GlStateManager.scale(-1, 1, 1);
+                GL11.glFrontFace(GL11.GL_CCW);
+            }
         }
     }
     //#endif

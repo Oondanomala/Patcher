@@ -208,7 +208,7 @@ public class Patcher {
      *
      * @param event {@link FMLNetworkEvent.ClientConnectedToServerEvent}
      */
-    //#if MC==10809
+    //#if MC==1.8.9
     @SubscribeEvent
     public void connectToServer(FMLNetworkEvent.ClientConnectedToServerEvent event) {
         if (event.isLocal) {
@@ -268,25 +268,13 @@ public class Patcher {
         }
     }
 
-    private boolean isServerBlacklisted(String ip) {
-        if (ip == null) return false;
-        String trim = ip.trim();
-        return !trim.isEmpty() && blacklistedServers.contains(trim);
-    }
-
     public boolean addOrRemoveBlacklist(String input) {
-        if (input == null || input.isEmpty() || input.trim().isEmpty()) {
+        if (blacklistedServers.contains(input)) {
+            blacklistedServers.remove(input);
             return false;
         } else {
-            input = input.trim();
-
-            if (isServerBlacklisted(input)) {
-                blacklistedServers.remove(input);
-                return false;
-            } else {
-                blacklistedServers.add(input);
-                return true;
-            }
+            blacklistedServers.add(input);
+            return true;
         }
     }
 

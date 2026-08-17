@@ -167,7 +167,7 @@
     "features.GuiPlayerTabOverlayMixin_TabOpacity",
     "features.GuiScreenMixin_BackgroundRendering",
     "features.GuiScreenServerListMixin_FakeServerListDirectConnect",
-    "features.InventoryPlayerTransformer_HotbarScrolling",
+    "features.InventoryPlayerMixin_HotbarScrolling",
     "features.LayerArrowMixin_CancelRender",
     "features.LayerWitherAuraMixin_DisableWhenInvisible",
     "features.MinecraftMixin_BetterDebugKeys",

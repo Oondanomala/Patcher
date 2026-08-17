@@ -3,28 +3,24 @@ package club.sk1er.patcher.hooks;
 import club.sk1er.patcher.config.PatcherConfig;
 import club.sk1er.patcher.mixins.accessors.FontRendererAccessor;
 import net.minecraft.client.gui.FontRenderer;
-import org.lwjgl.opengl.GL11;
+import net.minecraft.client.renderer.GlStateManager;
 
-@SuppressWarnings("unused")
 public class NameTagRenderingHooks {
     public static int drawNametagText(FontRenderer fr, String text, int x, int y, int color) {
         FontRendererAccessor fontRenderer = (FontRendererAccessor) fr;
-        int render;
         if (PatcherConfig.shadowedNametagText) {
-            GL11.glDepthMask(false);
-            render = fontRenderer.invokeRenderString(text, PatcherConfig.alternateTextShadow ? x : x + 1.0F, y + 1.0F, color, true);
-            GL11.glDepthMask(true);
+            GlStateManager.depthMask(false);
+            int render = fontRenderer.invokeRenderString(text, PatcherConfig.alternateTextShadow ? x : x + 1.0F, y + 1.0F, color, true);
+            GlStateManager.depthMask(true);
 
             render = Math.max(render, fontRenderer.invokeRenderString(text, x, y, color, false));
 
-            GL11.glColorMask(false, false, false, false);
+            GlStateManager.colorMask(false, false, false, false);
             render = Math.max(render, fr.drawString(text, x, y, color, true));
-            GL11.glColorMask(true, true, true, true);
+            GlStateManager.colorMask(true, true, true, true);
+            return render;
         } else {
-            render = fontRenderer.invokeRenderString(text, x, y, color, false);
+            return fontRenderer.invokeRenderString(text, x, y, color, false);
         }
-
-        return render;
     }
-    
 }

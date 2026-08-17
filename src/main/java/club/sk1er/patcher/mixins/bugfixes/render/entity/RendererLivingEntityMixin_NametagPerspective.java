@@ -3,6 +3,7 @@ package club.sk1er.patcher.mixins.bugfixes.render.entity;
 import club.sk1er.patcher.asm.external.mods.optifine.RenderTransformer;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RendererLivingEntity;
+import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -12,7 +13,7 @@ public class RendererLivingEntityMixin_NametagPerspective {
     //#if MC==10809
     @Redirect(
         method = "renderName(Lnet/minecraft/entity/EntityLivingBase;DDD)V",
-        at = @At(value = "FIELD", target = "Lnet/minecraft/client/renderer/entity/RenderManager;playerViewX:F")
+        at = @At(value = "FIELD", target = "Lnet/minecraft/client/renderer/entity/RenderManager;playerViewX:F", opcode = Opcodes.GETFIELD)
     )
     private float patcher$fixNametagPerspective(RenderManager instance) {
         //TODO: Migrate the rest of the transformers to Mixins

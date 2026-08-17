@@ -28,8 +28,8 @@ public class EntityRendererMixin_LeftHandedness {
         at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/EntityRenderer;enableLightmap()V", shift = At.Shift.AFTER)
     )
     private void patcher$flipHandSide(CallbackInfo ci) {
-        ItemRendererHook.isRenderingItemInFirstPerson = true;
         if (PatcherConfig.leftHandInFirstPerson) {
+            ItemRendererHook.isRenderingLeftHandItem = true;
             ItemStack itemToRender = ((ItemRendererAccessor) itemRenderer).getItemToRender();
             if (itemToRender == null || !(itemToRender.getItem() instanceof ItemMap)) {
                 GlStateManager.scale(-1, 1, 1);

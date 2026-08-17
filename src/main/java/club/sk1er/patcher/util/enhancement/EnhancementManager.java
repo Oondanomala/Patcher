@@ -15,8 +15,8 @@ public class EnhancementManager {
     }
 
     public void tick() {
-        for (Map.Entry<Class<? extends Enhancement>, Enhancement> entry : enhancementMap.entrySet()) {
-            entry.getValue().tick();
+        for (Enhancement e : enhancementMap.values()) {
+            e.tick();
         }
     }
 

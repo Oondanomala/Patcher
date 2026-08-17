@@ -85,9 +85,12 @@ public class PatcherCommand extends Command {
     }
 
     private void blacklist(String ip) {
-        String status = Patcher.instance.addOrRemoveBlacklist(ip) ? "§cnow" : "§ano longer";
-        ChatUtilities.sendMessage("Server §e\"" + ip + "\" §ris " + status + " §rblacklisted from chat length extension.");
-        Patcher.instance.saveBlacklistedServers();
+        ip = ip.trim();
+        if (!ip.isEmpty()) {
+            String status = Patcher.instance.addOrRemoveBlacklist(ip) ? "§cnow" : "§ano longer";
+            ChatUtilities.sendMessage("Server §e\"" + ip + "\" §ris " + status + " §rblacklisted from chat length extension.");
+            Patcher.instance.saveBlacklistedServers();
+        }
     }
 
     private void fov(float fov) throws CommandException {

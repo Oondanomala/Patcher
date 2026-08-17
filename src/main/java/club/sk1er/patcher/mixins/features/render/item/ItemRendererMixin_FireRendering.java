@@ -54,6 +54,7 @@ public class ItemRendererMixin_FireRendering {
         GlStateManager.popMatrix();
     }
 
+    @Unique
     private float patcher$getFireOpacity() {
         float fireOpacity = PatcherConfig.fireOverlayOpacity;
         if (PatcherConfig.hideFireOverlayWithFireResistance && mc.thePlayer.isPotionActive(Potion.fireResistance)) {

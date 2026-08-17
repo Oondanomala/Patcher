@@ -22,7 +22,7 @@ public class OverlayHandler {
 
     @SubscribeEvent
     public void renderOverlay(RenderGameOverlayEvent.Post event) {
-        //#if MC==10809
+        //#if MC==1.8.9
         RenderGameOverlayEvent.ElementType type = event.type;
         ScaledResolution res = event.resolution;
         //#else
@@ -31,18 +31,16 @@ public class OverlayHandler {
         //#endif
         if (type != RenderGameOverlayEvent.ElementType.ALL) return;
 
-        final int scaledWidth = res.getScaledWidth();
-
-        final Scoreboard scoreboard = mc.theWorld.getScoreboard();
-        final ScoreObjective objective = scoreboard.getObjectiveInDisplaySlot(0);
-
         if (PatcherConfig.toggleTab && this.toggledTab && !mc.gameSettings.keyBindPlayerList.isKeyDown()) {
+            final Scoreboard scoreboard = mc.theWorld.getScoreboard();
+            final ScoreObjective objective = scoreboard.getObjectiveInDisplaySlot(0);
             final GuiPlayerTabOverlay tabOverlay = mc.ingameGUI.getTabList();
+
             if (mc.isIntegratedServerRunning() && mc.thePlayer.sendQueue.getPlayerInfoMap().size() <= 1 && objective == null) {
                 tabOverlay.updatePlayerList(false);
             } else {
                 tabOverlay.updatePlayerList(true);
-                tabOverlay.renderPlayerlist(scaledWidth, scoreboard, objective);
+                tabOverlay.renderPlayerlist(res.getScaledWidth(), scoreboard, objective);
             }
         }
     }

@@ -20,8 +20,7 @@ public abstract class NetHandlerPlayClientMixin_FixHandleSpawnPlayerNPE {
     @Inject(
         method = "handleSpawnPlayer",
         cancellable = true,
-        at =
-        @At(
+        at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/network/PacketThreadUtil;checkThreadAndEnqueue(Lnet/minecraft/network/Packet;Lnet/minecraft/network/INetHandler;Lnet/minecraft/util/IThreadListener;)V",
             shift = At.Shift.AFTER

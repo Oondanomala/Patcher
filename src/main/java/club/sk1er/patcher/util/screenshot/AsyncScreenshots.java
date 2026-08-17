@@ -224,10 +224,10 @@ public class AsyncScreenshots implements Runnable {
         }
     }
 
-    static class ImageSelection implements Transferable {
+    private static final class ImageSelection implements Transferable {
         private final Image image;
 
-        ImageSelection(Image image) {
+        private ImageSelection(Image image) {
             this.image = image;
         }
 

@@ -1,7 +1,6 @@
 package club.sk1er.patcher.hooks;
 
 import club.sk1er.patcher.config.PatcherConfig;
-import com.google.common.collect.Queues;
 import gg.essential.universal.ChatColor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -10,16 +9,17 @@ import net.minecraft.network.play.server.S02PacketChat;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.MathHelper;
 
+import java.util.ArrayDeque;
 import java.util.Deque;
 
-//#if MC==11202
+//#if MC==1.12.2
 //$$ import net.minecraft.util.text.ChatType;
 //#endif
 
 @SuppressWarnings("unused")
 public class GuiNewChatHook {
 
-    public static final Deque<IChatComponent> messageQueue = Queues.newArrayDeque();
+    public static final Deque<IChatComponent> messageQueue = new ArrayDeque<>();
     private static final Minecraft mc = Minecraft.getMinecraft();
     private static long lastMessageAddedTime = 0L;
 
@@ -71,7 +71,7 @@ public class GuiNewChatHook {
     }
 
     public static void processChatMessage(S02PacketChat packet, IChatComponent message) {
-        //#if MC==10809
+        //#if MC==1.8.9
         if (packet.getType() == 0) {
             queueMessage(message);
         } else if (packet.getType() == 1) {
