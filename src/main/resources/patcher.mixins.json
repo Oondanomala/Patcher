@@ -65,6 +65,7 @@
     "bugfixes.GuiScreenResourcePacksMixin_FixOpenPackFolder",
     "bugfixes.GuiScreenServerListMixin_CloseOnEscape",
     "bugfixes.GuiTextField_FixCursorAlignment",
+    "bugfixes.GuiUtilsMixin_DrawAbovePotions",
     "bugfixes.GuiVideoSettingsMixin_MipmapSlider",
     "bugfixes.InventoryEffectRendererMixin_FixPotionEffectNumerals",
     "bugfixes.LayerArrowMixin_FixedBrightness",

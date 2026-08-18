@@ -10,7 +10,6 @@ import club.sk1er.patcher.asm.external.forge.loader.ModContainerFactoryTransform
 import club.sk1er.patcher.asm.external.forge.render.block.BlockInfoTransformer;
 import club.sk1er.patcher.asm.external.forge.render.block.ForgeBlockModelRendererTransformer;
 import club.sk1er.patcher.asm.external.forge.render.lighting.VertexLighterFlatTransformer;
-import club.sk1er.patcher.asm.external.forge.render.screen.GuiUtilsTransformer;
 import club.sk1er.patcher.asm.external.lwjgl.KeyboardTransformer;
 import club.sk1er.patcher.asm.external.lwjgl.LibraryLWJGLOpenALTransformer;
 import club.sk1er.patcher.asm.external.lwjgl.WindowsDisplayTransformer;
@@ -115,7 +114,7 @@ public class ClassTransformer implements IClassTransformer {
         } catch (IOException ignored) {
         }
 
-        //#if MC==10809
+        //#if MC==1.8.9
         registerTransformer(new GuiNewChatTransformer());
         registerTransformer(new S0EPacketSpawnObjectTransformer());
         registerTransformer(new RenderXPOrbTransformer());
@@ -123,7 +122,6 @@ public class ClassTransformer implements IClassTransformer {
         //#endif
         registerTransformer(new RenderGlobalTransformer());
         registerTransformer(new RenderPlayerTransformer());
-        registerTransformer(new GuiUtilsTransformer());
         registerTransformer(new GuiPlayerTabOverlayTransformer());
         registerTransformer(new NetHandlerPlayClientTransformer());
         registerTransformer(new LayerCustomHeadTransformer());
