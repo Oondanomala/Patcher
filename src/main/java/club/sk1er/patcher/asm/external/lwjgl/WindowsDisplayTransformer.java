@@ -35,7 +35,7 @@ public class WindowsDisplayTransformer implements PatcherTransformer {
                                 if (node instanceof JumpInsnNode && node.getOpcode() == Opcodes.IFNE) {
                                     node = iterator.previous();
                                     for (int i = 0; i < 3; i++) {
-                                        AbstractInsnNode previous = iterator.previous();
+                                        iterator.previous();
                                         iterator.remove();
                                     }
                                     InsnList fix = new InsnList();

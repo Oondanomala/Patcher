@@ -6,7 +6,6 @@ import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.FieldInsnNode;
-import org.objectweb.asm.tree.FieldNode;
 import org.objectweb.asm.tree.MethodInsnNode;
 import org.objectweb.asm.tree.MethodNode;
 
@@ -39,27 +38,6 @@ public interface PatcherTransformer {
     }
 
     /**
-     * Map the field name from notch names
-     *
-     * @param classNode the transformed class node
-     * @param fieldNode the transformed classes field node
-     * @return a mapped field name
-     */
-    default String mapFieldName(ClassNode classNode, FieldNode fieldNode) {
-        return FMLDeobfuscatingRemapper.INSTANCE.mapFieldName(classNode.name, fieldNode.name, fieldNode.desc);
-    }
-
-    /**
-     * Map the class name from notch names
-     *
-     * @param className the notch name of the class
-     * @return a deobfuscated name of the class
-     */
-    default String mapClassName(String className) {
-        return FMLDeobfuscatingRemapper.INSTANCE.map(className);
-    }
-
-    /**
      * Map the method desc from notch names
      *
      * @param methodNode the transformed method node
@@ -89,11 +67,6 @@ public interface PatcherTransformer {
     default String mapFieldNameFromNode(AbstractInsnNode node) {
         FieldInsnNode fieldInsnNode = (FieldInsnNode) node;
         return FMLDeobfuscatingRemapper.INSTANCE.mapFieldName(fieldInsnNode.owner, fieldInsnNode.name, fieldInsnNode.desc);
-    }
-
-    default String mapMethodDescFromNode(AbstractInsnNode node) {
-        MethodInsnNode methodInsnNode = (MethodInsnNode) node;
-        return FMLDeobfuscatingRemapper.INSTANCE.mapMethodDesc(methodInsnNode.desc);
     }
 
     /**

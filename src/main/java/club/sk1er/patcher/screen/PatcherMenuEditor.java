@@ -5,7 +5,6 @@ import club.sk1er.patcher.config.PatcherConfig;
 import club.sk1er.patcher.mixins.accessors.GuiMainMenuAccessor;
 import club.sk1er.patcher.screen.disconnect.SmartDisconnectScreen;
 import club.sk1er.patcher.screen.quit.ConfirmQuitScreen;
-import club.sk1er.patcher.tweaker.PatcherTweaker;
 import gg.essential.api.EssentialAPI;
 import gg.essential.api.config.EssentialConfig;
 import gg.essential.universal.UDesktop;

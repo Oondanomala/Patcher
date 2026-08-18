@@ -90,7 +90,6 @@ public class ModClassTransformer implements IClassTransformer {
         final OptiFineGenerations generations = ClassTransformer.generations;
         if (generations.getIGeneration().contains(optifineVersion)) {
             registerCommonTransformers();
-            registerI7Transformers();
         } else if (generations.getLGeneration().contains(optifineVersion)) {
             registerCommonTransformers();
             registerLSeriesTransformers();
@@ -128,10 +127,6 @@ public class ModClassTransformer implements IClassTransformer {
         registerTransformer(new FullbrightTickerTransformer());
         registerTransformer(new EntityCullingTransformer());
         registerTransformer(new WorldVertexBufferUploaderTransformer());
-    }
-
-    private void registerI7Transformers() {
-
     }
 
     private void registerLSeriesTransformers() {
