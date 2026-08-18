@@ -77,6 +77,8 @@
     "bugfixes.MinecraftMixin_ForeignKeyboards",
     "bugfixes.MinecraftMixin_PersistentShaders",
     "bugfixes.NetHandlerPlayClientMixin_FixHandleSpawnPlayerNPE",
+    "bugfixes.RenderGlobalMixin_FixBorderWithBlindness",
+    "bugfixes.RenderGlobalMixin_FixZFighting",
     "bugfixes.RenderGlobalMixin_RenderOOBEntities",
     "bugfixes.RenderPlayerMixin_ArmPosition",
     "bugfixes.ScoreboardMixin_FixLogSpam",

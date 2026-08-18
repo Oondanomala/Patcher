@@ -7,8 +7,6 @@ import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.InsnList;
 import org.objectweb.asm.tree.JumpInsnNode;
 import org.objectweb.asm.tree.LabelNode;
-import org.objectweb.asm.tree.LdcInsnNode;
-import org.objectweb.asm.tree.MethodInsnNode;
 import org.objectweb.asm.tree.MethodNode;
 
 import java.util.ListIterator;
@@ -37,20 +35,6 @@ public class RenderGlobalTransformer implements PatcherTransformer {
             String methodName = mapMethodName(classNode, methodNode);
 
             switch (methodName) {
-                case "preRenderDamagedBlocks":
-                case "func_180443_s": {
-                    ListIterator<AbstractInsnNode> iterator = methodNode.instructions.iterator();
-
-                    while (iterator.hasNext()) {
-                        AbstractInsnNode next = iterator.next();
-
-                        if (next instanceof LdcInsnNode && ((LdcInsnNode) next).cst.equals(-3.0F)) {
-                            ((LdcInsnNode) next).cst = next.getNext() instanceof LdcInsnNode ? -1.0F : -10.0F;
-                        }
-                    }
-                    break;
-                }
-
                 case "renderSky":
                 case "func_174976_a": {
                     if (methodNode.desc.equals("(FI)V")) {
@@ -69,32 +53,6 @@ public class RenderGlobalTransformer implements PatcherTransformer {
                             }
                         }
                     }
-
-                    break;
-                }
-
-                case "func_180449_a":
-                case "renderWorldBorder": {
-                    final ListIterator<AbstractInsnNode> iterator = methodNode.instructions.iterator();
-                    while (iterator.hasNext()) {
-                        final AbstractInsnNode next = iterator.next();
-                        if (next instanceof MethodInsnNode) {
-                            final String methodInsnName = mapMethodNameFromNode(next);
-                            if (next.getOpcode() == Opcodes.INVOKEVIRTUAL) {
-                                if (methodInsnName.equals("getClosestDistance") || methodInsnName.equals("func_177729_b")) {
-                                    methodNode.instructions.insertBefore(next.getPrevious().getPrevious().getPrevious(),
-                                        new MethodInsnNode(Opcodes.INVOKESTATIC, "net/minecraft/client/renderer/GlStateManager", "func_179106_n", "()V", false));
-                                }
-                            } else if (next.getOpcode() == Opcodes.INVOKESTATIC) {
-                                if ((methodInsnName.equals("depthMask") || methodInsnName.equals("func_179132_a")) && next.getPrevious().getOpcode() == Opcodes.ICONST_1) {
-                                    methodNode.instructions.insert(next,
-                                        new MethodInsnNode(Opcodes.INVOKESTATIC, "net/minecraft/client/renderer/GlStateManager", "func_179127_m", "()V", false)
-                                    );
-                                }
-                            }
-                        }
-                    }
-
                     break;
                 }
             }
