@@ -1,8 +1,8 @@
 package me.oondanomala.assential;
 
-import gg.essential.universal.UMinecraft;
 import gg.essential.universal.UResolution;
 import gg.essential.universal.USound;
+import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -40,9 +40,9 @@ public final class Notifications {
     @SubscribeEvent
     public void drawNotifications(TickEvent.RenderTickEvent event) {
         if (event.phase == TickEvent.Phase.START) {
-            if (lastTime == -1) lastTime = UMinecraft.getTime();
+            if (lastTime == -1) lastTime = Minecraft.getSystemTime();
             else {
-                long currentTime = UMinecraft.getTime();
+                long currentTime = Minecraft.getSystemTime();
                 deltaTime = currentTime - lastTime;
                 lastTime = currentTime;
             }

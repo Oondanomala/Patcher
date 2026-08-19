@@ -2,9 +2,9 @@ package club.sk1er.patcher.mixins.features.cropheight;
 
 import club.sk1er.patcher.config.PatcherConfig;
 import club.sk1er.patcher.hooks.CropUtilities;
-import gg.essential.universal.UMinecraft;
 import me.oondanomala.assential.MinecraftUtil;
 import net.minecraft.block.BlockCactus;
+import net.minecraft.client.Minecraft;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MovingObjectPosition;
@@ -20,14 +20,14 @@ public class BlockCactusMixin_CropHitbox extends BlockMixin_CropHitbox {
     //#if MC==10809
     @Inject(method = "getSelectedBoundingBox", at = @At("HEAD"))
     public void patcher$getSelectedBoundingBox(World worldIn, BlockPos pos, CallbackInfoReturnable<AxisAlignedBB> cir) {
-        if (PatcherConfig.futureHitBoxes && (MinecraftUtil.isHypixel() || UMinecraft.getMinecraft().isIntegratedServerRunning())) {
+        if (PatcherConfig.futureHitBoxes && (MinecraftUtil.isHypixel() || Minecraft.getMinecraft().isIntegratedServerRunning())) {
             CropUtilities.updateCactusBox(worldIn.getBlockState(pos).getBlock());
         }
     }
 
     @Override
     public void collisionRayTrace(World worldIn, BlockPos pos, Vec3 start, Vec3 end, CallbackInfoReturnable<MovingObjectPosition> cir) {
-        if (PatcherConfig.futureHitBoxes && (MinecraftUtil.isHypixel() || UMinecraft.getMinecraft().isIntegratedServerRunning())) {
+        if (PatcherConfig.futureHitBoxes && (MinecraftUtil.isHypixel() || Minecraft.getMinecraft().isIntegratedServerRunning())) {
             CropUtilities.updateCactusBox(worldIn.getBlockState(pos).getBlock());
         }
     }
