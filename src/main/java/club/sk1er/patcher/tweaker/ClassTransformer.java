@@ -1,8 +1,5 @@
 package club.sk1er.patcher.tweaker;
 
-//#if MC==1.8.9
-import club.sk1er.patcher.asm.external.forge.ForgeChunkManagerTransformer;
-//#endif
 import club.sk1er.patcher.asm.external.forge.loader.ASMModParserTransformer;
 import club.sk1er.patcher.asm.external.forge.loader.ModClassLoaderTransformer;
 import club.sk1er.patcher.asm.external.forge.render.block.BlockInfoTransformer;
@@ -138,7 +135,6 @@ public class ClassTransformer implements IClassTransformer {
         // forge classes
         //#if MC==1.8.9
         registerTransformer(new ModClassLoaderTransformer());
-        registerTransformer(new ForgeChunkManagerTransformer());
         registerTransformer(new BlockInfoTransformer());
         registerTransformer(new VertexLighterFlatTransformer());
         registerTransformer(new ForgeBlockModelRendererTransformer());

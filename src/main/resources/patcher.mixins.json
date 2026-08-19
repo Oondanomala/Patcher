@@ -270,6 +270,7 @@
     "performance.WorldMixin_Optimization",
     "performance.forge.FluidRegistryMixin_Optimization",
     "performance.forge.FMLClientHandlerMixin_Optimization",
+    "performance.forge.ForgeChunkManagerMixin_Optimization",
     "performance.forge.ForgeHooksClientMixin_AvoidExcessiveAllocations",
     "performance.forge.ModContainerFactoryMixin_SkipBaseMods",
     "performance.forge.ModelLoaderMixin_ClearModelErrors",
