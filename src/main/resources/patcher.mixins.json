@@ -271,6 +271,7 @@
     "performance.forge.FluidRegistryMixin_Optimization",
     "performance.forge.FMLClientHandlerMixin_Optimization",
     "performance.forge.ForgeHooksClientMixin_AvoidExcessiveAllocations",
+    "performance.forge.ModContainerFactoryMixin_SkipBaseMods",
     "performance.forge.ModelLoaderMixin_ClearModelErrors",
     "performance.forge.ModelLoaderMixin_SkipFirstBaking",
     "performance.forge.VertexLighterSmoothAoMixin_FasterLightmap",

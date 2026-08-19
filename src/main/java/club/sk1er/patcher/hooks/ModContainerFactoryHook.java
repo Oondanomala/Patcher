@@ -11,9 +11,8 @@ import org.objectweb.asm.Type;
 import java.lang.reflect.Constructor;
 import java.util.Map;
 
-@SuppressWarnings("unused")
 public class ModContainerFactoryHook {
-
+    //#if MC==1.8.9
     public static ModContainer build(ASMModParser parser, ModCandidate container, Map<Type, Constructor<? extends ModContainer>> modTypes) {
         final String className = parser.getASMType().getClassName();
         for (ModAnnotation annotation : parser.getAnnotations()) {
@@ -36,4 +35,5 @@ public class ModContainerFactoryHook {
 
         return null;
     }
+    //#endif
 }
