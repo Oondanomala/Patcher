@@ -4,7 +4,6 @@ package club.sk1er.patcher.tweaker;
 import club.sk1er.patcher.asm.external.forge.ForgeChunkManagerTransformer;
 //#endif
 import club.sk1er.patcher.asm.external.forge.loader.ASMModParserTransformer;
-import club.sk1er.patcher.asm.external.forge.loader.MinecraftForgeTransformer;
 import club.sk1er.patcher.asm.external.forge.loader.ModClassLoaderTransformer;
 import club.sk1er.patcher.asm.external.forge.loader.ModContainerFactoryTransformer;
 import club.sk1er.patcher.asm.external.forge.render.block.BlockInfoTransformer;
@@ -144,7 +143,6 @@ public class ClassTransformer implements IClassTransformer {
         registerTransformer(new BlockInfoTransformer());
         registerTransformer(new VertexLighterFlatTransformer());
         registerTransformer(new ForgeBlockModelRendererTransformer());
-        registerTransformer(new MinecraftForgeTransformer());
         registerTransformer(new ASMModParserTransformer());
         registerTransformer(new ModContainerFactoryTransformer());
         //#endif
