@@ -283,6 +283,7 @@
     "performance.leaks.AnvilChunkLoaderMixin_UnclosedStream",
     "performance.leaks.BlockRedstoneTorchMixin_MemoryLeak",
     "performance.leaks.C17PacketCustomPayloadMixin_MemoryLeak",
+    "performance.leaks.EnchantmentHelperMixin_MemoryLeak",
     "performance.leaks.GuiModListMixin_CloseStream",
     "performance.leaks.MinecraftMixin_MemoryIssues",
     "performance.leaks.MinecraftServerMixin_MemoryLeak",
