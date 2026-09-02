@@ -2,9 +2,6 @@ package club.sk1er.patcher.tweaker;
 
 import club.sk1er.patcher.asm.external.forge.loader.ASMModParserTransformer;
 import club.sk1er.patcher.asm.external.forge.loader.ModClassLoaderTransformer;
-import club.sk1er.patcher.asm.external.forge.render.block.BlockInfoTransformer;
-import club.sk1er.patcher.asm.external.forge.render.block.ForgeBlockModelRendererTransformer;
-import club.sk1er.patcher.asm.external.forge.render.lighting.VertexLighterFlatTransformer;
 import club.sk1er.patcher.asm.external.lwjgl.KeyboardTransformer;
 import club.sk1er.patcher.asm.external.lwjgl.LibraryLWJGLOpenALTransformer;
 import club.sk1er.patcher.asm.external.lwjgl.WindowsDisplayTransformer;
@@ -135,9 +132,6 @@ public class ClassTransformer implements IClassTransformer {
         // forge classes
         //#if MC==1.8.9
         registerTransformer(new ModClassLoaderTransformer());
-        registerTransformer(new BlockInfoTransformer());
-        registerTransformer(new VertexLighterFlatTransformer());
-        registerTransformer(new ForgeBlockModelRendererTransformer());
         registerTransformer(new ASMModParserTransformer());
         //#endif
         //registerTransformer(new JarDiscovererTransformer());

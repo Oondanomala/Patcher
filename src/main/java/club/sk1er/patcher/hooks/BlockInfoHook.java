@@ -1,16 +1,12 @@
 package club.sk1er.patcher.hooks;
 
-//#if MC==10809
 import net.minecraft.block.Block;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.client.model.pipeline.BlockInfo;
 
-@SuppressWarnings("unused")
 public class BlockInfoHook {
-
-    private static final EnumFacing[] sides = EnumFacing.values();
+    //#if MC==1.8.9
     private static final int[] packed = new int[7];
     private static boolean full;
 
@@ -18,13 +14,13 @@ public class BlockInfoHook {
         full = block.isFullCube();
         packed[0] = block.getMixedBrightnessForBlock(world, blockPos);
 
-        for (EnumFacing side : sides) {
+        for (EnumFacing side : EnumFacing.VALUES) {
             int i = side.ordinal() + 1;
             packed[i] = block.getMixedBrightnessForBlock(world, blockPos.offset(side));
         }
     }
 
-    public static void updateLightmap(BlockInfo blockInfo, float[] normal, float[] lightmap, float x, float y, float z) {
+    public static void updateLightmap(float[] normal, float[] lightmap, float x, float y, float z) {
         final float e1 = 0.99f;
         final float e2 = 0.95f;
 
@@ -43,5 +39,5 @@ public class BlockInfoHook {
         lightmap[0] = ((float) ((brightness >> 0x04) & 0xF) * 0x20) / 0xFFFF;
         lightmap[1] = ((float) ((brightness >> 0x14) & 0xF) * 0x20) / 0xFFFF;
     }
+    //#endif
 }
-//#endif
