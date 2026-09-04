@@ -1,5 +1,6 @@
 package club.sk1er.patcher.mixins.performance.forge;
 
+import club.sk1er.patcher.config.PatcherConfig;
 import net.minecraft.client.renderer.BlockModelShapes;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.resources.IResourceManager;
@@ -34,6 +35,12 @@ public class ModelLoaderMixin_SkipFirstBaking
     private Map<ModelResourceLocation, IModel> stateModels;
     @Unique
     private static boolean patcher$firstLoad = true;
+
+    static {
+        if (PatcherConfig.skipSecondResourceLoad) {
+            patcher$firstLoad = false;
+        }
+    }
 
     public ModelLoaderMixin_SkipFirstBaking(IResourceManager p_i46085_1_, TextureMap p_i46085_2_, BlockModelShapes p_i46085_3_) {
         super(p_i46085_1_, p_i46085_2_, p_i46085_3_);

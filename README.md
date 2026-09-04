@@ -39,6 +39,7 @@ Adapted from the disclaimer found in PolyPatcher.
 - **Player Fade Opacity Threshold** - Change the threshold at which transparent players will be rendered without writing to the depth buffer. Overwriting the depth buffer causes transparent players to draw over anything else that is drawn after it while not writing to it will cause the same elements to draw above the player and additionally will render players in the incorrect Z order. Depth writing is better for high opacity, and not writing is better for low opacity.
 - **Player Fade Opacity** - Change the fixed opacity for nearby players.
 - **Selective Resource Reloading** - Drastically speeds up resource reloading by only reloading what's necessary. May be incompatible with certain mods. *default
+- **Skip Second Resource Load** - Skips the second resource load at launch, improving startup time. This is a hack that _will_ break certain mods!
 
 </details>
 <details>

@@ -1404,6 +1404,14 @@ public class PatcherConfig extends Vigilant {
     )
     public static boolean selectiveResourceReloading = true;
 
+    @Property(
+        type = PropertyType.SWITCH, name = "Skip Second Resource Load",
+        description = "Skips the second resource load at launch, improving startup time.\n" +
+            "§cThis is a hack that §owill§c break certain mods!",
+        category = "Experimental", subcategory = "Resources"
+    )
+    public static boolean skipSecondResourceLoad;
+
     // HIDDEN
 
     @Property(
@@ -1542,7 +1550,7 @@ public class PatcherConfig extends Vigilant {
                 "resourceExploitFix", "newKeybindHandling", "debugKeybindFeedback", "futureHitBoxes",
                  "leftHandInFirstPerson", "extendedChatLength", "chatPosition", "parallaxFix",
                 "crosshairPerspective", "extendChatBackground", "cleanOptionsMenu", "vanillaGlassPanes",
-                "playerFade", "playerFadeStart", "playerFadeEnd", "selectiveResourceReloading"
+                "playerFade", "playerFadeStart", "playerFadeEnd", "selectiveResourceReloading", "skipSecondResourceLoad"
             ).forEach(property -> hidePropertyIf(property, minecraft112));
 
             hidePropertyIf("keyboardLayout", () -> !SystemUtils.IS_OS_LINUX);
