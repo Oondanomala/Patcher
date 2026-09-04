@@ -102,13 +102,6 @@ public class PatcherConfig extends Vigilant {
     public static boolean newKeybindHandling = true;
 
     @Property(
-        type = PropertyType.SWITCH, name = "Separate Sound & Texture Reloading",
-        description = "Separate reloading resources into reloading sounds (F3+S) and reloading textures (F3+T).",
-        category = "Miscellaneous", subcategory = "General"
-    )
-    public static boolean separateResourceLoading = true;
-
-    @Property(
         type = PropertyType.SWITCH, name = "Debug Keybind Feedback",
         description = "Send a chat message when using debug keybinds, like in 1.12+.",
         category = "Miscellaneous", subcategory = "General"
@@ -1403,6 +1396,14 @@ public class PatcherConfig extends Vigilant {
     )
     public static boolean hudCaching;
 
+    @Property(
+        type = PropertyType.SWITCH, name = "Selective Resource Reloading",
+        description = "Drastically speeds up resource reloading by only reloading what's necessary.\n" +
+            "§cMay be incompatible with certain mods.",
+        category = "Experimental", subcategory = "Resources"
+    )
+    public static boolean selectiveResourceReloading = true;
+
     // HIDDEN
 
     @Property(
@@ -1538,10 +1539,10 @@ public class PatcherConfig extends Vigilant {
             //noinspection ConstantConditions
             Function0<Boolean> minecraft112 = () -> ForgeVersion.mcVersion.equals("1.12.2");
             Arrays.asList(
-                "resourceExploitFix", "newKeybindHandling", "separateResourceLoading", "debugKeybindFeedback",
-                "futureHitBoxes", "leftHandInFirstPerson", "extendedChatLength", "chatPosition", "parallaxFix",
+                "resourceExploitFix", "newKeybindHandling", "debugKeybindFeedback", "futureHitBoxes",
+                 "leftHandInFirstPerson", "extendedChatLength", "chatPosition", "parallaxFix",
                 "crosshairPerspective", "extendChatBackground", "cleanOptionsMenu", "vanillaGlassPanes",
-                "playerFade", "playerFadeStart", "playerFadeEnd"
+                "playerFade", "playerFadeStart", "playerFadeEnd", "selectiveResourceReloading"
             ).forEach(property -> hidePropertyIf(property, minecraft112));
 
             hidePropertyIf("keyboardLayout", () -> !SystemUtils.IS_OS_LINUX);

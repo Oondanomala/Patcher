@@ -2,6 +2,8 @@ package club.sk1er.patcher.util.world.sound.audioswitcher;
 
 import club.sk1er.patcher.Patcher;
 import club.sk1er.patcher.config.PatcherConfig;
+import club.sk1er.patcher.hooks.ResourceReloadHook;
+import club.sk1er.patcher.hooks.ResourceReloadHook.ResourceType;
 import me.oondanomala.assential.Notifications;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
@@ -65,7 +67,7 @@ public class AudioSwitcher {
                 Patcher.instance.forceSaveConfig();
 
                 try {
-                    this.mc.getSoundHandler().onResourceManagerReload(this.mc.getResourceManager());
+                    ResourceReloadHook.reload(this.mc, ResourceType.SOUNDS);
                 } catch (Exception e) {
                     Notifications.push("Patcher", "Failed to reinitialize OpenAL.");
                     Patcher.instance.getLogger().error("Failed to reinitialize OpenAL.", e);

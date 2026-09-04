@@ -2,6 +2,8 @@ package club.sk1er.patcher.screen;
 
 import club.sk1er.patcher.Patcher;
 import club.sk1er.patcher.config.PatcherConfig;
+import club.sk1er.patcher.hooks.ResourceReloadHook;
+import club.sk1er.patcher.hooks.ResourceReloadHook.ResourceType;
 import club.sk1er.patcher.mixins.accessors.GuiMainMenuAccessor;
 import club.sk1er.patcher.screen.disconnect.SmartDisconnectScreen;
 import club.sk1er.patcher.screen.quit.ConfirmQuitScreen;
@@ -209,7 +211,7 @@ public class PatcherMenuEditor {
             if (buttonId == allSounds) {
                 mc.displayGuiScreen(Patcher.instance.getPatcherSoundConfig().gui());
             } else if (buttonId == refreshSounds) {
-                mc.getSoundHandler().onResourceManagerReload(mc.getResourceManager());
+                ResourceReloadHook.reload(mc, ResourceType.SOUNDS);
             }
         }
     }

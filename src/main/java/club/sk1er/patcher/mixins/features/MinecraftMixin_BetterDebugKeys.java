@@ -34,7 +34,7 @@ public abstract class MinecraftMixin_BetterDebugKeys {
 
     @Inject(method = "runTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;refreshResources()V", ordinal = 0, shift = At.Shift.AFTER))
     private void patcher$soundReloadingFeedback(CallbackInfo ci) {
-        if (PatcherConfig.separateResourceLoading) {
+        if (PatcherConfig.selectiveResourceReloading) {
             DebugKeybindHook.sendDebugMessage("Reloaded sounds");
         } else {
             DebugKeybindHook.sendDebugMessage("Reloaded resource packs");

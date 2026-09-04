@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(GuiVideoSettings.class)
 public abstract class GuiVideoSettingsMixin_MipmapSlider extends GuiScreen {
-    //#if MC==10809
+    //#if MC==1.8.9
     @Override
     public void onGuiClosed() {
         super.onGuiClosed();

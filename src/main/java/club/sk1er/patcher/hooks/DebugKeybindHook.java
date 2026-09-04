@@ -37,7 +37,7 @@ public class DebugKeybindHook {
         ChatUtilities.sendMessage(debugKeybind + " + P = Pause on lost focus", false);
         ChatUtilities.sendMessage(debugKeybind + " + Q = Show this list", false);
         ChatUtilities.sendMessage(debugKeybind + " + T = Reload resource packs", false);
-        ChatUtilities.sendMessage(debugKeybind + " + S = " + (PatcherConfig.separateResourceLoading ? "Reload sounds" : "Reload resource packs"), false);
+        ChatUtilities.sendMessage(debugKeybind + " + S = " + (PatcherConfig.selectiveResourceReloading ? "Reload sounds" : "Reload resource packs"), false);
     }
 
     public static void sendDebugMessage(String message) {

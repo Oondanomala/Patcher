@@ -38,6 +38,7 @@ Adapted from the disclaimer found in PolyPatcher.
 - **Player Fade Opacity Mode** - Change whether players fade out or keep a fixed transparency.
 - **Player Fade Opacity Threshold** - Change the threshold at which transparent players will be rendered without writing to the depth buffer. Overwriting the depth buffer causes transparent players to draw over anything else that is drawn after it while not writing to it will cause the same elements to draw above the player and additionally will render players in the incorrect Z order. Depth writing is better for high opacity, and not writing is better for low opacity.
 - **Player Fade Opacity** - Change the fixed opacity for nearby players.
+- **Selective Resource Reloading** - Drastically speeds up resource reloading by only reloading what's necessary. May be incompatible with certain mods. *default
 
 </details>
 <details>
@@ -53,7 +54,6 @@ Adapted from the disclaimer found in PolyPatcher.
 - **Speed FOV** - Modify your FOV when having the speed effect.
 - **Slowness FOV** - Modify Your FOV when having the slowness effect.
 - **Better Keybind Handling** - Makes keys re-register when closing a GUI, like in 1.12+. (Does not work on macOS due to LWJGL issues) *default
-- **Separate Sound & Texture Reloading** - Separate reloading resources into reloading sounds (F3+S) and reloading textures (F3+T).
 - **Debug Keybind Feedback** - Send a chat message when using debug keybinds, like in 1.12+.
 - **Disable Hotbar Scrolling** - Remove the ability to scroll through your hotbar.
 - **Crosshair Perspective** - Remove the crosshair when in third person.

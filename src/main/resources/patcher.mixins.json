@@ -29,6 +29,7 @@
     "accessors.PositionedSoundAccessor",
     "accessors.RenderManagerAccessor",
     "accessors.ResourcePackRepositoryAccessor",
+    "accessors.SimpleReloadableResourceManagerAccessor",
     "accessors.SoundHandlerAccessor",
     "accessors.SoundManagerAccessor",
     "accessors.SoundRegistryAccessor",
@@ -45,7 +46,6 @@
     "bugfixes.EntityRendererMixin_PolygonOffset",
     "bugfixes.EntityXPOrbMixin_AdjustHeight",
     "bugfixes.FontRendererMixin_ResetStyles",
-    "bugfixes.GameSettingsMixin_MipmapSlider",
     "bugfixes.GuiContainerMixin_SplitRemnants",
     "bugfixes.GuiGameOverMixin_ResolveButtonClick",
     "bugfixes.GuiIngameForgeMixin_FixAbsorptionHealth",
@@ -183,7 +183,6 @@
     "features.MinecraftMixin_FpsLimit",
     "features.MinecraftMixin_KeepChatMessages",
     "features.MinecraftMixin_Metrics",
-    "features.MinecraftMixin_SeparateResources",
     "features.MinecraftMixin_WindowedFullscreen",
     "features.MinecraftServerMixin_Metrics",
     "features.RenderArrowMixin_CancelRender",
@@ -295,6 +294,11 @@
     "performance.leaks.NodeProcessorMixin_MemoryLeak",
     "performance.leaks.S3FPacketCustomPayloadMixin_MemoryLeak",
     "performance.leaks.TextureManangerMixin_MemoryLeak",
-    "performance.render.item.ItemStackMixin_CacheDisplayName"
+    "performance.render.item.ItemStackMixin_CacheDisplayName",
+    "performance.resources.GameSettingsMixin_SelectiveResourceReload",
+    "performance.resources.GuiLanguageMixin_SelectiveResourceReload",
+    "performance.resources.MinecraftMixin_SelectiveResourceReload",
+    "performance.resources.SimpleReloadableResourceManager_SelectiveResourceReload",
+    "performance.resources.optifine.GameSettingsMixin_SelectiveResourceReloadOptifine"
   ]
 }
