@@ -2,7 +2,7 @@ package club.sk1er.patcher.hooks;
 
 //#if MC==10809
 import club.sk1er.patcher.Patcher;
-import club.sk1er.patcher.util.chat.ChatUtilities;
+import me.oondanomala.assential.Notifications;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.network.play.client.C19PacketResourcePackStatus;
@@ -35,7 +35,7 @@ public class NetHandlerPlayClientHook {
             if (isLevelProtocol && (url.contains("..") || !url.endsWith("/resources.zip"))) {
                 Patcher.instance.getLogger().warn("Malicious server tried to access {}", url);
                 if (Minecraft.getMinecraft().thePlayer != null) {
-                    ChatUtilities.sendMessage("§c§lThe current server has attempted to be malicious but we have stopped them.");
+                    Notifications.push("Patcher", "§c§lThe current server has attempted to be malicious but we have stopped them.");
                 }
 
                 throw new URISyntaxException(url, "Invalid levelstorage resourcepack path");
