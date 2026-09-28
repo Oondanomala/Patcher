@@ -9,22 +9,11 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 @Mixin(Chunk.class)
 public class ChunkMixin_Optimization {
     @Shadow @Final
     private ExtendedBlockStorage[] storageArrays;
-
-    @ModifyArg(
-        method = "setBlockState",
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/world/chunk/Chunk;relightBlock(III)V", ordinal = 0),
-        index = 1
-    )
-    private int patcher$subtractOneFromY(int y) {
-        return y - 1;
-    }
 
     /**
      * @author LlamaLad7
