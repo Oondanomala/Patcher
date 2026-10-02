@@ -121,6 +121,7 @@
     "bugfixes.optifine.RegionRenderCacheMixin_FixConnectedTextures",
     "bugfixes.optifine.RenderGlobalMixin_FixSkyVBOs",
     "bugfixes.render.entity.RendererLivingEntityMixin_NametagPerspective",
+    "bugfixes.render.entity.RenderPlayerMixin_FixSkinLayerRendering",
     "bugfixes.render.item.ItemModelMesherMixin_ResolveCrash",
     "bugfixes.render.item.ItemStackMixin_HexColorTooltip",
     "features.AbstractResourcePackMixin_DownscaleImages",

@@ -21,7 +21,6 @@ import club.sk1er.patcher.asm.render.world.VisGraphTransformer;
 import club.sk1er.patcher.asm.render.world.entity.LayerCustomHeadTransformer;
 import club.sk1er.patcher.asm.render.world.entity.LayerHeldItemTransformer;
 import club.sk1er.patcher.asm.render.world.entity.RenderFireballTransformer;
-import club.sk1er.patcher.asm.render.world.entity.RenderPlayerTransformer;
 import club.sk1er.patcher.asm.render.world.entity.RenderWitherTransformer;
 import club.sk1er.patcher.asm.render.world.entity.RenderXPOrbTransformer;
 import club.sk1er.patcher.asm.world.entity.data.nbt.NBTTagCompoundTransformer;
@@ -113,7 +112,6 @@ public class ClassTransformer implements IClassTransformer {
         registerTransformer(new RenderFireballTransformer());
         //#endif
         registerTransformer(new RenderGlobalTransformer());
-        registerTransformer(new RenderPlayerTransformer());
         registerTransformer(new GuiPlayerTabOverlayTransformer());
         registerTransformer(new NetHandlerPlayClientTransformer());
         registerTransformer(new LayerCustomHeadTransformer());
