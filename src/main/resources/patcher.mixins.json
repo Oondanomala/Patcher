@@ -106,6 +106,7 @@
     "bugfixes.forge.GuiModListMixin_RemoveErroneousSlash",
     "bugfixes.forge.LightUtilMixin_FixLighting",
     "bugfixes.forge.MinecraftForgeMixin_FixTypo",
+    "bugfixes.modelfixes.LayerHeldItemMixin_FixHeldItemRendering",
     "bugfixes.modelfixes.ModelPlayerMixin_FixedTransformations",
     "bugfixes.modelfixes.ModelSkeletonMixin_FixedHeldItemTransformations",
     "bugfixes.modelfixes.ModelVillagerMixin_ResolveRobeHeight",

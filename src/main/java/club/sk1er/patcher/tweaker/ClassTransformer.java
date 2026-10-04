@@ -19,7 +19,6 @@ import club.sk1er.patcher.asm.render.screen.InventoryEffectRendererTransformer;
 import club.sk1er.patcher.asm.render.world.RenderGlobalTransformer;
 import club.sk1er.patcher.asm.render.world.VisGraphTransformer;
 import club.sk1er.patcher.asm.render.world.entity.LayerCustomHeadTransformer;
-import club.sk1er.patcher.asm.render.world.entity.LayerHeldItemTransformer;
 import club.sk1er.patcher.asm.render.world.entity.RenderFireballTransformer;
 import club.sk1er.patcher.asm.render.world.entity.RenderWitherTransformer;
 import club.sk1er.patcher.asm.render.world.entity.RenderXPOrbTransformer;
@@ -119,7 +118,6 @@ public class ClassTransformer implements IClassTransformer {
         registerTransformer(new GuiChatTransformer());
         registerTransformer(new VisGraphTransformer());
         registerTransformer(new EffectRendererTransformer());
-        registerTransformer(new LayerHeldItemTransformer());
         registerTransformer(new NetHandlerPlayServerTransformer());
         registerTransformer(new EntityWitherTransformer());
         registerTransformer(new S34PacketMapsTransformer());
