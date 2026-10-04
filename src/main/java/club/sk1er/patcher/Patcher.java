@@ -43,6 +43,7 @@ import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.command.ICommand;
+import net.minecraft.util.Util;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.ForgeVersion;
 import net.minecraftforge.common.MinecraftForge;
@@ -141,11 +142,14 @@ public class Patcher {
             new OverlayHandler(), new EntityRendering(), new FovHandler(),
             new ChatHandler(), new GlanceRenderer(), new EntityCulling(),
             new ArmorStatusRenderer(), new PatcherMenuEditor(),
-            new ImagePreview(), new TitleFix(), new LinuxKeybindFix(),
+            new ImagePreview(), new TitleFix(),
             new MetricsRenderer(), new HUDCaching(), new EntityRendererHook(),
             MinecraftHook.INSTANCE, ScreenshotPreview.INSTANCE,
             new MousePerspectiveKeybindHandler()
         );
+        if (Util.getOSType() == Util.EnumOS.LINUX) {
+            registerEvents(new LinuxKeybindFix());
+        }
         Assential.init("Patcher", VERSION);
 
         checkLogs();

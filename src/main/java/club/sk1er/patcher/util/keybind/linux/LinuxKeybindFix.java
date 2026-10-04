@@ -8,7 +8,6 @@ import net.minecraft.inventory.Slot;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.client.event.GuiScreenEvent;
-import org.apache.commons.lang3.SystemUtils;
 import org.lwjgl.input.Keyboard;
 
 import java.util.HashMap;
@@ -58,7 +57,7 @@ public class LinuxKeybindFix {
 
     @SubscribeEvent
     public void onKeyPress(InputEvent.KeyInputEvent event) {
-        if (SystemUtils.IS_OS_LINUX && mc.thePlayer != null && Keyboard.isCreated() && Keyboard.getEventKeyState()) {
+        if (mc.thePlayer != null && Keyboard.isCreated() && Keyboard.getEventKeyState()) {
             if (PatcherConfig.keyboardLayout == 0) {
                 final int eventKey = Keyboard.getEventKey();
                 switch (eventKey) {
@@ -87,7 +86,7 @@ public class LinuxKeybindFix {
         //#else
         //$$ GuiScreen guiScreen = event.getGui();
         //#endif
-        if (SystemUtils.IS_OS_LINUX && PatcherConfig.keyboardLayout != 0 && guiScreen instanceof GuiContainer && mc.thePlayer != null
+        if (PatcherConfig.keyboardLayout != 0 && guiScreen instanceof GuiContainer && mc.thePlayer != null
             && Keyboard.isCreated() && Keyboard.getEventKeyState()) {
             char charPressed = Keyboard.getEventCharacter();
             GuiContainer gui = (GuiContainer) guiScreen;
