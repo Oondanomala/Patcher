@@ -28,28 +28,29 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.regex.Pattern;
 
-//#if MC==11202
+//#if MC==1.12.2
 //$$ import net.minecraft.util.text.ChatType;
 //#endif
 
 @SuppressWarnings("unused")
 public class ChatHandler {
-
     private static final Map<Integer, ChatEntry> chatMessageMap = new HashMap<>();
     private static final Map<Integer, Set<ChatLine>> messagesForHash = new HashMap<>();
     private static final Minecraft mc = Minecraft.getMinecraft();
 
-    private static final String chatTimestampRegex = "^(?:\\[\\d\\d:\\d\\d(:\\d\\d)?(?: AM| PM|)]|<\\d\\d:\\d\\d>) ";
+    private static final Pattern formattingRegex = Pattern.compile("(?i)\\u00A7.");
+    private static final Pattern chatTimestampRegex = Pattern.compile("^(?:\\[\\d\\d:\\d\\d(:\\d\\d)?(?: AM| PM|)]|<\\d\\d:\\d\\d>) ");
     private static final DecimalFormat decimalFormat = new DecimalFormat("#,###");
 
     public static int currentMessageHash = -1;
     private int ticks;
 
-    //#if MC==10809
+    //#if MC==1.8.9
     @SubscribeEvent
     public void renderChat(RenderGameOverlayEvent.Chat event) {
-        if (event.type == RenderGameOverlayEvent.ElementType.CHAT && PatcherConfig.chatPosition) {
+        if (PatcherConfig.chatPosition && event.type == RenderGameOverlayEvent.ElementType.CHAT) {
             event.posY -= 12;
         }
     }
@@ -57,7 +58,7 @@ public class ChatHandler {
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void onChatMessage(ClientChatReceivedEvent event) {
-        //#if MC==10809
+        //#if MC==1.8.9
         IChatComponent message = event.message;
         int type = event.type;
         int gameInfoType = 2;
@@ -70,20 +71,15 @@ public class ChatHandler {
             String time = getCurrentTime();
             if (PatcherConfig.timestampsStyle == 0) {
                 ChatComponentIgnored component = new ChatComponentIgnored(ChatColor.GRAY + "[" + time + "] " + ChatColor.RESET);
-                //#if MC==10809
-                component.appendSibling(event.message);
+                component.appendSibling(message);
+                //#if MC==1.8.9
                 event.message = component;
                 //#else
-                //$$ component.appendSibling(event.getMessage());
                 //$$ event.setMessage(component);
                 //#endif
             } else if (PatcherConfig.timestampsStyle == 1) {
                 LinkedList<IChatComponent> queue = new LinkedList<>();
-                //#if MC==10809
-                queue.add(event.message);
-                //#else
-                //$$ queue.add(event.getMessage());
-                //#endif
+                queue.add(message);
 
                 while (!queue.isEmpty()) {
                     IChatComponent component = queue.remove();
@@ -112,8 +108,9 @@ public class ChatHandler {
         if (event.phase == TickEvent.Phase.START) {
             if (ticks++ >= 12000) {
                 long time = System.currentTimeMillis();
+                long maxTime = PatcherConfig.compactChatTime * 1000L;
                 for (Map.Entry<Integer, ChatEntry> entry : chatMessageMap.entrySet()) {
-                    if ((time - entry.getValue().lastSeenMessageMillis) > (PatcherConfig.compactChatTime * 1000L)) {
+                    if ((time - entry.getValue().lastSeenMessageMillis) > maxTime) {
                         messagesForHash.remove(entry.getKey());
                     }
                 }
@@ -125,12 +122,12 @@ public class ChatHandler {
 
     @SubscribeEvent
     public void setChatMessageMap(ClientChatReceivedEvent event) {
-        //#if MC==10809
+        //#if MC==1.8.9
         IChatComponent message = event.message;
         //#else
         //$$ ITextComponent message = event.getMessage();
         //#endif
-        String clearMessage = cleanColor(message.getFormattedText()).trim();
+        String clearMessage = cleanColor(message.getUnformattedText()).trim();
         if (clearMessage.isEmpty() && PatcherConfig.removeBlankMessages) {
             event.setCanceled(true);
         }
@@ -147,7 +144,7 @@ public class ChatHandler {
         }
 
         if (!refresh) {
-            String message = cleanColor(chatComponent.getFormattedText()).trim();
+            String message = cleanColor(chatComponent.getUnformattedText()).trim();
             if (message.isEmpty() || isDivider(message)) {
                 return;
             }
@@ -303,12 +300,12 @@ public class ChatHandler {
         }
 
         String unformattedText = chatComponent.getUnformattedText();
-        String cleanedMessage = unformattedText.replaceAll(chatTimestampRegex, "").trim();
+        String cleanedMessage = chatTimestampRegex.matcher(unformattedText).replaceAll("").trim();
         return Objects.hash(cleanedMessage, siblingHashes, getChatStyleHash(chatComponent.getChatStyle()));
     }
 
     private static boolean isDivider(String clean) {
-        clean = clean.replaceAll(chatTimestampRegex, "").trim();
+        clean = chatTimestampRegex.matcher(clean).replaceAll("").trim();
         boolean divider = true;
         if (clean.length() < 5) {
             divider = false;
@@ -326,7 +323,7 @@ public class ChatHandler {
     }
 
     private static String cleanColor(String in) {
-        return in.replaceAll("(?i)\\u00A7.", "");
+        return formattingRegex.matcher(in).replaceAll("");
     }
 
     public static String getCurrentTime() {
