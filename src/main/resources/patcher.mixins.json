@@ -86,6 +86,7 @@
     "bugfixes.SoundManagerMixin_LogSpam",
     "bugfixes.TileEntityBannerRendererMixin_BannerAnimation",
     "bugfixes.TileEntityBannerRendererMixin_ChestDisplay",
+    "bugfixes.TileEntityEndPortal_FixCulling",
     "bugfixes.TileEntityRendererDispatcherMixin_EnableLighting",
     "bugfixes.TileEntitySkullRendererMixin_EnableBlending",
     "bugfixes.VertexBufferMixin_ResolveLockups",
