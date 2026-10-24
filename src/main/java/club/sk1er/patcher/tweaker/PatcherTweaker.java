@@ -1,8 +1,10 @@
 package club.sk1er.patcher.tweaker;
 
+import club.sk1er.patcher.Patcher;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.MalformedJsonException;
+import me.oondanomala.assential.Assential;
 import net.minecraft.launchwrapper.ITweaker;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.launchwrapper.LaunchClassLoader;
@@ -37,6 +39,7 @@ import java.util.zip.ZipFile;
 public class PatcherTweaker implements IFMLLoadingPlugin {
     @SuppressWarnings("unchecked")
     public PatcherTweaker() {
+        Assential.preInit("Patcher", Patcher.VERSION);
         MixinBootstrap.init();
         Mixins.addConfiguration("patcher.mixins.json");
         try {

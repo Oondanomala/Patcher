@@ -8,22 +8,28 @@ import org.apache.logging.log4j.Logger;
 
 public final class Assential {
     static Logger logger;
-    static String modName = "Assential";
+    static String modName;
     static String modVersion;
 
     private Assential() {
     }
 
     /**
-     * Call this in the {@link net.minecraftforge.fml.common.event.FMLInitializationEvent FMLInitializationEvent}
+     * Call this as early as possible.
      *
      * @param modName    The name of your mod, should be the same value passed in the {@link net.minecraftforge.fml.common.Mod @Mod} annotation
      * @param modVersion The version of your mod, should be the same value passed in the {@link net.minecraftforge.fml.common.Mod @Mod} annotation
      */
-    public static void init(String modName, String modVersion) {
+    public static void preInit(String modName, String modVersion) {
         Assential.modName = modName;
         Assential.modVersion = modVersion;
         logger = LogManager.getLogger(modName);
+    }
+
+    /**
+     * Call this in the {@link net.minecraftforge.fml.common.event.FMLInitializationEvent FMLInitializationEvent} handler.
+     */
+    public static void init() {
         MinecraftForge.EVENT_BUS.register(GuiUtil.INSTANCE);
         MinecraftForge.EVENT_BUS.register(Notifications.INSTANCE);
     }

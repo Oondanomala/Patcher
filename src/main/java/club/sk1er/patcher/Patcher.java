@@ -150,7 +150,7 @@ public class Patcher {
         if (Util.getOSType() == Util.EnumOS.LINUX) {
             registerEvents(new LinuxKeybindFix());
         }
-        Assential.init("Patcher", VERSION);
+        Assential.init();
 
         checkLogs();
         loadBlacklistedServers();
