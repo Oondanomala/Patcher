@@ -47,7 +47,7 @@ public class PatcherTweaker implements IFMLLoadingPlugin {
             FMLLaunchHandler launchHandler = ReflectionHelper.getPrivateValue(FMLLaunchHandler.class, null, "INSTANCE");
             LaunchClassLoader classLoader = ReflectionHelper.getPrivateValue(FMLLaunchHandler.class, launchHandler, "classLoader");
             Method loadCoreMod = ReflectionHelper.findMethod(CoreModManager.class,
-                //#if MC==10809
+                //#if MC==1.8.9
                 null,
                 new String[]{"loadCoreMod"},
                 //#else
@@ -95,18 +95,14 @@ public class PatcherTweaker implements IFMLLoadingPlugin {
 
     @SuppressWarnings("unchecked")
     private void unlockLwjgl() {
-        boolean lwjglUnlock = false;
         try {
             // Unlock LWJGL, allowing for it to be transformed.
             Field transformerExceptions = LaunchClassLoader.class.getDeclaredField("classLoaderExceptions");
             transformerExceptions.setAccessible(true);
             Object o = transformerExceptions.get(Launch.classLoader);
-            lwjglUnlock = ((Set<String>) o).remove("org.lwjgl.");
+            ((Set<String>) o).remove("org.lwjgl.");
         } catch (NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
-        }
-
-        if (!lwjglUnlock) {
             System.out.println("Failed to unlock LWJGL, several fixes will not work.");
         }
 
@@ -155,22 +151,20 @@ public class PatcherTweaker implements IFMLLoadingPlugin {
             mods.mkdirs(); // make the mods' folder for forge if it doesn't exist already
         }
 
-        File[] coreModList = mods.listFiles((dir, name) -> name.endsWith(".jar"));
-        for (File file : coreModList) {
+        File[] modList = mods.listFiles((dir, name) -> name.endsWith(".jar"));
+        for (File file : modList) {
             try {
                 try (ZipFile zipFile = new ZipFile(file)) {
-                    ZipEntry entry = zipFile.getEntry("mcmod.info");
-
                     if (zipFile.getEntry("io/framesplus/FramesPlus.class") != null) {
                         halt("Patcher is no longer compatible with Frames+ as of 1.3. The Frames+ enhancements have been rewritten for even greater performance and compatibility, and are now included in Patcher.");
                         continue;
                     }
-
                     if (zipFile.getEntry("club/sk1er/mods/core/ModCore.class") != null) {
                         halt("ModCore should not be in your mods folder. This will most likely cause issues and crash. Please remove it from the mods folder.");
                         continue;
                     }
 
+                    ZipEntry entry = zipFile.getEntry("mcmod.info");
                     if (entry != null) {
                         try (InputStream inputStream = zipFile.getInputStream(entry)) {
                             byte[] availableBytes = new byte[inputStream.available()];
@@ -188,7 +182,7 @@ public class PatcherTweaker implements IFMLLoadingPlugin {
                     }
                 }
             } catch (MalformedJsonException | IllegalStateException ignored) {
-                // some mods provide invalid mod infos : (
+                // some mods provide invalid mod infos :(
             } catch (Exception e) {
                 e.printStackTrace();
             }

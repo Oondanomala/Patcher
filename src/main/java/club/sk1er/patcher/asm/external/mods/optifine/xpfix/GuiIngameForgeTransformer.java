@@ -1,6 +1,6 @@
 package club.sk1er.patcher.asm.external.mods.optifine.xpfix;
 
-import club.sk1er.patcher.tweaker.ClassTransformer;
+import club.sk1er.patcher.tweaker.ModCompatManager;
 import club.sk1er.patcher.tweaker.transform.PatcherTransformer;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.AbstractInsnNode;
@@ -26,7 +26,7 @@ public class GuiIngameForgeTransformer implements PatcherTransformer {
                     final AbstractInsnNode next = iterator.next();
                     if (next instanceof LdcInsnNode && ((LdcInsnNode) next).cst.equals(8453920)) {
                         method.instructions.insertBefore(next.getNext(), new MethodInsnNode(Opcodes.INVOKESTATIC,
-                            ClassTransformer.optifineVersion.equals("I7") ? "CustomColors" : "net/optifine/CustomColors",
+                            ModCompatManager.optifineVersion.equals("I7") ? "CustomColors" : "net/optifine/CustomColors",
                             "getExpBarTextColor",
                             "(I)I",
                             false));

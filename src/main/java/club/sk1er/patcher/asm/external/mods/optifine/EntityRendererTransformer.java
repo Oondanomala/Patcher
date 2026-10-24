@@ -1,6 +1,6 @@
 package club.sk1er.patcher.asm.external.mods.optifine;
 
-import club.sk1er.patcher.tweaker.ClassTransformer;
+import club.sk1er.patcher.tweaker.ModCompatManager;
 import club.sk1er.patcher.tweaker.transform.PatcherTransformer;
 import net.minecraftforge.fml.common.asm.transformers.deobf.FMLDeobfuscatingRemapper;
 import org.objectweb.asm.Opcodes;
@@ -65,7 +65,7 @@ public class EntityRendererTransformer implements PatcherTransformer {
                     final ListIterator<AbstractInsnNode> iterator = methodNode.instructions.iterator();
                     while (iterator.hasNext()) {
                         AbstractInsnNode next = iterator.next();
-                        switch (ClassTransformer.optifineVersion) {
+                        switch (ModCompatManager.optifineVersion) {
                             case "I7": {
                                 if (next instanceof TypeInsnNode) {
                                     if (FMLDeobfuscatingRemapper.INSTANCE.map(((TypeInsnNode) next).desc).equals("net/minecraft/client/renderer/culling/Frustum")) {

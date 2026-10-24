@@ -3,7 +3,7 @@ package club.sk1er.patcher.screen.render.caching;
 import club.sk1er.patcher.config.PatcherConfig;
 import club.sk1er.patcher.mixins.accessors.GuiIngameAccessor;
 import club.sk1er.patcher.mixins.accessors.GuiIngameForgeAccessor;
-import club.sk1er.patcher.tweaker.ClassTransformer;
+import club.sk1er.patcher.tweaker.ModCompatManager;
 import club.sk1er.patcher.util.chat.ChatUtilities;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -32,7 +32,7 @@ public class HUDCaching {
     public void tick(TickEvent.ClientTickEvent event) {
         if (event.phase == TickEvent.Phase.END && PatcherConfig.hudCaching) {
             if (!OpenGlHelper.isFramebufferEnabled() && mc.thePlayer != null) {
-                String statement = (!ClassTransformer.optifineVersion.equals("NONE") ?
+                String statement = (!ModCompatManager.optifineVersion.equals("NONE") ?
                     "\n§cTry to disable OptiFine's Fast Render/Anti-aliasing option." : "") + "\n§7Are Framebuffers supported?: §e§l" + OpenGlHelper.framebufferSupported;
                 ChatUtilities.sendMessage("§cFramebuffers appear to be disabled, automatically disabling HUDCaching." + statement);
                 PatcherConfig.hudCaching = false;

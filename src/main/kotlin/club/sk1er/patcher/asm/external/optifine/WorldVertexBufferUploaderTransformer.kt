@@ -1,6 +1,6 @@
 package club.sk1er.patcher.asm.external.optifine
 
-import club.sk1er.patcher.tweaker.ClassTransformer
+import club.sk1er.patcher.tweaker.ModCompatManager
 import club.sk1er.patcher.tweaker.transform.PatcherTransformer
 import codes.som.anthony.koffee.assembleBlock
 import codes.som.anthony.koffee.insns.jvm.*
@@ -25,7 +25,7 @@ class WorldVertexBufferUploaderTransformer : PatcherTransformer {
     private val worldRenderer = "net/minecraft/client/renderer/WorldRenderer"
     private val vertexFormat: TypeLike = "net/minecraft/client/renderer/vertex/VertexFormat"
     private val vertexFormatElement = "net/minecraft/client/renderer/vertex/VertexFormatElement"
-    private val oldOptifine = ClassTransformer.optifineVersion == "I7"
+    private val oldOptifine = ModCompatManager.optifineVersion == "I7"
     private val sVertexBuilder = if (oldOptifine) "shadersmod/client/SVertexBuilder" else "net/optifine/shaders/SVertexBuilder"
 
     private fun removeReflectionCall() = assembleBlock {

@@ -1,6 +1,6 @@
 package club.sk1er.patcher.asm.external.mods.optifine;
 
-import club.sk1er.patcher.tweaker.ClassTransformer;
+import club.sk1er.patcher.tweaker.ModCompatManager;
 import club.sk1er.patcher.tweaker.transform.PatcherTransformer;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.ClassNode;
@@ -13,7 +13,7 @@ import org.objectweb.asm.tree.MethodNode;
 public class LagometerTransformer implements PatcherTransformer {
     @Override
     public String[] getClassName() {
-        return new String[]{ClassTransformer.optifineVersion.equals("I7") ? "Lagometer" : "net.optifine.Lagometer"};
+        return new String[]{ModCompatManager.optifineVersion.equals("I7") ? "Lagometer" : "net.optifine.Lagometer"};
     }
 
     @Override

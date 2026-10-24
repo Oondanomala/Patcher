@@ -23,86 +23,30 @@ import club.sk1er.patcher.asm.render.world.entity.RenderFireballTransformer;
 import club.sk1er.patcher.asm.render.world.entity.RenderWitherTransformer;
 import club.sk1er.patcher.asm.render.world.entity.RenderXPOrbTransformer;
 import club.sk1er.patcher.asm.world.entity.data.nbt.NBTTagCompoundTransformer;
-import club.sk1er.patcher.optifine.OptiFineGenerations;
 import club.sk1er.patcher.tweaker.transform.PatcherTransformer;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
-import com.google.gson.Gson;
-import gg.essential.universal.UDesktop;
 import net.minecraft.launchwrapper.IClassTransformer;
 import net.minecraft.launchwrapper.Launch;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.tree.ClassNode;
-import org.objectweb.asm.tree.FieldNode;
 import org.spongepowered.asm.mixin.MixinEnvironment;
 
-import javax.net.ssl.HttpsURLConnection;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.UIManager;
-import java.awt.Component;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.net.URI;
-import java.net.URL;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 
 public class ClassTransformer implements IClassTransformer {
     public static final boolean OUTPUT_BYTECODE = Boolean.getBoolean("patcher.debugBytecode");
-    public static String optifineVersion = "NONE";
     private final Logger logger = LogManager.getLogger("Patcher - Class Transformer");
     private final Multimap<String, PatcherTransformer> transformerMap = ArrayListMultimap.create();
 
-    public static boolean smoothFontDetected;
-    public static final Set<String> supportedOptiFineVersions = new HashSet<>();
-    public static OptiFineGenerations generations;
-
     public ClassTransformer() {
         MixinEnvironment.getCurrentEnvironment().addTransformerExclusion(getClass().getName());
-        try {
-            // detect SmoothFont
-            final ClassLoader classLoader = this.getClass().getClassLoader();
-            if (classLoader.getResource("bre/smoothfont/mod_SmoothFont.class") != null) {
-                smoothFontDetected = true;
-                this.logger.warn("SmoothFont detected, disabling FontRenderer optimizations.");
-            }
-
-            // OptiFine stuff
-            this.fetchSupportedOptiFineVersions();
-            this.updateOptiFineGenerations();
-            ClassNode classNode = new ClassNode();
-            ClassReader classReader = new ClassReader("Config");
-            classReader.accept(classNode, ClassReader.SKIP_CODE);
-            for (FieldNode fieldNode : classNode.fields) {
-                if (fieldNode.name.equals("OF_RELEASE")) {
-                    optifineVersion = (String) fieldNode.value;
-                    break;
-                }
-            }
-
-            if (!supportedOptiFineVersions.contains(optifineVersion)) {
-                logger.info("User has outdated OptiFine. (version: OptiFine-{})", optifineVersion);
-                this.haltForOptiFine("Patcher has detected OptiFine " + optifineVersion + ", which is not supported and will crash.\n" +
-                    "Please update to a supported version of OptiFine and try again.\n" +
-                    "Supported versions: " + StringUtils.join(supportedOptiFineVersions, ", "));
-                return;
-            }
-        } catch (IOException ignored) {
-        }
+        ModCompatManager.detectMods(this.getClass());
 
         //#if MC==1.8.9
         registerTransformer(new GuiNewChatTransformer());
@@ -125,14 +69,14 @@ public class ClassTransformer implements IClassTransformer {
         registerTransformer(new LibraryLWJGLOpenALTransformer());
         if (isDevelopment()) registerTransformer(new InventoryEffectRendererTransformer());
 
-        // forge classes
+        // Forge classes
         //#if MC==1.8.9
         registerTransformer(new ModClassLoaderTransformer());
         registerTransformer(new ASMModParserTransformer());
         //#endif
         //registerTransformer(new JarDiscovererTransformer());
 
-        // lwjgl
+        // LWJGL
         registerTransformer(new WindowsDisplayTransformer());
         registerTransformer(new WindowsKeycodesTransformer());
         registerTransformer(new KeyboardTransformer());
@@ -195,106 +139,6 @@ public class ClassTransformer implements IClassTransformer {
     @Override
     public byte[] transform(String name, String transformedName, byte[] bytes) {
         return createTransformer(transformedName, bytes, transformerMap, logger);
-    }
-
-    private void haltForOptiFine(String message) {
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        JFrame frame = new JFrame();
-        frame.setUndecorated(true);
-        frame.setAlwaysOnTop(true);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-
-        JButton openOptifine = new JButton("Open OptiFine Website");
-        openOptifine.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                try {
-                    UDesktop.browse(new URI("https://optifine.net/downloads/"));
-                } catch (Exception ex) {
-                    JLabel label = new JLabel();
-                    label.setText("Failed to open OptiFine website.");
-                    label.setAlignmentX(Component.CENTER_ALIGNMENT);
-                    label.setAlignmentY(Component.CENTER_ALIGNMENT);
-                }
-            }
-        });
-
-        JButton close = new JButton("Close");
-        close.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                PatcherTweaker.invokeExit();
-            }
-        });
-
-        Object[] options = {openOptifine, close};
-        JOptionPane.showOptionDialog(frame, message, "Launch Aborted", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null, options, options[0]);
-        PatcherTweaker.invokeExit();
-    }
-
-    private void fetchSupportedOptiFineVersions() {
-        HttpsURLConnection connection = null;
-        try {
-            URL optifineVersions = new URL("https://raw.githubusercontent.com/Oondanomala/Patcher/zeroconfig/data/optifine.txt");
-            connection = (HttpsURLConnection) optifineVersions.openConnection();
-            connection.setRequestProperty("User-Agent", "Patcher OptiFine Fetcher");
-            connection.setConnectTimeout(5000);
-            connection.setReadTimeout(5000);
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
-                String version;
-                while ((version = reader.readLine()) != null) {
-                    supportedOptiFineVersions.add(version);
-                }
-            }
-        } catch (Exception e) {
-            this.logger.error("Failed to read supported OptiFine versions, adding defaults.", e);
-            supportedOptiFineVersions.addAll(Arrays.asList(
-                "I7",
-                "L5",
-                "M5", "M6_pre1", "M6_pre2", "M6",
-                "G5", "G6_pre1", "G6"
-            ));
-        } finally {
-            if (connection != null) connection.disconnect();
-        }
-    }
-
-    private void updateOptiFineGenerations() {
-        HttpsURLConnection connection = null;
-        try {
-            URL optifineGenerations = new URL("https://raw.githubusercontent.com/Oondanomala/Patcher/zeroconfig/data/optifine_generations.json");
-            connection = (HttpsURLConnection) optifineGenerations.openConnection();
-            connection.setRequestProperty("User-Agent", "Patcher OptiFine Fetcher");
-            connection.setConnectTimeout(5000);
-            connection.setReadTimeout(5000);
-            try (Reader reader = new InputStreamReader(connection.getInputStream())) {
-                generations = new Gson().fromJson(reader, OptiFineGenerations.class);
-            }
-        } catch (Exception e) {
-            this.logger.error("Failed to read OptiFine generations list. Supplying default supported generations.", e);
-            generations = new OptiFineGenerations();
-            generations.getIGeneration().add("I7");
-
-            generations.getLGeneration().add("L5");
-            generations.getLGeneration().add("L6");
-
-            generations.getMGeneration().add("M5");
-            generations.getMGeneration().add("M6_pre1");
-            generations.getMGeneration().add("M6_pre2");
-            generations.getMGeneration().add("M6");
-
-            generations.getGGeneration().add("G5");
-            generations.getGGeneration().add("G6_pre1");
-            generations.getGGeneration().add("G6");
-        } finally {
-            if (connection != null) connection.disconnect();
-        }
     }
 
     public static boolean isDevelopment() {

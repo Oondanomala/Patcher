@@ -29,8 +29,8 @@ import club.sk1er.patcher.asm.external.mods.tnttime.TNTTimeTransformer;
 import club.sk1er.patcher.asm.external.mods.ve.BetterChatTransformer;
 import club.sk1er.patcher.asm.external.optifine.WorldVertexBufferUploaderTransformer;
 import club.sk1er.patcher.asm.render.screen.InventoryEffectRendererTransformer;
-import club.sk1er.patcher.optifine.OptiFineGenerations;
 import club.sk1er.patcher.tweaker.ClassTransformer;
+import club.sk1er.patcher.tweaker.ModCompatManager;
 import club.sk1er.patcher.tweaker.transform.PatcherTransformer;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
@@ -52,7 +52,7 @@ public class ModClassTransformer implements IClassTransformer {
         MixinEnvironment.getCurrentEnvironment().addTransformerExclusion(getClass().getName());
         // OptiFine loads these classes after we do, overwriting our changes,
         // so transform it AFTER OptiFine loads.
-        //#if MC==10809
+        //#if MC==1.8.9
         registerTransformer(new EntityRendererTransformer());
         registerTransformer(new RenderTransformer());
         //#endif
@@ -86,19 +86,17 @@ public class ModClassTransformer implements IClassTransformer {
         // to how they normally were (using Forge's changes).
         //
         // Only I7 and above are supported due to them being the biggest versions of OptiFine.
-        final String optifineVersion = ClassTransformer.optifineVersion;
-        final OptiFineGenerations generations = ClassTransformer.generations;
-        if (generations.getIGeneration().contains(optifineVersion)) {
-            registerCommonTransformers();
-        } else if (generations.getLGeneration().contains(optifineVersion)) {
-            registerCommonTransformers();
-            registerLSeriesTransformers();
-            registerLSeriesFixesTransformers();
-        } else if (generations.getMGeneration().contains(optifineVersion) || generations.getFutureGeneration().contains(optifineVersion)) {
-            registerCommonTransformers();
-            registerLSeriesTransformers();
-        } else {
-            logger.info("User's OptiFine version ({}) does not support any reflection optimizations, none will be applied.", optifineVersion);
+        switch (ModCompatManager.optifineGeneration) {
+            case L:
+                registerLSeriesFixesTransformers();
+            case M:
+            case FUTURE:
+                registerLSeriesTransformers();
+            case I:
+                registerCommonTransformers();
+                break;
+            default:
+                logger.info("User's OptiFine version ({}) does not support any reflection optimizations, none will be applied.", ModCompatManager.optifineVersion);
         }
     }
 
@@ -123,10 +121,12 @@ public class ModClassTransformer implements IClassTransformer {
         registerTransformer(new LagometerTransformer());
         registerTransformer(new GuiIngameForgeTransformer());
         registerTransformer(new OptifineFontRendererTransformer());
-        registerTransformer(new OptiFineHookTransformer());
         registerTransformer(new FullbrightTickerTransformer());
         registerTransformer(new EntityCullingTransformer());
         registerTransformer(new WorldVertexBufferUploaderTransformer());
+        if (!ModCompatManager.smoothFont) {
+            registerTransformer(new OptiFineHookTransformer());
+        }
     }
 
     private void registerLSeriesTransformers() {

@@ -1,7 +1,7 @@
 package club.sk1er.patcher.config;
 
 import club.sk1er.patcher.Patcher;
-import club.sk1er.patcher.tweaker.ClassTransformer;
+import club.sk1er.patcher.tweaker.ModCompatManager;
 import me.oondanomala.assential.GuiUtil;
 import gg.essential.vigilance.Vigilant;
 import gg.essential.vigilance.data.Property;
@@ -1529,7 +1529,7 @@ public class PatcherConfig extends Vigilant {
 
             hidePropertyIf("instantFullscreen", () -> !SystemUtils.IS_OS_WINDOWS);
 
-            Function0<Boolean> noOptiFine = () -> ClassTransformer.optifineVersion.equals("NONE");
+            Function0<Boolean> noOptiFine = () -> ModCompatManager.optifineVersion.equals("NONE");
             Arrays.asList(
                 "scrollToZoom", "normalZoomSensitivity", "customZoomSensitivity", "smoothZoomAnimation",
                 "smoothZoomAnimationWhenScrolling", "smoothZoomAlgorithm", "toggleToZoom", "normalFpsCounter",
@@ -1537,7 +1537,7 @@ public class PatcherConfig extends Vigilant {
                 "dynamicZoomSensitivity"
             ).forEach(property -> hidePropertyIf(property, noOptiFine));
 
-            Function0<Boolean> smoothFontDetected = () -> ClassTransformer.smoothFontDetected;
+            Function0<Boolean> smoothFontDetected = () -> ModCompatManager.smoothFont;
             hidePropertyIf("optimizedFontRenderer", smoothFontDetected);
             hidePropertyIf("cacheFontData", smoothFontDetected);
 
