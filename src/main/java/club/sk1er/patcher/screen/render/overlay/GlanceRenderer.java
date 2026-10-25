@@ -19,7 +19,7 @@ import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.StatCollector;
-//#if MC==10809
+//#if MC==1.8.9
 import net.minecraft.world.WorldSettings;
 //#else
 //$$ import net.minecraft.potion.PotionUtils;
@@ -53,35 +53,36 @@ public class GlanceRenderer {
      * Create a map for short enchantment name identification.
      * Protection -> P, Fire Protection -> FP, Blast Protection -> BP, etc.
      */
-    private final Map<Integer, String> shortEnchantmentNames = new HashMap<Integer, String>() {{
-        put(0, "P");
-        put(1, "FP");
-        put(2, "FF");
-        put(3, "BP");
-        put(4, "PP");
-        put(5, "R");
-        put(6, "AA");
-        put(7, "T");
-        put(8, "DS");
-        put(9, "FW"); // frost walker - 1.12 only
-        put(16, "SH");
-        put(17, "SM");
-        put(18, "BoA");
-        put(19, "KB");
-        put(20, "FA");
-        put(21, "L");
-        put(32, "EFF");
-        put(33, "ST");
-        put(34, "UNB");
-        put(35, "F");
-        put(48, "POW");
-        put(49, "PUN");
-        put(50, "FLA");
-        put(51, "INF");
-        put(61, "LoS");
-        put(62, "LU");
-        put(70, "MEN"); // mending - 1.12 only
-    }};
+    private final Map<Integer, String> shortEnchantmentNames = new HashMap<>();
+    {
+        shortEnchantmentNames.put(0, "P");
+        shortEnchantmentNames.put(1, "FP");
+        shortEnchantmentNames.put(2, "FF");
+        shortEnchantmentNames.put(3, "BP");
+        shortEnchantmentNames.put(4, "PP");
+        shortEnchantmentNames.put(5, "R");
+        shortEnchantmentNames.put(6, "AA");
+        shortEnchantmentNames.put(7, "T");
+        shortEnchantmentNames.put(8, "DS");
+        shortEnchantmentNames.put(9, "FW"); // frost walker - 1.12 only
+        shortEnchantmentNames.put(16, "SH");
+        shortEnchantmentNames.put(17, "SM");
+        shortEnchantmentNames.put(18, "BoA");
+        shortEnchantmentNames.put(19, "KB");
+        shortEnchantmentNames.put(20, "FA");
+        shortEnchantmentNames.put(21, "L");
+        shortEnchantmentNames.put(32, "EFF");
+        shortEnchantmentNames.put(33, "ST");
+        shortEnchantmentNames.put(34, "UNB");
+        shortEnchantmentNames.put(35, "F");
+        shortEnchantmentNames.put(48, "POW");
+        shortEnchantmentNames.put(49, "PUN");
+        shortEnchantmentNames.put(50, "FLA");
+        shortEnchantmentNames.put(51, "INF");
+        shortEnchantmentNames.put(61, "LoS");
+        shortEnchantmentNames.put(62, "LU");
+        shortEnchantmentNames.put(70, "MEN"); // mending - 1.12 only
+    }
 
     /**
      * Render the damage of the currently held item above the hotbar for easy viewing.
@@ -91,7 +92,7 @@ public class GlanceRenderer {
     @SubscribeEvent
     public void renderDamage(RenderGameOverlayEvent.Post event) {
         EntityPlayerSP player = mc.thePlayer;
-        //#if MC==10809
+        //#if MC==1.8.9
         RenderGameOverlayEvent.ElementType type = event.type;
         ScaledResolution res = event.resolution;
         //#else
@@ -131,7 +132,7 @@ public class GlanceRenderer {
     @SubscribeEvent
     public void renderItemCount(final RenderGameOverlayEvent.Post event) {
         EntityPlayerSP player = mc.thePlayer;
-        //#if MC==10809
+        //#if MC==1.8.9
         RenderGameOverlayEvent.ElementType type = event.type;
         ScaledResolution res = event.resolution;
         //#else
@@ -145,7 +146,7 @@ public class GlanceRenderer {
         ItemStack currentItem = player.inventory.getCurrentItem();
         if (currentItem != null) {
             // air counts for some reason on 1.12?
-            //#if MC==11202
+            //#if MC==1.12.2
             //$$ if (currentItem.getItem() == Items.AIR) return;
             //#endif
 
@@ -156,7 +157,7 @@ public class GlanceRenderer {
 
             if (count > 1 || shouldRenderArrowCount) {
                 int offset = mc.playerController.getCurrentGameType() ==
-                    //#if MC==10809
+                    //#if MC==1.8.9
                     WorldSettings.GameType.CREATIVE
                     //#else
                     //$$ GameType.CREATIVE
@@ -179,7 +180,7 @@ public class GlanceRenderer {
     @SubscribeEvent
     public void renderEnchantments(final RenderGameOverlayEvent.Post event) {
         final EntityPlayerSP player = mc.thePlayer;
-        //#if MC==10809
+        //#if MC==1.8.9
         RenderGameOverlayEvent.ElementType type = event.type;
         ScaledResolution res = event.resolution;
         //#else
@@ -222,7 +223,7 @@ public class GlanceRenderer {
      */
     private String getAttackDamageString(ItemStack stack) {
         if (stack != null) {
-            //#if MC==11202
+            //#if MC==1.12.2
             //$$ final Multimap<String, AttributeModifier> modifiers = stack.getAttributeModifiers(EntityEquipmentSlot.MAINHAND);
             //#else
             final Multimap<String, AttributeModifier> modifiers = stack.getAttributeModifiers();
@@ -238,7 +239,7 @@ public class GlanceRenderer {
                         double baseDamage = modifier.getAmount()
                             + EnchantmentHelper.getModifierForCreature(stack, EnumCreatureAttribute.UNDEFINED);
 
-                        //#if MC==11202
+                        //#if MC==1.12.2
                         //$$ baseDamage += mc.player.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getBaseValue();
                         //#endif
 
@@ -252,7 +253,7 @@ public class GlanceRenderer {
 
                 //noinspection ConstantConditions - IntelliJ incorrectly identifies this as a constant condition evaluating to false. It doesn't seem to notice the `damage = ...` statement just a few lines above.
                 if (damage > 0) {
-                    //#if MC==11202
+                    //#if MC==1.12.2
                     //$$ return I18n.translateToLocalFormatted(
                     //#else
                     return StatCollector.translateToLocalFormatted(
@@ -309,7 +310,7 @@ public class GlanceRenderer {
     private String getPotionEffectString(ItemStack heldItemStack) {
         ItemPotion potion = (ItemPotion) heldItemStack.getItem();
         List<PotionEffect> effects =
-            //#if MC==10809
+            //#if MC==1.8.9
             potion.getEffects(heldItemStack);
             //#else
             //$$ PotionUtils.getEffectsFromStack(heldItemStack);
@@ -343,7 +344,7 @@ public class GlanceRenderer {
      */
     private String getEnchantmentString(ItemStack heldItemStack) {
         StringBuilder builder = new StringBuilder();
-        //#if MC==10809
+        //#if MC==1.8.9
         Map<Integer, Integer> enchantmentMap = EnchantmentHelper.getEnchantments(heldItemStack);
         for (Map.Entry<Integer, Integer> entry : enchantmentMap.entrySet()) {
             builder.append(ChatColor.BOLD).append(shortEnchantmentNames.get(entry.getKey()))
