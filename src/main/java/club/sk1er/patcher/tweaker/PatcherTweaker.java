@@ -42,6 +42,7 @@ public class PatcherTweaker implements IFMLLoadingPlugin {
         Assential.preInit("Patcher", Patcher.VERSION);
         MixinBootstrap.init();
         Mixins.addConfiguration("patcher.mixins.json");
+        ModCompatManager.detectModsEarly(this.getClass());
         try {
             // Create a second internal tweaker, creating after OptiFine does its thing.
             FMLLaunchHandler launchHandler = ReflectionHelper.getPrivateValue(FMLLaunchHandler.class, null, "INSTANCE");
@@ -106,7 +107,9 @@ public class PatcherTweaker implements IFMLLoadingPlugin {
             System.out.println("Failed to unlock LWJGL, several fixes will not work.");
         }
 
-        silenceLog4j();
+        if (!ModCompatManager.retroFuturaBootstrap) {
+            silenceLog4j();
+        }
     }
 
     private void silenceLog4j() {

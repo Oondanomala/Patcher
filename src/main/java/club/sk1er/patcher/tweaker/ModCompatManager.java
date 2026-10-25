@@ -31,9 +31,17 @@ import java.util.Set;
 public class ModCompatManager {
     private static final Logger LOGGER = LogManager.getLogger("Patcher - Mod Compatibility");
 
+    public static boolean retroFuturaBootstrap = false;
     public static boolean smoothFont = false;
     public static String optifineVersion = "NONE";
     public static Generation optifineGeneration = Generation.UNKNOWN;
+
+    static void detectModsEarly(Class<?> caller) {
+        try {
+            Class.forName("com.gtnewhorizons.retrofuturabootstrap.api.RetroFuturaBootstrap", false, caller.getClassLoader());
+            retroFuturaBootstrap = true;
+        } catch (ClassNotFoundException ignored) { }
+    }
 
     static void detectMods(Class<?> caller) {
         // SmoothFont
