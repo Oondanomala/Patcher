@@ -209,7 +209,6 @@
     "features.containeropacity.GuiInventoryMixin_ContainerOpacity",
     "features.cropheight.BlockCactusMixin_CropHitbox",
     "features.cropheight.BlockCropsMixin_CropHeight",
-    "features.cropheight.BlockMixin_CropHitbox",
     "features.cropheight.BlockNetherWartMixin_CropHeight",
     "features.disableenchantglint.LayerArmorBaseMixin_DisableEnchantGlint",
     "features.disableenchantglint.RenderItemMixin_DisableEnchantGlint",

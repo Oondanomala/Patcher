@@ -1,34 +1,29 @@
 package club.sk1er.patcher.mixins.features.cropheight;
 
 import club.sk1er.patcher.config.PatcherConfig;
-import club.sk1er.patcher.hooks.CropUtilities;
 import me.oondanomala.assential.MinecraftUtil;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockCactus;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
-import net.minecraft.world.World;
+import net.minecraft.world.IBlockAccess;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(BlockCactus.class)
-public class BlockCactusMixin_CropHitbox extends BlockMixin_CropHitbox {
-    //#if MC==10809
-    @Inject(method = "getSelectedBoundingBox", at = @At("HEAD"))
-    public void patcher$getSelectedBoundingBox(World worldIn, BlockPos pos, CallbackInfoReturnable<AxisAlignedBB> cir) {
-        if (PatcherConfig.futureHitBoxes && (MinecraftUtil.isHypixel() || Minecraft.getMinecraft().isIntegratedServerRunning())) {
-            CropUtilities.updateCactusBox(worldIn.getBlockState(pos).getBlock());
-        }
+public abstract class BlockCactusMixin_CropHitbox extends Block {
+    public BlockCactusMixin_CropHitbox(Material materialIn) {
+        super(materialIn);
     }
 
+    //#if MC==1.8.9
+    // TODO: These never change, there's no point in setting them every time
     @Override
-    public void collisionRayTrace(World worldIn, BlockPos pos, Vec3 start, Vec3 end, CallbackInfoReturnable<MovingObjectPosition> cir) {
+    public void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos) {
         if (PatcherConfig.futureHitBoxes && (MinecraftUtil.isHypixel() || Minecraft.getMinecraft().isIntegratedServerRunning())) {
-            CropUtilities.updateCactusBox(worldIn.getBlockState(pos).getBlock());
+            setBlockBounds(0.0625f, 0, 0.0625f, 0.9375f, 1, 0.9375f);
+        } else {
+            setBlockBounds(0, 0, 0, 1, 1, 1);
         }
     }
     //#endif
