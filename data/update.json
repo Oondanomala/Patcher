@@ -1,10 +1,11 @@
 {
   "homepage": "https://github.com/Oondanomala/Patcher/releases/latest",
   "promos": {
-    "1.12.2-recommended": "1.10.4",
-    "1.8.9-recommended": "1.10.4"
+    "1.12.2-recommended": "1.11.0",
+    "1.8.9-recommended": "1.11.0"
   },
   "1.12.2": {
+    "1.11.0": "Additions:\n  Fixed not being able to drop items in GUIs when the drop keybind is bound to a mouse button\n  Misc performance improvements\nFixes:\n  Fixed very broken sky lighting calculations\n  Removed a bunch of redundant fixes\n  Optifine versions are only fetched if necessary, improving startup performance\nMisc:\n  Converted most transformers to mixins, and fixed a bunch of bugs along the way\n  Other code cleanups and optimizations",
     "1.10.4": "Additions:\n  Completely removed the snooper\n  Forcefully disabled Realms notifications, as they don't work anyway\n  Made the server edit, direct connect, and add server GUIs close when pressing escape\nFixes:\n  Cache Font Data no longer creates 50 useless background threads\n  Fixed a (harmless) error when loading a replay with ReplayMod\nMisc:\n  Improved a bunch of default config values\n  The startup time notification is now even more accurate\n  General code cleanup",
     "1.10.3": "Additions:\n  Patcher will now send a notification if any loaded mod has an update available. As usual, mods can be individually disabled in Forge's configs\nFixes:\n  Fixed the update notification's failure notification crashing the game",
     "1.10.2": "Additions:\n  Added option to make button text white on hover instead of yellow, like in 1.14+\nFixes:\n  Fixed compatibility with the 5zig mod",
@@ -17,6 +18,7 @@
     "1.8.8": "Additions:\n  Add cactus to 1.14+ crop hitboxes\n  Add option to remove vertical view bobbing\nFixes:\n  Resolve achievement menu breaking with remove container background\n  Resolve resource pack folder sometimes not opening on windows\n  Resolve not being able to open chests with a block 2 blocks above it\n  Resolve image preview breaking on Imgur links\nMisc:\n  Change \"inventoryscale\" command to be hidden from autocomplete (this command was moved to \"/patcher invscale\")\n  Fixed patcher not working in dev environments"
   },
   "1.8.9": {
+    "1.11.0": "Additions:\n  Added option to fade players away the closer they get to you. Experimental, has transparency issues, 1.8 only for now\n  Added option to drastically speed up resource reloading in some cases by only reloading what's necessary\n  Added experimental hack to speed up game startup by skipping the second resource reload (will break certain mods!)\n  Improved startup time by skipping the first model baking\n  Fixed not being able to drop items in GUIs when the drop keybind is bound to a mouse button\n  Fixed end portal culling bounding box being too low\n  Misc performance improvements & memory leak fixes\nFixes:\n  Fixed very broken sky lighting calculations\n  Fixed hand sway with Left Hand in First Person\n  Fixed 1.12 Farm Selection Boxes not resetting once disabled\n  Optifine versions are only fetched if necessary, improving startup performance\nMisc:\n  Converted most transformers to mixins, and fixed a bunch of bugs along the way\n  Other code cleanups and bug fixes",
     "1.10.4": "Additions:\n  Completely removed the snooper\n  Forcefully disabled Realms notifications, as they don't work anyway\n  Backported the 1.9+ spectator switcher debug keybind to 1.8\n  Made the server edit, direct connect, and add server GUIs close when pressing escape\nFixes:\n  Cache Font Data no longer creates 50 useless background threads\n  Fixed a (harmless) error when loading a replay with ReplayMod\nMisc:\n  Improved a bunch of default config values\n  The startup time notification is now even more accurate\n  General code cleanup",
     "1.10.3": "Additions:\n  Backported the 1.12+ improved keybinding category order in the controls menu\n  Patcher will now send a notification if any loaded mod has an update available. As usual, mods can be individually disabled in Forge's configs\n  Fixed crash when trying to clone a book with no NBT data\nFixes:\n  Fixed the update notification's failure notification crashing the game",
     "1.10.2": "Additions:\n  Added option to make button text white on hover instead of yellow, like in 1.14+\nFixes:\n  Fixed compatibility with the 5zig mod",
