@@ -1,6 +1,5 @@
 package club.sk1er.patcher.screen.render.overlay.metrics;
 
-@SuppressWarnings("unused")
 public class MetricsData {
     private final long[] samples = new long[240];
     private int startIndex;

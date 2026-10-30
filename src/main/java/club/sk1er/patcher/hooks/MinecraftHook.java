@@ -19,7 +19,6 @@ import org.lwjgl.opengl.DisplayMode;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
-@SuppressWarnings("unused")
 public class MinecraftHook {
     public static final MinecraftHook INSTANCE = new MinecraftHook();
     private static final Minecraft mc = Minecraft.getMinecraft();
@@ -27,7 +26,7 @@ public class MinecraftHook {
     private boolean lastFullscreen = false;
     public static MetricsData metricsData;
 
-    //#if MC==10809
+    //#if MC==1.8.9
     public static void updateKeyBindState() {
         for (KeyBinding keybinding : KeyBindingAccessor.getKeybindArray()) {
             try {

@@ -16,7 +16,6 @@ import java.util.Deque;
 //$$ import net.minecraft.util.text.ChatType;
 //#endif
 
-@SuppressWarnings("unused")
 public class GuiNewChatHook {
 
     public static final Deque<IChatComponent> messageQueue = new ArrayDeque<>();

@@ -34,7 +34,6 @@ import java.util.regex.Pattern;
 //$$ import net.minecraft.util.text.ChatType;
 //#endif
 
-@SuppressWarnings("unused")
 public class ChatHandler {
     private static final Map<Integer, ChatEntry> chatMessageMap = new HashMap<>();
     private static final Map<Integer, Set<ChatLine>> messagesForHash = new HashMap<>();

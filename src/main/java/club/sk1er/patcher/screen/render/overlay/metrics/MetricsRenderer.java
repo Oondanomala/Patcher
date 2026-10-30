@@ -16,14 +16,13 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.lwjgl.opengl.GL11;
 
-@SuppressWarnings("unused")
 public class MetricsRenderer extends Gui {
 
     private final Minecraft mc = Minecraft.getMinecraft();
 
     @SubscribeEvent
     public void draw(RenderGameOverlayEvent.Post event) {
-        //#if MC==10809
+        //#if MC==1.8.9
         RenderGameOverlayEvent.ElementType type = event.type;
         ScaledResolution res = event.resolution;
         //#else

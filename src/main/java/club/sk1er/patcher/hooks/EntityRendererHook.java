@@ -14,7 +14,6 @@ import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 
-@SuppressWarnings("unused")
 public class EntityRendererHook {
     private static final Minecraft mc = Minecraft.getMinecraft();
     private static boolean zoomToggled = false;
@@ -40,7 +39,7 @@ public class EntityRendererHook {
 
     public static boolean hasMap() {
         if (!PatcherConfig.mapBobbing || mc.thePlayer == null) return false;
-        //#if MC==10809
+        //#if MC==1.8.9
         ItemStack heldItem = mc.thePlayer.getHeldItem();
         return heldItem != null && heldItem.getItem() instanceof ItemMap;
         //#else
@@ -66,10 +65,11 @@ public class EntityRendererHook {
         mc.gameSettings.mouseSensitivity = oldSensitivity;
     }
 
+    @SuppressWarnings("unused")
     public static float getHandFOVModifier(float original) {
         if (PatcherConfig.renderHandWhenZoomed && (ZoomHook.zoomed || (PatcherConfig.smoothZoomAnimation && ZoomHook.smoothZoomProgress > 0))) {
             float f = 70f;
-            //#if MC==10809
+            //#if MC==1.8.9
             Block block = ActiveRenderInfo.getBlockAtEntityViewpoint(mc.theWorld, mc.thePlayer, partialTicks);
             //#else
             //$$ IBlockState block = ActiveRenderInfo.getBlockStateAtEntityViewpoint(mc.world, mc.player, partialTicks);
@@ -85,7 +85,7 @@ public class EntityRendererHook {
 
     @SubscribeEvent
     public void worldRender(RenderWorldLastEvent event) {
-        //#if MC==10809
+        //#if MC==1.8.9
         partialTicks = event.partialTicks;
         //#else
         //$$ partialTicks = event.getPartialTicks();

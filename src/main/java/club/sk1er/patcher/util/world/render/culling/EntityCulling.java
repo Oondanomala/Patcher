@@ -91,7 +91,7 @@ public class EntityCulling {
         return Minecraft.isGuiEnabled()
             && entity != mc.getRenderManager().livingPlayer
             && ((entity instanceof EntityArmorStand) || !entity.isInvisibleToPlayer(player)) &&
-            //#if MC==10809
+            //#if MC==1.8.9
             entity.riddenByEntity == null;
             //#else
             //$$ !entity.isBeingRidden();
@@ -130,7 +130,6 @@ public class EntityCulling {
         GlStateManager.enableAlpha();
     }
 
-    @SuppressWarnings("unused")
     public static boolean renderItem(Entity stack) {
         //needs to be called from RenderEntityItem#doRender and RenderItemFrame#doRender. Returning true means it should cancel the render event
         return shouldPerformCulling && PatcherConfig.entityCulling && stack.worldObj == mc.thePlayer.worldObj && checkEntity(stack);
@@ -199,7 +198,7 @@ public class EntityCulling {
             return;
         }
 
-        //#if MC==10809
+        //#if MC==1.8.9
         EntityLivingBase entity = event.entity;
         //#else
         //$$ EntityLivingBase entity = event.getEntity();
@@ -208,7 +207,7 @@ public class EntityCulling {
         if (entity == mc.thePlayer || entity.worldObj != mc.thePlayer.worldObj ||
             (PatcherConfig.checkArmorstandRules && armorstand && ((EntityArmorStand) entity).hasMarker()) ||
             (entity.isInvisibleToPlayer(mc.thePlayer) && !armorstand)
-            //#if MC==11202
+            //#if MC==1.12.2
             //$$ || entity.isGlowing()
             //#endif
         ) {
@@ -225,7 +224,7 @@ public class EntityCulling {
                 (PatcherConfig.dontCullEntityNametags && !armorstand) ||
                 (PatcherConfig.dontCullArmorStandNametags && armorstand)) {
 
-                //#if MC==10809
+                //#if MC==1.8.9
                 double x = event.x;
                 double y = event.y;
                 double z = event.z;

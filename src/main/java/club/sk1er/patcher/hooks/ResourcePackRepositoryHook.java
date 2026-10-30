@@ -10,7 +10,6 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
-@SuppressWarnings("unused")
 public class ResourcePackRepositoryHook {
     public static void updateRepositoryEntriesAll(ResourcePackRepository repository) {
         ResourcePackRepositoryAccessor accessor = (ResourcePackRepositoryAccessor) repository;

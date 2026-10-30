@@ -65,7 +65,6 @@ public class RenderTransformer implements CommonTransformer {
         return list;
     }
 
-    @SuppressWarnings("unused")
     public static float checkPerspective() {
         return Minecraft.getMinecraft().gameSettings.thirdPersonView == 2 ? -1 : 1;
     }

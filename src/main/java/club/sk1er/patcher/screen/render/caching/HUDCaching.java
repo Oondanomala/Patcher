@@ -42,7 +42,6 @@ public class HUDCaching {
         }
     }
 
-    @SuppressWarnings("unused")
     public static void renderCachedHud(EntityRenderer renderer, GuiIngame ingame, float partialTicks) {
         if (!OpenGlHelper.isFramebufferEnabled() || !PatcherConfig.hudCaching) {
             ingame.renderGameOverlay(partialTicks);
@@ -59,7 +58,7 @@ public class HUDCaching {
                 WorldRenderer worldRenderer = tessellator.getWorldRenderer();
                 if (ingame instanceof GuiIngameForge) {
                     ((GuiIngameForgeAccessor) ingame).callRenderCrosshairs(
-                        //#if MC==10809
+                        //#if MC==1.8.9
                         width, height
                         //#else
                         //$$ partialTicks
@@ -67,7 +66,7 @@ public class HUDCaching {
                     );
                 } else if (
                     // todo: fix this boolean check
-                    //#if MC==10809
+                    //#if MC==1.8.9
                     ((GuiIngameAccessor) ingame).invokeShowCrosshair() &&
                         //#endif
                         GuiIngameForge.renderCrosshairs) {

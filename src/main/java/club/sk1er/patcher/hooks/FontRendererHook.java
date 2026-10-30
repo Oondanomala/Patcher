@@ -133,7 +133,6 @@ public final class FontRendererHook {
         return text.substring(startIndex, endIndex);
     }
 
-    @SuppressWarnings({"unused"})
     public boolean renderStringAtPos(String text, boolean shadow) {
         if (this.fontRendererAccessor.getRenderEngine() == null || !PatcherConfig.optimizedFontRenderer) {
             this.deleteTextureId();
@@ -499,7 +498,6 @@ public final class FontRendererHook {
         return hook.getCharWidth(fontRenderer, c);
     }
 
-    @SuppressWarnings("unused")
     public int getStringWidth(String text) {
         if (text == null) {
             return 0;
