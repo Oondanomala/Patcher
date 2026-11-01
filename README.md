@@ -239,26 +239,29 @@ Adapted from the disclaimer found in PolyPatcher.
 Patcher reproduces the functionality of these mods and as such, they are no longer needed.
 
 This list may not always be up-to-date. To view an updated list, click [here](data/duplicate_mods.json)
+- **BetterScaledGUI**
 - **Case Commands**
+- **Clean View**
 - **Command Patcher**
 - **Compact Chat**
 - **Cross Chat**
+- **Fullbright**
+- **HUDCaching**
+- **InputFix**
 - **Item Optimizations**
-- **MouseBindFix**
-- **Resource Exploit Fix**
-- **Windowed Fullscreen** (sk1er_fullscreen)
-- **Clean View**
 - **MemoryFix**
+- **MenuFPSUnlocker**
+- **MouseBindFix**
 - **MouseDelayFix**
 - **NoCloseMyChat**
-- **Vanilla Enhancements**
-- **PortalInputFix**
-- **BetterScaledGUI**
-- **Void Chat**
-- **Fullbright**
-- **InputFix**
-- **HUDCaching**
+- **NoMoreRealms**
 - **NoScroll**
+- **PortalInputFix**
+- **Resource Exploit Fix**
+- **Unscrollify Hotbar**
+- **Vanilla Enhancements**
+- **Void Chat**
+- **Windowed Fullscreen** (sk1er_fullscreen)
 
 </details>
 
